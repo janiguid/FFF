@@ -1,0 +1,376 @@
+fileFormatVersion: 2
+guid: c69a49a4bbbb78c499b99aaad3a96374
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2795671954740486305
+    second: Realm1Tileset5_0
+  - first:
+      213: 4104018892208656731
+    second: Realm1Tileset5_1
+  - first:
+      213: -3861062751617814297
+    second: Realm1Tileset5_2
+  - first:
+      213: -5697703803267418038
+    second: Realm1Tileset5_3
+  - first:
+      213: -37314826381664793
+    second: Realm1Tileset5_4
+  - first:
+      213: 2051945002162286007
+    second: Realm1Tileset5_5
+  - first:
+      213: 7302160095596649152
+    second: Realm1Tileset5_6
+  - first:
+      213: 3825206777720938903
+    second: Realm1Tileset5_7
+  - first:
+      213: 1380068427826453015
+    second: Realm1Tileset5_8
+  - first:
+      213: 4247402495207920871
+    second: Realm1Tileset5_9
+  - first:
+      213: -7399784109356115794
+    second: Realm1Tileset5_10
+  - first:
+      213: -123476590604545894
+    second: Realm1Tileset5_11
+  - first:
+      213: 8829892291846320023
+    second: Realm1Tileset5_12
+  - first:
+      213: -7923015907543801727
+    second: Realm1Tileset5_13
+  - first:
+      213: 6814008184211106429
+    second: Realm1Tileset5_14
+  - first:
+      213: -6701154886768095165
+    second: Realm1Tileset5_15
+  - first:
+      213: -3604224451368290658
+    second: Realm1Tileset5_16
+  - first:
+      213: 924224998379946137
+    second: Realm1Tileset5_17
+  - first:
+      213: 4274114437334185904
+    second: Realm1Tileset5_18
+  - first:
+      213: -90415462622857413
+    second: Realm1Tileset5_19
+  - first:
+      213: -1845926176893131822
+    second: Realm1Tileset5_20
+  - first:
+      213: 4355403840122839387
+    second: Realm1Tileset5_21
+  - first:
+      213: -1383308350514600283
+    second: Realm1Tileset5_22
+  - first:
+      213: 6220437993891655672
+    second: Realm1Tileset5_23
+  - first:
+      213: 9007696730855777399
+    second: Realm1Tileset5_24
+  - first:
+      213: 4504496402219025094
+    second: Realm1Tileset5_25
+  - first:
+      213: 3920915229606867736
+    second: Realm1Tileset5_26
+  - first:
+      213: 8149205292015134448
+    second: Realm1Tileset5_27
+  - first:
+      213: -2081684698819241631
+    second: Realm1Tileset5_28
+  - first:
+      213: 987992781955623068
+    second: Realm1Tileset5_29
+  - first:
+      213: 4592595481407182873
+    second: Realm1Tileset5_30
+  - first:
+      213: 8967625063589767031
+    second: Realm1Tileset5_31
+  - first:
+      213: 2456001494258280535
+    second: Realm1Tileset5_32
+  - first:
+      213: -2945384748261921966
+    second: Realm1Tileset5_33
+  - first:
+      213: 6984621341801082144
+    second: Realm1Tileset5_34
+  - first:
+      213: -7066155153921767987
+    second: Realm1Tileset5_35
+  - first:
+      213: -6645005161261219498
+    second: Realm1Tileset5_36
+  - first:
+      213: -3494426778665797876
+    second: Realm1Tileset5_37
+  - first:
+      213: 4497504317711682577
+    second: Realm1Tileset5_38
+  - first:
+      213: -7196999838292386646
+    second: Realm1Tileset5_39
+  - first:
+      213: -8214411799322555126
+    second: Realm1Tileset5_40
+  - first:
+      213: -4917074722837089804
+    second: Realm1Tileset5_41
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 256
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 0
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Realm1Tileset5_1
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 842
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b51d69d307764f830800000000000000
+      internalID: 4104018892208656731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Realm1Tileset5_12
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 644
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79fa574b1441a8a70800000000000000
+      internalID: 8829892291846320023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Realm1Tileset5_15
+      rect:
+        serializedVersion: 2
+        x: 1081
+        y: 644
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 340905d7227b003a0800000000000000
+      internalID: -6701154886768095165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Realm1Tileset5_18
+      rect:
+        serializedVersion: 2
+        x: 1407
+        y: 644
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b73cae7f64b05b30800000000000000
+      internalID: 4274114437334185904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Realm1Tileset5_22
+      rect:
+        serializedVersion: 2
+        x: 494
+        y: 542
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a6eeb062608dcce0800000000000000
+      internalID: -1383308350514600283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Realm1Tileset5_28
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 704
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1695380bbce5c13e0800000000000000
+      internalID: -2081684698819241631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Realm1Tileset5_31
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 691
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 777682a9b77637c70800000000000000
+      internalID: 8967625063589767031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: afe62dbedb3e628498d673daaf34769d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
