@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    //Uncheck to use controller
+    public bool useController;
+
     //PLAYER DATA RELATED
     public CharacterData playerData;
 
@@ -95,10 +98,21 @@ public class PlayerMovement : MonoBehaviour
 
     void VerticalMovement()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded || -Input.GetAxisRaw("VerticalGamePad") > 0.1 && isGrounded)
+        if (useController)
         {
-            rigidbody2D.velocity = Vector2.up * jumpVelocity;
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded || -Input.GetAxisRaw("VerticalGamePad") > 0.1 && isGrounded)
+            {
+                rigidbody2D.velocity = Vector2.up * jumpVelocity;
+            }
         }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded || Input.GetAxisRaw("Vertical") > 0.1 && isGrounded)
+            {
+                rigidbody2D.velocity = Vector2.up * jumpVelocity;
+            }
+        }
+
 
         if ((Input.GetButtonDown("Square") || Input.GetButtonDown("Triangle")) && !isGrounded && !isFrozen && playerData.pauseTime > 0f)
         {
@@ -112,9 +126,16 @@ public class PlayerMovement : MonoBehaviour
     void HorizontalMovement()
     {
 
-        
 
-        horizontalVelocity.x = speed * Input.GetAxis("HorizontalGamePad");
+        if (useController)
+        {
+            horizontalVelocity.x = speed * Input.GetAxis("HorizontalGamePad");
+        }
+        else
+        {
+            horizontalVelocity.x = speed * Input.GetAxis("Horizontal");
+        }
+
         horizontalVelocity.y = rigidbody2D.velocity.y;
 
         rigidbody2D.velocity = horizontalVelocity;
