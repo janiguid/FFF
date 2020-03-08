@@ -68,15 +68,17 @@ public class PlayerMovement : MonoBehaviour
             rigidbody2D.gravityScale = gravityScale;
         }
 
-        RaycastHit2D raycastHit = Physics2D.BoxCast(collider2D.bounds.center, collider2D.bounds.extents, 0f, Vector2.down, collider2D.bounds.extents.y + additionalRay,layerMask);
-        if (raycastHit.collider)
-        {
-            isGrounded = true;
-        }
-        else
-        {
-            isGrounded = false;
-        }
+
+
+        //RaycastHit2D raycastHit = Physics2D.BoxCast(collider2D.bounds.center, collider2D.bounds.extents/99, 0f, Vector2.down, collider2D.bounds.extents.y + additionalRay,layerMask);
+        //if (raycastHit.collider)
+        //{
+        //    isGrounded = true;
+        //}
+        //else
+        //{
+        //    isGrounded = false;
+        //}
 
         VerticalMovement();
         HorizontalMovement();
@@ -94,6 +96,22 @@ public class PlayerMovement : MonoBehaviour
             savedVelocity = Vector2.zero;
         }
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Ground")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Ground")
+        {
+            isGrounded = false;
+        }
     }
 
     void VerticalMovement()
