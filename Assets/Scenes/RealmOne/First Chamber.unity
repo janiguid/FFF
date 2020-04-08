@@ -246,12 +246,12 @@ PrefabInstance:
     - target: {fileID: 2197532110118350678, guid: 760c48a6cee3f3646841e303d3f97ae0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.8
+      value: 9.2
       objectReference: {fileID: 0}
     - target: {fileID: 2197532110118350678, guid: 760c48a6cee3f3646841e303d3f97ae0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.9
+      value: 13.4
       objectReference: {fileID: 0}
     - target: {fileID: 2197532110118350678, guid: 760c48a6cee3f3646841e303d3f97ae0,
         type: 3}
@@ -316,13 +316,38 @@ PrefabInstance:
     - target: {fileID: 3698646556905524335, guid: 760c48a6cee3f3646841e303d3f97ae0,
         type: 3}
       propertyPath: cameraSpeed
-      value: 10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3698646556905524335, guid: 760c48a6cee3f3646841e303d3f97ae0,
         type: 3}
       propertyPath: playerMovement
       value: 
       objectReference: {fileID: 1195996850}
+    - target: {fileID: 3698646556905524335, guid: 760c48a6cee3f3646841e303d3f97ae0,
+        type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1195996851}
+    - target: {fileID: 6749222724339993060, guid: 760c48a6cee3f3646841e303d3f97ae0,
+        type: 3}
+      propertyPath: BoundX
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749222724339993060, guid: 760c48a6cee3f3646841e303d3f97ae0,
+        type: 3}
+      propertyPath: BoundY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6749222724339993060, guid: 760c48a6cee3f3646841e303d3f97ae0,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1195996854}
+    - target: {fileID: 6749222724339993060, guid: 760c48a6cee3f3646841e303d3f97ae0,
+        type: 3}
+      propertyPath: HeightOffset
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760c48a6cee3f3646841e303d3f97ae0, type: 3}
 --- !u!1 &558902002
@@ -20865,7 +20890,7 @@ MonoBehaviour:
   pauseTime: 0
   savedVelocity: {x: 0, y: 0}
   horizontalVelocity: {x: 0, y: 0}
-  speed: 20
+  speed: 10
 --- !u!61 &1195996851
 BoxCollider2D:
   m_ObjectHideFlags: 0

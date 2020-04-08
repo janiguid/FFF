@@ -5,6 +5,8 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField]
+    Collider2D playerCollider;
+    [SerializeField]
     PlayerMovement playerMovement;
     [SerializeField]
     public float boundSpeed;
@@ -14,47 +16,55 @@ public class CameraFollow : MonoBehaviour
     public Transform player;
     Vector3 target;
 
-    public Bounds bounds;
+    public Bounds playerBounds;
+    public CustomBounds bounds;
     // Start is called before the first frame update
     void Start()
     {
-        bounds = new Bounds(5, 5, player.position);          
+        playerBounds = playerCollider.bounds;
+        bounds = new CustomBounds(5, 5, player.position);          
     }
 
     // Update is called once per frame
     void Update()
     {
         cameraSpeed = Mathf.Abs(playerMovement.horizontalVelocity.x);
-        print(Time.deltaTime);
-        if(player.position.x < bounds.leftBound)
+        if (playerCollider.bounds.min.x < bounds.leftBound)
         {
-            bounds.Update(player.position);
-            bounds.MoveLeft();
-
-
-            target = new Vector3(bounds.center.x, bounds.center.y, -3.5f);
-            //target = new Vector3(player.position.x, player.position.y, -3.5f);
-            //transform.position = Vector3.MoveTowards(transform.position, target, cameraSpeed * Time.deltaTime);
-        }else if(player.position.x > bounds.rightBound)
-        {
-            bounds.Update(player.position);
-            bounds.MoveRight();
+            //bounds.Update(player.position);
+            bounds.MoveLeft(Time.deltaTime * cameraSpeed);
 
 
             target = new Vector3(bounds.center.x, bounds.center.y, -3.5f);
             //target = new Vector3(player.position.x, player.position.y, -3.5f);
             //transform.position = Vector3.MoveTowards(transform.position, target, cameraSpeed * Time.deltaTime);
         }
+        else if(playerCollider.bounds.max.x > bounds.rightBound)
+        {
+            
+            bounds.MoveRight();
 
 
+            //target = new Vector3(bounds.center.x, bounds.center.y, -3.5f);
+            //target = new Vector3(player.position.x, player.position.y, -3.5f);
+            //transform.position = Vector3.MoveTowards(transform.position, target, cameraSpeed * Time.deltaTime);
+        }
+
+        bounds.Update(player.position);
+
+
+        //target = new Vector3(bounds.center.x, bounds.center.y, -3.5f);
         //transform.position = Vector3.MoveTowards(transform.position, target, cameraSpeed * Time.deltaTime);
+        transform.position = target;
 
         print(bounds.center);
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, cameraSpeed * Time.deltaTime);
+        //target = new Vector3(bounds.center.x, bounds.center.y, -3.5f);
+        ////transform.position = Vector3.MoveTowards(transform.position, target, cameraSpeed * Time.deltaTime);
+        //transform.position = target;
     }
 
     private void OnDrawGizmos()
@@ -65,7 +75,7 @@ public class CameraFollow : MonoBehaviour
 }
 
 
-public struct Bounds
+public struct CustomBounds
 {
     public Vector2 playerLocation;
     public float width;
@@ -74,7 +84,7 @@ public struct Bounds
     public float rightBound;
     public Vector2 center;
 
-    public Bounds(int w, int h, Vector2 pos)
+    public CustomBounds(int w, int h, Vector2 pos)
     {
         playerLocation = pos;
         width = w;
@@ -88,23 +98,23 @@ public struct Bounds
     public void Update(Vector2 pos)
     {
         playerLocation = pos;
-        center.x = (leftBound + rightBound) / 2;
-        center.y = playerLocation.y;
+        center.x = ((leftBound + rightBound) / 2f);
+        center.y = playerLocation.y + 0.7f;
     }
 
-    public void MoveLeft()
+    public void MoveLeft(float amount)
     {
-        leftBound -= .4f;
-        rightBound -= .4f;
-        center.x = (leftBound + rightBound) / 2;
-        center.y = playerLocation.y;
+        leftBound -= amount;
+        rightBound -= amount;
+        //center.x = (leftBound + rightBound) / 2f;
+        //center.y = playerLocation.y;
     }
 
     public void MoveRight()
     {
-        leftBound += .4f;
-        rightBound += .4f;
-        center.x = (leftBound + rightBound) /2f;
-        center.y = playerLocation.y;
+        leftBound += .01f;
+        rightBound += .01f;
+        //center.x = (leftBound + rightBound) /2f;
+        //center.y = playerLocation.y;
     }
 }

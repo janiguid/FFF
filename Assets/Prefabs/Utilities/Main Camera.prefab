@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2197532110118350678}
+  - component: {fileID: 6749222724339993060}
   - component: {fileID: 3698646556905524335}
   - component: {fileID: 2197532110118350679}
   - component: {fileID: 2197532110118350681}
@@ -35,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3698646556905524335
+--- !u!114 &6749222724339993060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,10 +45,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 2197532110118350682}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b59235153e94948982ab0a7b00e38b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  BoundX: 0
+  BoundY: 0
+--- !u!114 &3698646556905524335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197532110118350682}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ef0db820e7caa74dac081c19a9d6b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCollider: {fileID: 0}
+  playerMovement: {fileID: 0}
+  boundSpeed: 0
+  cameraSpeed: 0
   player: {fileID: 0}
+  playerBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
 --- !u!20 &2197532110118350679
 Camera:
   m_ObjectHideFlags: 0
