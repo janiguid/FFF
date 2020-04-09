@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goTo: 0
+  x: 7
+  y: -33
 --- !u!61 &259598914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259598912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.94, y: -31.47, z: -3026.7993}
+  m_LocalPosition: {x: 6.94, y: -30.15, z: -3026.7993}
   m_LocalScale: {x: 6.0371995, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19267,6 +19269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goTo: 2
+  x: 0
+  y: 0
 --- !u!61 &903627280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19476,7 +19480,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1011630736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.9, y: -62.5, z: 0}
+  m_LocalPosition: {x: -9.9, y: -54.4, z: 0}
   m_LocalScale: {x: 1.1740283, y: 1.1740283, z: 1.1740283}
   m_Children: []
   m_Father: {fileID: 0}
@@ -19742,7 +19746,7 @@ GameObject:
   - component: {fileID: 2021783745}
   m_Layer: 10
   m_Name: FirenaV2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
