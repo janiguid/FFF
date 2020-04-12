@@ -23,6 +23,10 @@ public class ComboSystem : MonoBehaviour
     public float ComboCooldown;
     public int HitCount;
 
+    public float ComboTimer;
+    public float TopLimit;
+    public float BottomLimit;
+
     public Transform PunchPosition;
     public float PunchLength;
 
@@ -102,13 +106,15 @@ public class ComboSystem : MonoBehaviour
             ResetCombo();
         }
 
-        if (ComboCooldown <= 0)
+        if (ComboCooldown <= 0 || (ComboTimer < TopLimit && ComboTimer > BottomLimit))
         {
+            if ((ComboTimer < TopLimit && ComboTimer > BottomLimit)) print("yesss");
             CheckInput();
         }
         else
         {
             ComboCooldown -= Time.deltaTime;
+            ComboTimer -= Time.deltaTime;
         }
 
 
@@ -183,11 +189,24 @@ public class ComboSystem : MonoBehaviour
                 break;
         }
 
-        if(comboCount >= comboMax)
+        if (comboCount >= comboMax)
         {
             ComboCooldown = 1.5f;
             comboCount = 0;
         }
+    }
+
+    //Sets the limiters
+    //Player must input the command when ComboTimer
+    //is within these two limits
+    //If player inputs a command when ComboTimer > TopLimit
+    //That resets the combo
+    void SetLimiters(float bot, float top)
+    {
+        //Top Limit should never be > 1
+        TopLimit = top;
+        BottomLimit = bot;
+        ComboTimer = 1;
     }
 
     //Set pauseTime so player won't be paused in air if they don't hit anything
@@ -199,7 +218,9 @@ public class ComboSystem : MonoBehaviour
         {
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
 
-            playerData.pauseTime = 0.5f;
+            playerData.pauseTime = 0.2f;
+
+            SetLimiters(0.1f, 0.8f);
         }
         else
         {
@@ -214,7 +235,7 @@ public class ComboSystem : MonoBehaviour
         if (ray)
         {
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
-            playerData.pauseTime = 0.5f;
+            playerData.pauseTime = 0.2f;
         }
         else
         {
@@ -229,8 +250,9 @@ public class ComboSystem : MonoBehaviour
         if (ray)
         {
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
-            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyForce(1000 * playerData.GetDirection(), 0);
-            playerData.pauseTime = 0.5f;
+            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyForce(100 * playerData.GetDirection(), 0);
+            playerData.pauseTime = 0.2f;
+            SetLimiters(0.1f, 0.8f);
         }
         else
         {
@@ -245,8 +267,8 @@ public class ComboSystem : MonoBehaviour
         if (ray)
         {
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
-            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyForce(500 * playerData.GetDirection(), 3000);
-            playerData.pauseTime = 0.5f;
+            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyForce(50 * playerData.GetDirection(), 200);
+            playerData.pauseTime = 0.2f;
         }
         else
         {
@@ -274,6 +296,9 @@ public class ComboSystem : MonoBehaviour
     {
         CurrentNode = RootNode;
         playerData.pauseTime = 0f;
+        ComboTimer = 0;
+        TopLimit = 1;
+        BottomLimit = 0;
     }
 }
 

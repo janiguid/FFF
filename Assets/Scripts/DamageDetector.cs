@@ -25,7 +25,9 @@ public class DamageDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if character is frozen, keep it freezed 
+
+        //BUGGG HEEERRREEE
+        //if character is frozen, keep it freezed
         //until timer runs out
         if (isFrozen)
         {
@@ -33,11 +35,10 @@ public class DamageDetector : MonoBehaviour
             MyRB2D.velocity = Vector2.zero;
         }
 
-        //if timer runs out, make character go down
-        if(staggerTime <= 0)
+        ////if timer runs out, make character go down
+        if (staggerTime <= 0)
         {
             isFrozen = false;
-            MyRB2D.velocity = Vector2.down*20;
         }
     }
 
