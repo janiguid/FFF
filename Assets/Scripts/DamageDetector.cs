@@ -5,6 +5,9 @@ using UnityEngine;
 public class DamageDetector : MonoBehaviour
 {
     [SerializeField]
+    private AudioSource MyAudio;
+
+    [SerializeField]
     private CharacterData MyData;
 
     private Rigidbody2D MyRB2D;
@@ -19,6 +22,7 @@ public class DamageDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        MyAudio = GetComponent<AudioSource>();
         MyRB2D = GetComponent<Rigidbody2D>();
     }
 
@@ -51,6 +55,7 @@ public class DamageDetector : MonoBehaviour
         Freeze(freezeTime);
         print(gameObject.name + "received " + damage + "damage");
 
+        MyAudio.Play();
     }
 
     //Applies force to this character
