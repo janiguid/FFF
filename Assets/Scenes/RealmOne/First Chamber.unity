@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -20779,11 +20779,11 @@ TilemapCollider2D:
   m_GameObject: {fileID: 788127228}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e22bf392ddd593c44933ff56a1fd8a46, type: 2}
+  m_Material: {fileID: 6200000, guid: 6afb757fae7c4824f84b2bf35c1d1709, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.03}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!1 &1195996848
@@ -20797,9 +20797,9 @@ GameObject:
   - component: {fileID: 1195996854}
   - component: {fileID: 1195996853}
   - component: {fileID: 1195996852}
-  - component: {fileID: 1195996851}
   - component: {fileID: 1195996850}
   - component: {fileID: 1195996849}
+  - component: {fileID: 1195996851}
   m_Layer: 10
   m_Name: FirenaV2
   m_TagString: Player
@@ -20864,11 +20864,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 1195996848}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e22bf392ddd593c44933ff56a1fd8a46, type: 2}
+  m_Material: {fileID: 6200000, guid: 6afb757fae7c4824f84b2bf35c1d1709, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.11305618, y: 0.094112396}
+  m_Offset: {x: 0, y: -0.12}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -20879,7 +20879,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3340092, y: 4.451775}
+  m_Size: {x: 1.42, y: 4.04}
   m_EdgeRadius: 0
 --- !u!50 &1195996852
 Rigidbody2D:

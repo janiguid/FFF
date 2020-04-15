@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goTo: 0
+  x: 0
+  y: 0
 --- !u!61 &89318526
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13036,7 +13038,7 @@ TilemapCollider2D:
   m_GameObject: {fileID: 267572841}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6afb757fae7c4824f84b2bf35c1d1709, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -13121,7 +13123,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 504834697}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e22bf392ddd593c44933ff56a1fd8a46, type: 2}
+  m_Material: {fileID: 6200000, guid: 6afb757fae7c4824f84b2bf35c1d1709, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -13288,6 +13290,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goTo: 5
+  x: 0
+  y: 0
 --- !u!61 &736789948
 BoxCollider2D:
   m_ObjectHideFlags: 0
