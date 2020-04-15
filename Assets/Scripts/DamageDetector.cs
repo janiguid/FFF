@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DamageDetector : MonoBehaviour
 {
+    public CameraShakeTest CameraShaker;
+
     [SerializeField]
     private AudioSource MyAudio;
 
@@ -30,7 +32,6 @@ public class DamageDetector : MonoBehaviour
     void Update()
     {
 
-        //BUGGG HEEERRREEE
         //if character is frozen, keep it freezed
         //until timer runs out
         if (isFrozen)
@@ -55,6 +56,7 @@ public class DamageDetector : MonoBehaviour
         Freeze(freezeTime);
         print(gameObject.name + "received " + damage + "damage");
 
+        ShakeCam();
         MyAudio.Play();
     }
 
@@ -63,6 +65,7 @@ public class DamageDetector : MonoBehaviour
     {
         isFrozen = false;
         MyRB2D.AddForce(new Vector2(HorizontalForce, VerticalForce), ForceMode2D.Impulse);
+        ShakeCam();
     }
 
     //This function saves the current velocity of this entity and 
@@ -75,5 +78,10 @@ public class DamageDetector : MonoBehaviour
         
         staggerTime = pauseTime;
         isFrozen = true;
+    }
+
+    public void ShakeCam()
+    {
+        CameraShaker.StartShake();
     }
 }

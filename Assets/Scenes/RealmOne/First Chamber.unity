@@ -193,6 +193,34 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!1 &136948474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2197532110118350682, guid: 760c48a6cee3f3646841e303d3f97ae0,
+    type: 3}
+  m_PrefabInstance: {fileID: 266456897}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &136948479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136948474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8743d30e05e3ba448860212c681a1e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1195996854}
+  initialCameraShakeTime: 0.08
+  cameraShakeTime: 0
+  beginCameraShakeTime: 0
+  minXShake: -0.05
+  maxXShake: 0.05
+  minYShake: -0.05
+  maxYShake: 0.05
+  combatMode: 0
+  combatModeTimer: 0
 --- !u!1 &167672309
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +271,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2197532110118350677, guid: 760c48a6cee3f3646841e303d3f97ae0,
+        type: 3}
+      propertyPath: m_ShowCustomSorter
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2197532110118350678, guid: 760c48a6cee3f3646841e303d3f97ae0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -348,7 +381,8 @@ PrefabInstance:
       propertyPath: HeightOffset
       value: 0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3698646556905524335, guid: 760c48a6cee3f3646841e303d3f97ae0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 760c48a6cee3f3646841e303d3f97ae0, type: 3}
 --- !u!1 &558902002
 GameObject:
@@ -20904,6 +20938,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 2393cc57f9d2d054889d9b1d0002a249,
         type: 2}
+    - target: {fileID: 8540266707965020001, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: CameraShaker
+      value: 
+      objectReference: {fileID: 136948479}
     - target: {fileID: 8540266707965020028, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
       propertyPath: m_LocalScale.y
