@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -20624,6 +20624,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1594636266216334936, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: 1.3087751
+      objectReference: {fileID: 0}
+    - target: {fileID: 1594636266216334936, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.5743406
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124081142448799947, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -1.3661315
+      objectReference: {fileID: 0}
+    - target: {fileID: 8124081142448799947, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 2.432362
+      objectReference: {fileID: 0}
     - target: {fileID: 8540266707953683950, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
       propertyPath: m_Name
@@ -20705,6 +20725,11 @@ PrefabInstance:
       propertyPath: CameraShaker
       value: 
       objectReference: {fileID: 136948479}
+    - target: {fileID: 8540266707965020001, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: MyAudio
+      value: 
+      objectReference: {fileID: 1426763207}
     - target: {fileID: 8540266707965020028, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
       propertyPath: m_LocalScale.y
@@ -20740,15 +20765,106 @@ PrefabInstance:
       propertyPath: m_GravityScale
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 8540266707965020030, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266708451789896, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Name
+      value: LowCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266708451789897, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266708451789897, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266708888787490, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_Name
+      value: HighCollider
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266708888787491, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266708888787491, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8540266707965020026, guid: d64cb783bf2d2114d8d447922ecdcbc0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d64cb783bf2d2114d8d447922ecdcbc0, type: 3}
+--- !u!1 &986006762
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 986006763}
+  m_Layer: 0
+  m_Name: KickOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &986006763
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986006762}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.32, y: -5.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1195996854}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1195996854 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8614403071197667836, guid: 2e982a81d85769148ae95b8f0b9ec808,
     type: 3}
   m_PrefabInstance: {fileID: 8614403070170502986}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1272469464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8540266708451789896, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 837213882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1272469467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272469464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959572a8bd8fb6443a9e1cbea38e3c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraShaker: {fileID: 136948479}
+  MyAudio: {fileID: 1426763207}
+  MyData: {fileID: 11400000, guid: 2393cc57f9d2d054889d9b1d0002a249, type: 2}
+  staggerTime: 0
+  isFrozen: 0
+  savedVelocity: {x: 0, y: 0}
+  freezeTime: 0
+  fallingVelocity: 0
 --- !u!1 &1354271386
 GameObject:
   m_ObjectHideFlags: 0
@@ -21022,6 +21138,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1484263893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8540266708888787490, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+    type: 3}
+  m_PrefabInstance: {fileID: 837213882}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1484263896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484263893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959572a8bd8fb6443a9e1cbea38e3c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CameraShaker: {fileID: 136948479}
+  MyAudio: {fileID: 1426763207}
+  MyData: {fileID: 11400000, guid: 2393cc57f9d2d054889d9b1d0002a249, type: 2}
+  staggerTime: 0
+  isFrozen: 0
+  savedVelocity: {x: 0, y: 0}
+  freezeTime: 0
+  fallingVelocity: 0
 --- !u!1 &1636674811
 GameObject:
   m_ObjectHideFlags: 0
@@ -21477,6 +21619,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Firena
       objectReference: {fileID: 0}
+    - target: {fileID: 8614403071197667835, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: KickLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614403071197667835, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: KickPosition
+      value: 
+      objectReference: {fileID: 986006763}
     - target: {fileID: 8614403071197667836, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
       propertyPath: m_LocalPosition.x

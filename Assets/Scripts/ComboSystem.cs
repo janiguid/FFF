@@ -29,6 +29,8 @@ public class ComboSystem : MonoBehaviour
 
     public Transform PunchPosition;
     public float PunchLength;
+    public Transform KickPosition;
+    public float KickLength;
 
     public ComboNode RootNode;
     public ComboNode CurrentNode;
@@ -38,6 +40,7 @@ public class ComboSystem : MonoBehaviour
     void Start()
     {
         PunchPosition = transform.Find("PunchOrigin").GetComponent<Transform>();
+        KickPosition = transform.Find("KickOrigin").GetComponent<Transform>();
         InitializeCombos();
     }
 
@@ -230,12 +233,13 @@ public class ComboSystem : MonoBehaviour
 
     void HeavyPunch()
     {
-        RaycastHit2D ray = Physics2D.Raycast(PunchPosition.position, Vector2.right * playerData.GetDirection(), PunchLength, EnemyLayer);
-        Debug.DrawRay(PunchPosition.position, Vector2.right * PunchLength * playerData.GetDirection(), Color.red, 2);
+        RaycastHit2D ray = Physics2D.Raycast(KickPosition.position, Vector2.right * playerData.GetDirection(), KickLength, EnemyLayer);
+        Debug.DrawRay(KickPosition.position, Vector2.right * KickLength * playerData.GetDirection(), Color.red, 2);
         if (ray)
         {
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
             playerData.pauseTime = 0.2f;
+            SetLimiters(0.1f, 0.8f);
         }
         else
         {
@@ -262,13 +266,14 @@ public class ComboSystem : MonoBehaviour
 
     void PushHeavyPunch()
     {
-        RaycastHit2D ray = Physics2D.Raycast(PunchPosition.position, Vector2.right * playerData.GetDirection(), PunchLength, EnemyLayer);
-        Debug.DrawRay(PunchPosition.position, Vector2.right * PunchLength * playerData.GetDirection(), Color.red, 2);
+        RaycastHit2D ray = Physics2D.Raycast(KickPosition.position, Vector2.right * playerData.GetDirection(), KickLength, EnemyLayer);
+        Debug.DrawRay(KickPosition.position, Vector2.right * KickLength * playerData.GetDirection(), Color.red, 2);
         if (ray)
         {
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
             ray.collider.gameObject.GetComponent<DamageDetector>().ApplyForce(50 * playerData.GetDirection(), 200);
             playerData.pauseTime = 0.2f;
+            SetLimiters(0.1f, 0.8f);
         }
         else
         {
