@@ -2,26 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stroll : StateMachineBehaviour
+public class LeechProjectile : StateMachineBehaviour
 {
-    public Transform Character;
+    public Projectile myProjectile;
+    public float cooldown;
+    Projectile Ball;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        cooldown = 3f;
+        Ball = Instantiate(myProjectile, animator.transform);
+        Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        cooldown -= Time.deltaTime;
 
+
+        //really buggy. temp code to test projectile spawning
+        if(cooldown < 0)
+        {
+            cooldown = 3f;
+            Ball = Instantiate(myProjectile, animator.transform);
+            Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        cooldown = 3f;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
