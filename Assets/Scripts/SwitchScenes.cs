@@ -10,10 +10,13 @@ public class SwitchScenes : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SceneManager.LoadScene(goTo);
-        player = GameObject.FindWithTag("Player");
-        player.transform.position = new Vector2(x, y);
-        Debug.Log(player.transform.position);
+        if (collision.CompareTag("Player"))
+        {
+            player = GameObject.FindWithTag("Player");
+            player.transform.position = new Vector2(x, y);
+            SceneManager.LoadScene(goTo);
+            Debug.Log("Player: " + player.transform.position + " Scene: " + goTo);
+        }
     }
 
 }
