@@ -5,13 +5,15 @@ using UnityEngine;
 public class LeechProjectile : StateMachineBehaviour
 {
     public Projectile myProjectile;
+    private float initialCooldownTime;
     public float cooldown;
     Projectile Ball;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        cooldown = 3f;
+        initialCooldownTime = 5f;
+        cooldown = initialCooldownTime;
         Ball = Instantiate(myProjectile, animator.transform);
         Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
         
@@ -26,7 +28,7 @@ public class LeechProjectile : StateMachineBehaviour
         //really buggy. temp code to test projectile spawning
         if(cooldown < 0)
         {
-            cooldown = 3f;
+            cooldown = initialCooldownTime;
             Ball = Instantiate(myProjectile, animator.transform);
             Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
         }
@@ -35,7 +37,7 @@ public class LeechProjectile : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        cooldown = 3f;
+        cooldown = initialCooldownTime;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

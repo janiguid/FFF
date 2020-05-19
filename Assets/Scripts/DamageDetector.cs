@@ -12,6 +12,7 @@ public class DamageDetector : MonoBehaviour
     [SerializeField]
     private CharacterData MyData;
 
+    [SerializeField]
     private Rigidbody2D MyRB2D;
 
     public float staggerTime;
@@ -24,8 +25,8 @@ public class DamageDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        MyAudio = GetComponent<AudioSource>();
-        MyRB2D = GetComponent<Rigidbody2D>();
+        //MyAudio = GetComponent<AudioSource>();
+        //MyRB2D = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -57,7 +58,12 @@ public class DamageDetector : MonoBehaviour
         print(gameObject.name + "received " + damage + "damage");
 
         ShakeCam();
-        MyAudio.Play();
+
+        if (MyAudio)
+        {
+            MyAudio.Play();
+        }
+        
     }
 
     //Applies force to this character

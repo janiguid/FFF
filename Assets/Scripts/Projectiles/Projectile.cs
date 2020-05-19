@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float direction;
-    Rigidbody2D myRigidBody;
+    public Rigidbody2D myRigidBody;
     public float speed;
     public int damage;
     public float lifetime;

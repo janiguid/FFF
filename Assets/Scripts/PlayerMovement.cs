@@ -38,10 +38,13 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 horizontalVelocity;
     public float speed;
+    public Vector3 spriteFlipper = new Vector3(-1, 1, 1);
 
     // Start is called before the first frame update
     void Start()
     {
+        isGrounded = true;
+
         additionalRay = 0.4f;
         rigidbody2D = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<Collider2D>();
@@ -69,17 +72,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
 
-
-        //RaycastHit2D raycastHit = Physics2D.BoxCast(collider2D.bounds.center, collider2D.bounds.extents/99, 0f, Vector2.down, collider2D.bounds.extents.y + additionalRay,layerMask);
-        //if (raycastHit.collider)
-        //{
-        //    isGrounded = true;
-        //}
-        //else
-        //{
-        //    isGrounded = false;
-        //}
-
         VerticalMovement();
         HorizontalMovement();
 
@@ -100,6 +92,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print(collision.tag);
         if (collision.tag == "Ground")
         {
             isGrounded = true;
@@ -108,6 +101,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        print(collision.tag + "exit" );
         if (collision.tag == "Ground")
         {
             isGrounded = false;
@@ -118,14 +112,16 @@ public class PlayerMovement : MonoBehaviour
     {
         if (useController)
         {
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded || -Input.GetAxisRaw("VerticalGamePad") > 0.1 && isGrounded)
+            
+            if ((Input.GetKeyDown(KeyCode.Space) && isGrounded) || (Input.GetAxisRaw("VerticalGamePad") > 0.1) && isGrounded)
             {
+                print("blah");
                 rigidbody2D.velocity = Vector2.up * jumpVelocity;
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded || Input.GetAxisRaw("Vertical") > 0.1 && isGrounded)
+            if ((Input.GetKeyDown(KeyCode.Space) && isGrounded) || (Input.GetAxisRaw("Vertical") > 0.1 && isGrounded))
             {
                 rigidbody2D.velocity = Vector2.up * jumpVelocity;
             }
@@ -172,6 +168,9 @@ public class PlayerMovement : MonoBehaviour
     void SetDirection(int direction)
     {
         playerData.SetDirection(direction);
-        sprite.flipX = !sprite.flipX;
+        //sprite.flipX = !sprite.flipX;
+        spriteFlipper = transform.localScale;
+        spriteFlipper.x = -spriteFlipper.x;
+        transform.localScale = spriteFlipper;
     }
 }

@@ -34,9 +34,16 @@ public class ComboSystem : MonoBehaviour
     public ComboNode CurrentNode;
     public ComboNode NextNode;
 
+    public Collider2D[] HitResults;
+    public Collider2D PunchCollider;
+    public ContactFilter2D HitFilters;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        HitFilters.SetLayerMask(EnemyLayer);
+        HitResults = new Collider2D[3];
         PunchPosition = transform.Find("PunchOrigin").GetComponent<Transform>();
         InitializeCombos();
     }
@@ -129,6 +136,9 @@ public class ComboSystem : MonoBehaviour
         else if (Input.GetButtonDown("Triangle"))
         {
             CheckAttack(2);
+        }else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CheckAttack(1);
         }
     }
 
@@ -212,20 +222,37 @@ public class ComboSystem : MonoBehaviour
     //Set pauseTime so player won't be paused in air if they don't hit anything
     void LightPunch()
     {
-        RaycastHit2D ray = Physics2D.Raycast(PunchPosition.position, Vector2.right * playerData.GetDirection(), PunchLength, EnemyLayer);
-        Debug.DrawRay(PunchPosition.position, Vector2.right * PunchLength * playerData.GetDirection(), Color.red, 2);
-        if (ray)
-        {
-            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
 
-            playerData.pauseTime = 0.2f;
+        //ATTACK COLLIDRES NEED TO BE TRIGGERS WHILE 
+        //DEFENSE COLLIDERS AND HIT COLLIDERS NEED TO BE NOT TRIGGERS
+        int hits = PunchCollider.OverlapCollider(HitFilters, HitResults);
 
-            SetLimiters(0.1f, 0.8f);
-        }
-        else
+        if(hits > 0)
         {
-            playerData.pauseTime = 0f;
+            //14 is the enemy block layer
+            if(HitResults[0].gameObject.layer == 14)
+            {
+                //play blocked audio
+                print("blocked");
+                return;
+            }
+            print("hit" + HitResults[0].name + " on layer: " + HitResults[0].gameObject.layer);
+            DamageDetector dam = HitResults[0].GetComponent<DamageDetector>();
+            if (dam)
+            {
+                dam.ApplyDamage(5f);
+                print("damageing" + dam.gameObject.name);
+                playerData.pauseTime = 0.2f;
+
+                SetLimiters(0.1f, 0.8f);
+            }
+            else
+            {
+                playerData.pauseTime = 0f;
+                print("Damage detector isn't detected");
+            }
         }
+
     }
 
     void HeavyPunch()
@@ -245,19 +272,34 @@ public class ComboSystem : MonoBehaviour
 
     void PushLightPunch()
     {
-        RaycastHit2D ray = Physics2D.Raycast(PunchPosition.position, Vector2.right * playerData.GetDirection(), PunchLength, EnemyLayer);
-        Debug.DrawRay(PunchPosition.position, Vector2.right * PunchLength * playerData.GetDirection(), Color.red, 2);
-        if (ray)
+        int hits = PunchCollider.OverlapCollider(HitFilters, HitResults);
+
+        if (hits > 0)
         {
-            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyDamage(5);
-            ray.collider.gameObject.GetComponent<DamageDetector>().ApplyForce(100 * playerData.GetDirection(), 0);
-            playerData.pauseTime = 0.2f;
-            SetLimiters(0.1f, 0.8f);
+            //14 is the enemy block layer
+            if (HitResults[0].gameObject.layer == 14)
+            {
+                //play blocked audio
+                print("blocked");
+                return;
+            }
+            print("hit" + HitResults[0].name + " on layer: " + HitResults[0].gameObject.layer);
+            DamageDetector dam = HitResults[0].GetComponent<DamageDetector>();
+            if (dam)
+            {
+                dam.ApplyDamage(5f);
+                dam.ApplyForce(100 * playerData.GetDirection(), 0);
+                print("damageing" + dam.gameObject.name);
+                playerData.pauseTime = 0.2f;
+                SetLimiters(0.1f, 0.8f);
+            }
+            else
+            {
+                playerData.pauseTime = 0f;
+                print("Damage detector isn't detected");
+            }
         }
-        else
-        {
-            playerData.pauseTime = 0f;
-        }
+
     }
 
     void PushHeavyPunch()

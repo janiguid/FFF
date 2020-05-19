@@ -31,7 +31,7 @@ public class CharacterLOS : MonoBehaviour
             }
             else
             {
-                Debug.Log("Couldn't find animator. Check to see if it's attached.", gameObject);
+                //Debug.Log("Couldn't find animator. Check to see if it's attached.", gameObject);
             }
         }
     }
