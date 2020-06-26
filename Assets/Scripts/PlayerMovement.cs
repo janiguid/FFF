@@ -131,10 +131,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void blah()
-    {
-        print(";dasfdsf");
-    }
 
     void VerticalMovement()
     {

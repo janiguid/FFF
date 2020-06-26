@@ -27641,6 +27641,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: Speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: jumpTime
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8614403071197667832, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
       propertyPath: useController
