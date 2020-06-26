@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    private InputActions Inputs;
+
+
     //Uncheck to use controller
     public bool useController;
 
@@ -39,6 +44,24 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 horizontalVelocity;
     public float speed;
     public Vector3 spriteFlipper = new Vector3(-1, 1, 1);
+
+    private void Awake()
+    {
+        Inputs = new InputActions();
+        
+    }
+
+    private void OnEnable()
+    {
+        Inputs.Enable();
+    }
+
+    private void OnDisable()
+    {
+        Inputs.Disable();
+    }
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -108,61 +131,68 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void blah()
+    {
+        print(";dasfdsf");
+    }
+
     void VerticalMovement()
     {
-        if (useController)
-        {
+        
+
+        //if (useController)
+        //{
             
-            if ((Input.GetKeyDown(KeyCode.Space) && isGrounded) || (Input.GetAxisRaw("VerticalGamePad") > 0.1) && isGrounded)
-            {
-                print("blah");
-                rigidbody2D.velocity = Vector2.up * jumpVelocity;
-            }
-        }
-        else
-        {
-            if ((Input.GetKeyDown(KeyCode.Space) && isGrounded) || (Input.GetAxisRaw("Vertical") > 0.1 && isGrounded))
-            {
-                rigidbody2D.velocity = Vector2.up * jumpVelocity;
-            }
-        }
+        //    if ((Input.GetKeyDown(KeyCode.Space) && isGrounded) || (Input.GetAxisRaw("VerticalGamePad") > 0.1) && isGrounded)
+        //    {
+        //        print("blah");
+        //        rigidbody2D.velocity = Vector2.up * jumpVelocity;
+        //    }
+        //}
+        //else
+        //{
+        //    if ((Input.GetKeyDown(KeyCode.Space) && isGrounded) || (Input.GetAxisRaw("Vertical") > 0.1 && isGrounded))
+        //    {
+        //        rigidbody2D.velocity = Vector2.up * jumpVelocity;
+        //    }
+        //}
 
 
-        if ((Input.GetButtonDown("Square") || Input.GetButtonDown("Triangle")) && !isGrounded && !isFrozen && playerData.pauseTime > 0f)
-        {
-            pauseTime = playerData.pauseTime;
-            savedVelocity = rigidbody2D.velocity;
-            rigidbody2D.velocity = Vector2.zero;
-            isFrozen = true;
-        }
+        //if ((Input.GetButtonDown("Square") || Input.GetButtonDown("Triangle")) && !isGrounded && !isFrozen && playerData.pauseTime > 0f)
+        //{
+        //    pauseTime = playerData.pauseTime;
+        //    savedVelocity = rigidbody2D.velocity;
+        //    rigidbody2D.velocity = Vector2.zero;
+        //    isFrozen = true;
+        //}
     }
 
     void HorizontalMovement()
     {
 
 
-        if (useController)
-        {
-            horizontalVelocity.x = speed * Input.GetAxis("HorizontalGamePad");
-        }
-        else
-        {
-            horizontalVelocity.x = speed * Input.GetAxis("Horizontal");
-        }
+        //if (useController)
+        //{
+        //    horizontalVelocity.x = speed * Input.GetAxis("HorizontalGamePad");
+        //}
+        //else
+        //{
+        //    horizontalVelocity.x = speed * Input.GetAxis("Horizontal");
+        //}
 
-        horizontalVelocity.y = rigidbody2D.velocity.y;
+        //horizontalVelocity.y = rigidbody2D.velocity.y;
 
-        rigidbody2D.velocity = horizontalVelocity;
+        //rigidbody2D.velocity = horizontalVelocity;
 
-        if(horizontalVelocity.x < 0 && playerData.GetDirection() > 0)
-        {
-            SetDirection(-1);
-        }
-        else if(horizontalVelocity.x > 0 && playerData.GetDirection() < 0)
-        {
-            SetDirection(1);
+        //if(horizontalVelocity.x < 0 && playerData.GetDirection() > 0)
+        //{
+        //    SetDirection(-1);
+        //}
+        //else if(horizontalVelocity.x > 0 && playerData.GetDirection() < 0)
+        //{
+        //    SetDirection(1);
 
-        }
+        //}
     }
 
     void SetDirection(int direction)
@@ -172,5 +202,10 @@ public class PlayerMovement : MonoBehaviour
         spriteFlipper = transform.localScale;
         spriteFlipper.x = -spriteFlipper.x;
         transform.localScale = spriteFlipper;
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        print("Jumping");
     }
 }

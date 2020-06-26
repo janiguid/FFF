@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 8614403071197667839}
   - component: {fileID: 8614403071197667838}
   - component: {fileID: 8614403071197667833}
+  - component: {fileID: 2834229472007811081}
   - component: {fileID: 8614403071197667832}
   - component: {fileID: 8614403071197667835}
   - component: {fileID: 8614403071197667837}
@@ -237,7 +238,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4.0198874, y: 14.02964}
   m_EdgeRadius: 0
---- !u!114 &8614403071197667832
+--- !u!114 &2834229472007811081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -245,6 +246,18 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8614403071197667834}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55a8a0059258ef4ca1d2334abc7203f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8614403071197667832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614403071197667834}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef141e4f4f332424db8deda26276d845, type: 3}
   m_Name: 
@@ -263,6 +276,7 @@ MonoBehaviour:
   savedVelocity: {x: 0, y: 0}
   horizontalVelocity: {x: 0, y: 0}
   speed: 10
+  spriteFlipper: {x: -1, y: 1, z: 1}
 --- !u!114 &8614403071197667835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,6 +302,22 @@ MonoBehaviour:
   BottomLimit: 0
   PunchPosition: {fileID: 0}
   PunchLength: 2
+  HitResults: []
+  PunchCollider: {fileID: 0}
+  HitFilters:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
 --- !u!61 &8614403071197667837
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -129,17 +129,17 @@ public class ComboSystem : MonoBehaviour
 
     void CheckInput()
     {
-        if (Input.GetButtonDown("Square"))
-        {
-            CheckAttack(1);
-        }
-        else if (Input.GetButtonDown("Triangle"))
-        {
-            CheckAttack(2);
-        }else if (Input.GetKeyDown(KeyCode.Q))
-        {
-            CheckAttack(1);
-        }
+        //if (Input.GetButtonDown("Square"))
+        //{
+        //    CheckAttack(1);
+        //}
+        //else if (Input.GetButtonDown("Triangle"))
+        //{
+        //    CheckAttack(2);
+        //}else if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    CheckAttack(1);
+        //}
     }
 
     // Everything starts from root node
