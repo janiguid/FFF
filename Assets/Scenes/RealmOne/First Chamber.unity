@@ -27585,46 +27585,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: Speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: jumpTime
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: maxJumps
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: isGrounded
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2834229472007811081, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: speed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403071197667832, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: useController
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403071197667832, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8614403071197667834, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
       propertyPath: m_Name
@@ -27638,7 +27598,7 @@ PrefabInstance:
     - target: {fileID: 8614403071197667836, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.4
+      value: 13.81
       objectReference: {fileID: 0}
     - target: {fileID: 8614403071197667836, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
@@ -27685,28 +27645,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8614403071197667837, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0.07461929
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403071197667837, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 3.1134129
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403071197667837, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -7.547292
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403071197667837, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.8617735
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8614403071197667832, guid: 2e982a81d85769148ae95b8f0b9ec808, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e982a81d85769148ae95b8f0b9ec808, type: 3}
 --- !u!1 &1354271386
 GameObject:

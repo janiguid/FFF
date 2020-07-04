@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using FFF;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private int maxJumps;
     [SerializeField] private int jumpsLeft;
+    [SerializeField] private bool isFacingRight;
 
     public enum JumpType
     {
@@ -25,11 +27,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
-    [SerializeField] private bool usingController;
-
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
+    private SpriteRenderer SRenderer;
 
     private void Awake()
     {
@@ -40,13 +40,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         RB_2D = GetComponent<Rigidbody2D>();
-        Inputs.Land.Jump.performed += _ => Jump();
+        Inputs.LandMovement.Jump.performed += _ => Jump();
 
         gravityScale = (2 * jumpHeight / Mathf.Pow(jumpTime, 2));
         jumpVelocity = gravityScale * jumpTime;
 
         RB_2D.gravityScale = gravityScale;
         RefreshJump();
+
+        SRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -63,7 +65,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        horizontalMovement = Inputs.Land.Move.ReadValue<float>();
+        horizontalMovement = Inputs.LandMovement.Move.ReadValue<float>();
 
 
         movement.x = Vector2.right.x * horizontalMovement * speed;
@@ -74,6 +76,21 @@ public class PlayerController : MonoBehaviour
         }
 
         RB_2D.velocity = movement;
+
+        if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
+        {
+            Flip();
+        }
+
+    }
+
+    void Flip()
+    {
+        Vector2 turner = Vector2.left;
+        turner.y += 1;
+        transform.localScale *= turner;
+        isFacingRight = !isFacingRight;
+        print("balh");
     }
 
     void Jump()

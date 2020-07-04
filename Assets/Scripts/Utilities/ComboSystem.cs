@@ -51,7 +51,7 @@ public class ComboSystem : MonoBehaviour
     void InitializeCombos()
     {
         //start tree
-        RootNode = new ComboNode(0, 0, false);
+        RootNode = new ComboNode(0, 0, false, 0, 0);
 
         //define temp to help with initializing children
         ComboNode parent = RootNode;
@@ -60,17 +60,17 @@ public class ComboSystem : MonoBehaviour
         //add first combo root
         //-----------------------------------
         //light punch
-        childToBeAdded = new ComboNode(1, 10, false);
+        childToBeAdded = new ComboNode(1, 10, false, 2, 2);
         parent.AddChild(childToBeAdded);
 
         //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false);
+        childToBeAdded = new ComboNode(1, 10, false, 2, 2);
         parent.AddChild(childToBeAdded);
 
         //push light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 15, true);
+        childToBeAdded = new ComboNode(1, 15, true, 5, 5);
         parent.AddChild(childToBeAdded);
         //-----------------------------------
 
@@ -79,15 +79,15 @@ public class ComboSystem : MonoBehaviour
         //-----------------------------------
         //light punch
         parent = RootNode;
-        childToBeAdded = new ComboNode(2, 15, false);
+        childToBeAdded = new ComboNode(2, 15, false, 2, 2);
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 15, false);
+        childToBeAdded = new ComboNode(2, 15, false, 2, 2);
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 20, true);
+        childToBeAdded = new ComboNode(2, 20, true, 2, 5);
         parent.AddChild(childToBeAdded);
         //-----------------------------------
 
@@ -129,17 +129,18 @@ public class ComboSystem : MonoBehaviour
 
     void CheckInput()
     {
-        //if (Input.GetButtonDown("Square"))
-        //{
-        //    CheckAttack(1);
-        //}
-        //else if (Input.GetButtonDown("Triangle"))
-        //{
-        //    CheckAttack(2);
-        //}else if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    CheckAttack(1);
-        //}
+        if (Input.GetButtonDown("Square"))
+        {
+            CheckAttack(1);
+        }
+        else if (Input.GetButtonDown("Triangle"))
+        {
+            CheckAttack(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            CheckAttack(1);
+        }
     }
 
     // Everything starts from root node
@@ -351,68 +352,68 @@ public class ComboSystem : MonoBehaviour
 //3 is circle / B
 //4 is X / A
 //99 should never happen
-public class ComboNode
-{
-    public int attackType;
-    public int hitValue;
-    public bool isFinisher;
-    public List<ComboNode> children = new List<ComboNode>();
+//public class ComboNode
+//{
+//    public int attackType;
+//    public int hitValue;
+//    public bool isFinisher;
+//    public List<ComboNode> children = new List<ComboNode>();
 
 
-    //TYPE: 0,1,2,3,4,5
-    //DAMAGE: amount it deals
-    //ENDER: whether it ends the combo or not
-    public ComboNode(int type, int damage, bool ender)
-    {
-        attackType = type;
-        hitValue = damage;
-        isFinisher = ender;
-    }
+//    //TYPE: 0,1,2,3,4,5
+//    //DAMAGE: amount it deals
+//    //ENDER: whether it ends the combo or not
+//    public ComboNode(int type, int damage, bool ender)
+//    {
+//        attackType = type;
+//        hitValue = damage;
+//        isFinisher = ender;
+//    }
 
-    //adds child
-    public void AddChild(ComboNode attack)
-    {
+//    //adds child
+//    public void AddChild(ComboNode attack)
+//    {
 
-        children.Add(attack);
+//        children.Add(attack);
 
-    }
+//    }
 
 
-    //returns child
-    public ComboNode GetChild(int attackType)
-    {
-        for (int i = 0; i < children.Count; ++i)
-        {
-            if(children[i].attackType == attackType)
-            {
-                return children[i];
-            }
-        }
+//    //returns child
+//    public ComboNode GetChild(int attackType)
+//    {
+//        for (int i = 0; i < children.Count; ++i)
+//        {
+//            if(children[i].attackType == attackType)
+//            {
+//                return children[i];
+//            }
+//        }
 
-        return new ComboNode(99, 0, false);
-    }
+//        return new ComboNode(99, 0, false);
+//    }
 
-    //loops through children nodes to see if input
-    //is a possible continuation
-    public bool CheckChildren(int attackType)
-    {
-        if(attackType == 99)
-        {
-            System.Console.WriteLine("Should not happen");
-            return false;
-        }
+//    //loops through children nodes to see if input
+//    //is a possible continuation
+//    public bool CheckChildren(int attackType)
+//    {
+//        if(attackType == 99)
+//        {
+//            System.Console.WriteLine("Should not happen");
+//            return false;
+//        }
 
-        for (int i = 0; i < children.Count; ++i)
-        {
+//        for (int i = 0; i < children.Count; ++i)
+//        {
 
-            //return true if one of the children has this type
-            if (children[i].attackType == attackType)
-            {
-                return true;
-            }
-        }
+//            //return true if one of the children has this type
+//            if (children[i].attackType == attackType)
+//            {
+//                return true;
+//            }
+//        }
 
-        return false;
-    }
-}
+//        return false;
+//    }
+
 

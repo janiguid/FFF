@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 8614403071197667833}
   - component: {fileID: 8614403071197667837}
   - component: {fileID: 2834229472007811081}
+  - component: {fileID: 1646761395827740261}
   - component: {fileID: 8614403071197667835}
   - component: {fileID: 528679530651121969}
   m_Layer: 10
@@ -180,9 +181,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d141c77c0bbb58f4ba8dcd91b3303b73, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0b69f7b5634bd2c489c90cd56c256533, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 3.06, y: 4.64}
@@ -227,9 +228,9 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.054665804, y: -0.7235143}
   m_SpriteTilingProperty:
-    border: {x: 0.42999998, y: 0.75, z: 0.38, w: 1.12}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.6, y: 16.98}
+    oldSize: {x: 9.31, y: 19.56}
     newSize: {x: 3.06, y: 4.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -251,18 +252,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0746215, y: -7.6538577}
+  m_Offset: {x: 0.07461929, y: -7.547292}
   m_SpriteTilingProperty:
-    border: {x: 0.42999998, y: 0.75, z: 0.38, w: 1.12}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.6, y: 16.98}
+    oldSize: {x: 9.31, y: 19.56}
     newSize: {x: 3.06, y: 4.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.1075587, y: 1.0749044}
+  m_Size: {x: 3.1134129, y: 0.8617735}
   m_EdgeRadius: 0
 --- !u!114 &2834229472007811081
 MonoBehaviour:
@@ -277,18 +278,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityScale: 0
-  jumpHeight: 0
-  jumpTime: 0
+  jumpHeight: 4
+  jumpTime: 0.4
   jumpVelocity: 0
   movement: {x: 0, y: 0}
   horizontalMovement: 0
   verticalMovement: 0
-  speed: 0
+  speed: 7
   isGrounded: 0
-  maxJumps: 0
+  maxJumps: 1
   jumpsLeft: 0
-  usingController: 0
---- !u!114 &8614403071197667835
+  isFacingRight: 1
+--- !u!114 &1646761395827740261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,6 +297,18 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8614403071197667834}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439d51f852d8691438a45acd29ebc7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8614403071197667835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614403071197667834}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18c2d51244278df41b8a8195525b44f5, type: 3}
   m_Name: 

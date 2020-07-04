@@ -2,7 +2,7 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Land",
+            "name": "LandMovement",
             "id": "4a103845-87aa-47bf-b29d-ea22e7dd77ba",
             "actions": [
                 {
@@ -17,6 +17,22 @@
                     "name": "Move",
                     "type": "Button",
                     "id": "54de0e6b-c24d-4d0a-bcc0-f91f9a153be0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "West",
+                    "type": "Button",
+                    "id": "2606c87f-b109-4721-bdc3-5eb0ce5a5edc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "North",
+                    "type": "Button",
+                    "id": "92b15c38-f90e-4d35-bf8c-03765f118cee",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -143,6 +159,28 @@
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "d90a2905-a357-4cca-95fd-5e952413d1d7",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "West",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4c6e46f6-24e3-4ede-b170-30b10f8eb44b",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "North",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

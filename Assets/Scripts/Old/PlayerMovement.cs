@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
 
-    private InputActions Inputs;
+    private InputAction Inputs;
 
 
     //Uncheck to use controller
@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        Inputs = new InputActions();
+        //Inputs = new InputActions();
         
     }
 
