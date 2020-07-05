@@ -42,13 +42,18 @@ public class PlayerController : MonoBehaviour
         RB_2D = GetComponent<Rigidbody2D>();
         Inputs.LandMovement.Jump.performed += _ => Jump();
 
+        InitializePhys();
+        RefreshJump();
+
+        SRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void InitializePhys()
+    {
         gravityScale = (2 * jumpHeight / Mathf.Pow(jumpTime, 2));
         jumpVelocity = gravityScale * jumpTime;
 
         RB_2D.gravityScale = gravityScale;
-        RefreshJump();
-
-        SRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -90,7 +95,6 @@ public class PlayerController : MonoBehaviour
         turner.y += 1;
         transform.localScale *= turner;
         isFacingRight = !isFacingRight;
-        print("balh");
     }
 
     void Jump()

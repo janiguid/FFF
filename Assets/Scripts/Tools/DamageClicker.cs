@@ -5,11 +5,13 @@ using UnityEngine;
 public class DamageClicker : MonoBehaviour
 {
     [SerializeField] private LayerMask layerToTest;
+    public float xForce;
+    public float yForce;
     CameraFollow cam;
     // Update is called once per frame
     void Update()
     {
-        
+        Vector2 forwardVector = Vector2.right;
         if (Input.GetMouseButtonDown(0))
         {
             print("Clicked");
@@ -19,7 +21,7 @@ public class DamageClicker : MonoBehaviour
 
             if(ray.collider != null)
             {
-                ray.collider.gameObject.GetComponent<IDamageable>().ApplyDamage(1f);
+                ray.collider.gameObject.GetComponent<IPushable>().ApplyForce(xForce, yForce);
             }
         }
     }

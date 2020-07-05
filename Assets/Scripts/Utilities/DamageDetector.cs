@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDetector : MonoBehaviour
+public class DamageDetector : MonoBehaviour, IDamageable, IPushable
 {
-    public CameraShakeTest CameraShaker;
+    [SerializeField] private float gravityScale;
+    [SerializeField] private float jumpHeight;
+    [SerializeField] private float jumpTime;
+    [SerializeField] private float jumpVelocity;
+    [SerializeField] private Vector2 movement;
+    [SerializeField] private float horizontalMovement;
+    [SerializeField] private float verticalMovement;
 
-    [SerializeField]
-    private AudioSource MyAudio;
+    //public CameraShakeTest CameraShaker;
 
-    [SerializeField]
-    private CharacterData MyData;
+    [SerializeField] private AudioSource MyAudio;
 
-    [SerializeField]
-    private Rigidbody2D MyRB2D;
+    [SerializeField] private CharacterData MyData;
+
+    [SerializeField] private Rigidbody2D MyRB2D;
 
     public float staggerTime;
     public bool isFrozen;
@@ -25,8 +30,18 @@ public class DamageDetector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //MyAudio = GetComponent<AudioSource>();
-        //MyRB2D = GetComponent<Rigidbody2D>();
+        MyAudio = GetComponent<AudioSource>();
+        MyRB2D = GetComponent<Rigidbody2D>();
+
+        InitializePhys();
+    }
+
+    void InitializePhys()
+    {
+        gravityScale = (2 * jumpHeight / Mathf.Pow(jumpTime, 2));
+        jumpVelocity = gravityScale * jumpTime;
+
+        MyRB2D.gravityScale = gravityScale;
     }
 
     // Update is called once per frame
@@ -67,11 +82,15 @@ public class DamageDetector : MonoBehaviour
     }
 
     //Applies force to this character
-    public void ApplyForce(int HorizontalForce, int VerticalForce)
+    public void ApplyForce(float HorizontalForce, float VerticalForce)
     {
         isFrozen = false;
         MyRB2D.AddForce(new Vector2(HorizontalForce, VerticalForce), ForceMode2D.Impulse);
         ShakeCam();
+        if (MyAudio)
+        {
+            MyAudio.Play();
+        }
     }
 
     //This function saves the current velocity of this entity and 
@@ -88,6 +107,8 @@ public class DamageDetector : MonoBehaviour
 
     public void ShakeCam()
     {
-        CameraShaker.StartShake();
+        //CameraShaker.StartShake();
     }
+
+
 }

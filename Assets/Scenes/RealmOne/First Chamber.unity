@@ -121,6 +121,57 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &174347315 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2197532110118350682, guid: 760c48a6cee3f3646841e303d3f97ae0,
+    type: 3}
+  m_PrefabInstance: {fileID: 983252555}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &174347322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 174347315}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8743d30e05e3ba448860212c681a1e3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 0}
+  initialCameraShakeTime: 0
+  cameraShakeTime: 0
+  beginCameraShakeTime: 0
+  minXShake: 0
+  maxXShake: 0
+  minYShake: 0
+  maxYShake: 0
+  combatMode: 0
+  combatModeTimer: 0
+--- !u!1 &292185508 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8614403071197667834, guid: 2e982a81d85769148ae95b8f0b9ec808,
+    type: 3}
+  m_PrefabInstance: {fileID: 992411952}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &292185517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292185508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d048d232438febf4f964e0f549ca67b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  PunchLength: 1
+  punchPosition: {fileID: 0}
 --- !u!4 &356649643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8614403071197667836, guid: 2e982a81d85769148ae95b8f0b9ec808,
@@ -27438,7 +27489,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 6200000, guid: 6afb757fae7c4824f84b2bf35c1d1709, type: 2}
+  m_Material: {fileID: 6200000, guid: 1e7db037eec944249b7eda095cc54521, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -27459,7 +27510,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &913261418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27474,7 +27525,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   layerToTest:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 5120
+  xForce: 10
+  yForce: 20
 --- !u!4 &913261419
 Transform:
   m_ObjectHideFlags: 0
@@ -27585,6 +27638,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8614403070695849400, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: m_TagString
+      value: PunchPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614403070695849401, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614403070695849401, guid: 2e982a81d85769148ae95b8f0b9ec808,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.02
+      objectReference: {fileID: 0}
     - target: {fileID: 8614403071197667834, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
       propertyPath: m_Name
@@ -27803,7 +27871,7 @@ PrefabInstance:
     - target: {fileID: 8540266707953683951, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15.664158
+      value: 13.7
       objectReference: {fileID: 0}
     - target: {fileID: 8540266707953683951, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
@@ -27850,8 +27918,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8540266707965020026, guid: d64cb783bf2d2114d8d447922ecdcbc0, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64cb783bf2d2114d8d447922ecdcbc0, type: 3}
 --- !u!1 &1815438729
 GameObject:

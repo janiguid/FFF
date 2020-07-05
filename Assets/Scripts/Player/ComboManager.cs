@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FFF;
+using System;
 
 public class ComboManager : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class ComboManager : MonoBehaviour
     private ComboNode RootNode;
     private ComboNode CurrentNode;
 
+    private Dictionary<int, Func<bool>> MethodDict = new Dictionary<int, Func<bool>>();
+
     private void Awake()
     {
         Inputs = new InputActions();
@@ -24,6 +27,12 @@ public class ComboManager : MonoBehaviour
     {
         Inputs.LandMovement.West.performed += _ => Punch();
         Inputs.LandMovement.North.performed += _ => UpperCut();
+
+        ComboMethods combos = gameObject.GetComponent<ComboMethods>();
+        combos.InitializeDict();
+
+
+        MethodDict = combos.GetDictionary();
 
         InitializeCombos();
     }
@@ -106,25 +115,30 @@ public class ComboManager : MonoBehaviour
         if (comboTimer < recoveryTime) return;
         CheckInput(1);
         
-        //buttonPressed = this
-        //check if buttonPressed is among children of currentNode
-        //if yes, make it currentNode and shoot raytrace
-        //if not, return
     }
 
     void UpperCut()
     {
-        print("Uppercut");
-        CheckInput(2);
+        CheckInput(3);
     }
 
     void CheckInput(int i)
     {
         if (CurrentNode.CheckChildren(i))
         {
-            CommenceAttack(i);
-           
             CurrentNode = CurrentNode.GetChild(i);
+            //add 10 to add finisher 
+            if (CurrentNode.isFinisher)
+            {
+                CommenceAttack(i + 10);
+            }
+            else
+            {
+                CommenceAttack(i);
+            }
+            
+           
+            
 
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
@@ -137,8 +151,7 @@ public class ComboManager : MonoBehaviour
 
     void CommenceAttack(int i)
     {
-        print("Punched");
-
+        MethodDict[i]();
     }
 
 
