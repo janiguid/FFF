@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ToggleFlight",
+                    "type": "Button",
+                    "id": "28179be7-f4f2-43b7-9921-8bdb14dd55c4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -179,6 +187,55 @@
                     "processors": "",
                     "groups": "",
                     "action": "North",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4f59d385-9cc4-40cc-9501-d5f8d88a9af1",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleFlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ba2934aa-69f5-4025-8632-fbfbf95b2760",
+                    "path": "<DualShockGamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleFlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "FlightMovement",
+            "id": "38f29bcf-fe25-46e2-acea-54937c778e7b",
+            "actions": [
+                {
+                    "name": "Flight",
+                    "type": "Value",
+                    "id": "49b2b898-f485-484e-8e97-51959c251c24",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1a8fccac-0cdb-44e3-ba8d-a9c28743b89b",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

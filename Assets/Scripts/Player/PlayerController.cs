@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         RB_2D = GetComponent<Rigidbody2D>();
-        Inputs.LandMovement.Jump.performed += _ => Jump();
+        
 
         InitializePhys();
         RefreshJump();
@@ -58,12 +58,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        Inputs.LandMovement.Jump.performed += _ => Jump();
+        if(RB_2D) RB_2D.gravityScale = gravityScale;
+
         Inputs.Enable();
     }
 
     private void OnDisable()
     {
+        Inputs.LandMovement.Jump.performed -= _ => Jump();
         Inputs.Disable();
+    }
+
+    void BeginFlight()
+    {
+        GetComponent<FlightController>().InitializeFlight();
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 8614403070695849401}
   m_Layer: 0
   m_Name: PunchOrigin
-  m_TagString: Untagged
+  m_TagString: PunchPosition
   m_Icon: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +96,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8614403070695849400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.32, y: 0.56, z: 0}
+  m_LocalPosition: {x: 1.02, y: 1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8614403071197667836}
@@ -117,8 +117,10 @@ GameObject:
   - component: {fileID: 8614403071197667837}
   - component: {fileID: 2834229472007811081}
   - component: {fileID: 1646761395827740261}
-  - component: {fileID: 8614403071197667835}
   - component: {fileID: 528679530651121969}
+  - component: {fileID: 292185510}
+  - component: {fileID: 292185517}
+  - component: {fileID: 292185518}
   m_Layer: 10
   m_Name: Firena
   m_TagString: Untagged
@@ -205,7 +207,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -301,47 +303,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 439d51f852d8691438a45acd29ebc7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8614403071197667835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8614403071197667834}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18c2d51244278df41b8a8195525b44f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: afbf26640b6c16d4da7d8a7874465981, type: 2}
-  EnemyLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  ComboStarted: 0
-  WindowBeforeNextAttack: 0
-  ComboCooldown: 0
-  HitCount: 0
-  ComboTimer: 0
-  TopLimit: 0
-  BottomLimit: 0
-  PunchPosition: {fileID: 0}
-  PunchLength: 2
-  HitResults: []
-  PunchCollider: {fileID: 0}
-  HitFilters:
-    useTriggers: 0
-    useLayerMask: 0
-    useDepth: 0
-    useOutsideDepth: 0
-    useNormalAngle: 0
-    useOutsideNormalAngle: 0
-    layerMask:
-      serializedVersion: 2
-      m_Bits: 0
-    minDepth: 0
-    maxDepth: 0
-    minNormalAngle: 0
-    maxNormalAngle: 0
+  timerStarted: 0
+  comboTimer: 0
+  timeBeforeComboReset: 0
+  recoveryTime: 0
 --- !u!114 &528679530651121969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,3 +321,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialPlayerHealth: 50
   PlayerHealth: 0
+--- !u!114 &292185510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614403071197667834}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111b9b6539b57db4cbbc5809adcf7ffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyRB2D: {fileID: 0}
+  speed: 20
+--- !u!114 &292185517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614403071197667834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d048d232438febf4f964e0f549ca67b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  PunchLength: 1
+  punchPosition: {fileID: 0}
+--- !u!114 &292185518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8614403071197667834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b803ec625865aa64b950674af52bd4d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 0}
+  flightController: {fileID: 0}

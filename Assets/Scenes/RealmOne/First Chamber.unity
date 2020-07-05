@@ -149,29 +149,6 @@ MonoBehaviour:
   maxYShake: 0
   combatMode: 0
   combatModeTimer: 0
---- !u!1 &292185508 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8614403071197667834, guid: 2e982a81d85769148ae95b8f0b9ec808,
-    type: 3}
-  m_PrefabInstance: {fileID: 992411952}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &292185517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292185508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d048d232438febf4f964e0f549ca67b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyLayer:
-    serializedVersion: 2
-    m_Bits: 4096
-  PunchLength: 1
-  punchPosition: {fileID: 0}
 --- !u!4 &356649643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8614403071197667836, guid: 2e982a81d85769148ae95b8f0b9ec808,
@@ -27510,7 +27487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &913261418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27638,21 +27615,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8614403070695849400, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_TagString
-      value: PunchPosition
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403070695849401, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.85
-      objectReference: {fileID: 0}
-    - target: {fileID: 8614403070695849401, guid: 2e982a81d85769148ae95b8f0b9ec808,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.02
-      objectReference: {fileID: 0}
     - target: {fileID: 8614403071197667834, guid: 2e982a81d85769148ae95b8f0b9ec808,
         type: 3}
       propertyPath: m_Name
@@ -27863,6 +27825,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 8540266707953683950, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8540266707953683951, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27916,6 +27883,16 @@ PrefabInstance:
     - target: {fileID: 8540266707953683951, guid: d64cb783bf2d2114d8d447922ecdcbc0,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266707965020001, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: gravityScale
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8540266707965020029, guid: d64cb783bf2d2114d8d447922ecdcbc0,
+        type: 3}
+      propertyPath: m_BodyType
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
