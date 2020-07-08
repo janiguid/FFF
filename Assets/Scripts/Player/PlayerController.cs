@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using FFF;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -18,14 +18,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int maxJumps;
     [SerializeField] private int jumpsLeft;
     [SerializeField] private bool isFacingRight;
-
-    public enum JumpType
-    {
-        Normal,
-        Double,
-        Flight
-    }
-
+    [SerializeField] private float minYVelocity;
+    [SerializeField] private float maxYVelocity;
 
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
@@ -34,13 +28,14 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         Inputs = new InputActions();
+        Inputs.LandMovement.Jump.performed += _ => Jump();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         RB_2D = GetComponent<Rigidbody2D>();
-        
+
 
         InitializePhys();
         RefreshJump();
@@ -58,23 +53,27 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        Inputs.LandMovement.Jump.performed += _ => Jump();
-        if(RB_2D) RB_2D.gravityScale = gravityScale;
-
         Inputs.Enable();
+
+        if (RB_2D)
+        {
+            RB_2D.gravityScale = gravityScale;
+            RB_2D.velocity = movement = Vector2.zero;
+        }
+        RefreshJump();
     }
 
     private void OnDisable()
     {
-        Inputs.LandMovement.Jump.performed -= _ => Jump();
+        
         Inputs.Disable();
     }
 
-    void BeginFlight()
+    private void OnDestroy()
     {
-        GetComponent<FlightController>().InitializeFlight();
-        gameObject.SetActive(false);
+        Inputs.LandMovement.Jump.performed -= _ => Jump();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -87,7 +86,8 @@ public class PlayerController : MonoBehaviour
 
         if (!isGrounded)
         {
-            movement.y -= gravityScale * Time.deltaTime;
+            movement.y = Mathf.Clamp(movement.y - gravityScale * Time.deltaTime, minYVelocity, maxYVelocity);
+            
         }
 
         RB_2D.velocity = movement;
@@ -97,6 +97,11 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
+    }
+
+    public int GetRemainingJumps()
+    {
+        return jumpsLeft;
     }
 
     void Flip()
@@ -109,9 +114,11 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
+        print("jump func called");
         if (jumpsLeft == 0) return;
         movement.y = Vector2.up.y * jumpVelocity;
         isGrounded = false;
+        
         jumpsLeft -= 1;
     }
 
@@ -128,12 +135,12 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
             movement.y = 0;
             RefreshJump();
+            print("Refreshed");
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        print(collision.tag + "exit");
         if (collision.tag == "Ground")
         {
             isGrounded = false;

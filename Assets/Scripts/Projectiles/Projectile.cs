@@ -33,11 +33,10 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            DamageDetector player = collision.gameObject.GetComponent<DamageDetector>();
-            if (player)
+            IDamageable player = collision.gameObject.GetComponent<IDamageable>();
+            if (player != null)
             {
                 player.ApplyDamage(10);
-                Destroy(gameObject);
             }
             else
             {

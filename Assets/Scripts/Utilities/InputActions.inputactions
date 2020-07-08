@@ -192,17 +192,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4f59d385-9cc4-40cc-9501-d5f8d88a9af1",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "ToggleFlight",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "ba2934aa-69f5-4025-8632-fbfbf95b2760",
                     "path": "<DualShockGamepad>/leftTrigger",
                     "interactions": "",
@@ -225,6 +214,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Cursor",
+                    "type": "Value",
+                    "id": "fdeaa65d-887f-4a3a-aa9b-63b674c44fe0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -236,6 +233,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Flight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1230ead-4079-45cc-a420-34e78044dc69",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "436834d6-a32d-4bfa-a640-478d584d4da7",
+                    "path": "<DualShockGamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

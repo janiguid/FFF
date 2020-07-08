@@ -6,14 +6,12 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace FFF
+public class @InputActions : IInputActionCollection, IDisposable
 {
-    public class @InputActions : IInputActionCollection, IDisposable
+    public InputActionAsset asset { get; }
+    public @InputActions()
     {
-        public InputActionAsset asset { get; }
-        public @InputActions()
-        {
-            asset = InputActionAsset.FromJson(@"{
+        asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputActions"",
     ""maps"": [
         {
@@ -207,17 +205,6 @@ namespace FFF
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4f59d385-9cc4-40cc-9501-d5f8d88a9af1"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ToggleFlight"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""ba2934aa-69f5-4025-8632-fbfbf95b2760"",
                     ""path"": ""<DualShockGamepad>/leftTrigger"",
                     ""interactions"": """",
@@ -240,6 +227,14 @@ namespace FFF
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cursor"",
+                    ""type"": ""Value"",
+                    ""id"": ""fdeaa65d-887f-4a3a-aa9b-63b674c44fe0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -253,176 +248,207 @@ namespace FFF
                     ""action"": ""Flight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1230ead-4079-45cc-a420-34e78044dc69"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""436834d6-a32d-4bfa-a640-478d584d4da7"",
+                    ""path"": ""<DualShockGamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cursor"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-            // LandMovement
-            m_LandMovement = asset.FindActionMap("LandMovement", throwIfNotFound: true);
-            m_LandMovement_Jump = m_LandMovement.FindAction("Jump", throwIfNotFound: true);
-            m_LandMovement_Move = m_LandMovement.FindAction("Move", throwIfNotFound: true);
-            m_LandMovement_West = m_LandMovement.FindAction("West", throwIfNotFound: true);
-            m_LandMovement_North = m_LandMovement.FindAction("North", throwIfNotFound: true);
-            m_LandMovement_ToggleFlight = m_LandMovement.FindAction("ToggleFlight", throwIfNotFound: true);
-            // FlightMovement
-            m_FlightMovement = asset.FindActionMap("FlightMovement", throwIfNotFound: true);
-            m_FlightMovement_Flight = m_FlightMovement.FindAction("Flight", throwIfNotFound: true);
-        }
-
-        public void Dispose()
-        {
-            UnityEngine.Object.Destroy(asset);
-        }
-
-        public InputBinding? bindingMask
-        {
-            get => asset.bindingMask;
-            set => asset.bindingMask = value;
-        }
-
-        public ReadOnlyArray<InputDevice>? devices
-        {
-            get => asset.devices;
-            set => asset.devices = value;
-        }
-
-        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-        public bool Contains(InputAction action)
-        {
-            return asset.Contains(action);
-        }
-
-        public IEnumerator<InputAction> GetEnumerator()
-        {
-            return asset.GetEnumerator();
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public void Enable()
-        {
-            asset.Enable();
-        }
-
-        public void Disable()
-        {
-            asset.Disable();
-        }
-
         // LandMovement
-        private readonly InputActionMap m_LandMovement;
-        private ILandMovementActions m_LandMovementActionsCallbackInterface;
-        private readonly InputAction m_LandMovement_Jump;
-        private readonly InputAction m_LandMovement_Move;
-        private readonly InputAction m_LandMovement_West;
-        private readonly InputAction m_LandMovement_North;
-        private readonly InputAction m_LandMovement_ToggleFlight;
-        public struct LandMovementActions
-        {
-            private @InputActions m_Wrapper;
-            public LandMovementActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Jump => m_Wrapper.m_LandMovement_Jump;
-            public InputAction @Move => m_Wrapper.m_LandMovement_Move;
-            public InputAction @West => m_Wrapper.m_LandMovement_West;
-            public InputAction @North => m_Wrapper.m_LandMovement_North;
-            public InputAction @ToggleFlight => m_Wrapper.m_LandMovement_ToggleFlight;
-            public InputActionMap Get() { return m_Wrapper.m_LandMovement; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(LandMovementActions set) { return set.Get(); }
-            public void SetCallbacks(ILandMovementActions instance)
-            {
-                if (m_Wrapper.m_LandMovementActionsCallbackInterface != null)
-                {
-                    @Jump.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnJump;
-                    @Jump.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnJump;
-                    @Jump.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnJump;
-                    @Move.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnMove;
-                    @Move.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnMove;
-                    @Move.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnMove;
-                    @West.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnWest;
-                    @West.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnWest;
-                    @West.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnWest;
-                    @North.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnNorth;
-                    @North.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnNorth;
-                    @North.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnNorth;
-                    @ToggleFlight.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnToggleFlight;
-                    @ToggleFlight.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnToggleFlight;
-                    @ToggleFlight.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnToggleFlight;
-                }
-                m_Wrapper.m_LandMovementActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Jump.started += instance.OnJump;
-                    @Jump.performed += instance.OnJump;
-                    @Jump.canceled += instance.OnJump;
-                    @Move.started += instance.OnMove;
-                    @Move.performed += instance.OnMove;
-                    @Move.canceled += instance.OnMove;
-                    @West.started += instance.OnWest;
-                    @West.performed += instance.OnWest;
-                    @West.canceled += instance.OnWest;
-                    @North.started += instance.OnNorth;
-                    @North.performed += instance.OnNorth;
-                    @North.canceled += instance.OnNorth;
-                    @ToggleFlight.started += instance.OnToggleFlight;
-                    @ToggleFlight.performed += instance.OnToggleFlight;
-                    @ToggleFlight.canceled += instance.OnToggleFlight;
-                }
-            }
-        }
-        public LandMovementActions @LandMovement => new LandMovementActions(this);
-
+        m_LandMovement = asset.FindActionMap("LandMovement", throwIfNotFound: true);
+        m_LandMovement_Jump = m_LandMovement.FindAction("Jump", throwIfNotFound: true);
+        m_LandMovement_Move = m_LandMovement.FindAction("Move", throwIfNotFound: true);
+        m_LandMovement_West = m_LandMovement.FindAction("West", throwIfNotFound: true);
+        m_LandMovement_North = m_LandMovement.FindAction("North", throwIfNotFound: true);
+        m_LandMovement_ToggleFlight = m_LandMovement.FindAction("ToggleFlight", throwIfNotFound: true);
         // FlightMovement
-        private readonly InputActionMap m_FlightMovement;
-        private IFlightMovementActions m_FlightMovementActionsCallbackInterface;
-        private readonly InputAction m_FlightMovement_Flight;
-        public struct FlightMovementActions
+        m_FlightMovement = asset.FindActionMap("FlightMovement", throwIfNotFound: true);
+        m_FlightMovement_Flight = m_FlightMovement.FindAction("Flight", throwIfNotFound: true);
+        m_FlightMovement_Cursor = m_FlightMovement.FindAction("Cursor", throwIfNotFound: true);
+    }
+
+    public void Dispose()
+    {
+        UnityEngine.Object.Destroy(asset);
+    }
+
+    public InputBinding? bindingMask
+    {
+        get => asset.bindingMask;
+        set => asset.bindingMask = value;
+    }
+
+    public ReadOnlyArray<InputDevice>? devices
+    {
+        get => asset.devices;
+        set => asset.devices = value;
+    }
+
+    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+    public bool Contains(InputAction action)
+    {
+        return asset.Contains(action);
+    }
+
+    public IEnumerator<InputAction> GetEnumerator()
+    {
+        return asset.GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+
+    public void Enable()
+    {
+        asset.Enable();
+    }
+
+    public void Disable()
+    {
+        asset.Disable();
+    }
+
+    // LandMovement
+    private readonly InputActionMap m_LandMovement;
+    private ILandMovementActions m_LandMovementActionsCallbackInterface;
+    private readonly InputAction m_LandMovement_Jump;
+    private readonly InputAction m_LandMovement_Move;
+    private readonly InputAction m_LandMovement_West;
+    private readonly InputAction m_LandMovement_North;
+    private readonly InputAction m_LandMovement_ToggleFlight;
+    public struct LandMovementActions
+    {
+        private @InputActions m_Wrapper;
+        public LandMovementActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Jump => m_Wrapper.m_LandMovement_Jump;
+        public InputAction @Move => m_Wrapper.m_LandMovement_Move;
+        public InputAction @West => m_Wrapper.m_LandMovement_West;
+        public InputAction @North => m_Wrapper.m_LandMovement_North;
+        public InputAction @ToggleFlight => m_Wrapper.m_LandMovement_ToggleFlight;
+        public InputActionMap Get() { return m_Wrapper.m_LandMovement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(LandMovementActions set) { return set.Get(); }
+        public void SetCallbacks(ILandMovementActions instance)
         {
-            private @InputActions m_Wrapper;
-            public FlightMovementActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Flight => m_Wrapper.m_FlightMovement_Flight;
-            public InputActionMap Get() { return m_Wrapper.m_FlightMovement; }
-            public void Enable() { Get().Enable(); }
-            public void Disable() { Get().Disable(); }
-            public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(FlightMovementActions set) { return set.Get(); }
-            public void SetCallbacks(IFlightMovementActions instance)
+            if (m_Wrapper.m_LandMovementActionsCallbackInterface != null)
             {
-                if (m_Wrapper.m_FlightMovementActionsCallbackInterface != null)
-                {
-                    @Flight.started -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFlight;
-                    @Flight.performed -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFlight;
-                    @Flight.canceled -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFlight;
-                }
-                m_Wrapper.m_FlightMovementActionsCallbackInterface = instance;
-                if (instance != null)
-                {
-                    @Flight.started += instance.OnFlight;
-                    @Flight.performed += instance.OnFlight;
-                    @Flight.canceled += instance.OnFlight;
-                }
+                @Jump.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnJump;
+                @Move.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnMove;
+                @West.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnWest;
+                @West.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnWest;
+                @West.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnWest;
+                @North.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnNorth;
+                @North.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnNorth;
+                @North.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnNorth;
+                @ToggleFlight.started -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnToggleFlight;
+                @ToggleFlight.performed -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnToggleFlight;
+                @ToggleFlight.canceled -= m_Wrapper.m_LandMovementActionsCallbackInterface.OnToggleFlight;
+            }
+            m_Wrapper.m_LandMovementActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @West.started += instance.OnWest;
+                @West.performed += instance.OnWest;
+                @West.canceled += instance.OnWest;
+                @North.started += instance.OnNorth;
+                @North.performed += instance.OnNorth;
+                @North.canceled += instance.OnNorth;
+                @ToggleFlight.started += instance.OnToggleFlight;
+                @ToggleFlight.performed += instance.OnToggleFlight;
+                @ToggleFlight.canceled += instance.OnToggleFlight;
             }
         }
-        public FlightMovementActions @FlightMovement => new FlightMovementActions(this);
-        public interface ILandMovementActions
+    }
+    public LandMovementActions @LandMovement => new LandMovementActions(this);
+
+    // FlightMovement
+    private readonly InputActionMap m_FlightMovement;
+    private IFlightMovementActions m_FlightMovementActionsCallbackInterface;
+    private readonly InputAction m_FlightMovement_Flight;
+    private readonly InputAction m_FlightMovement_Cursor;
+    public struct FlightMovementActions
+    {
+        private @InputActions m_Wrapper;
+        public FlightMovementActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Flight => m_Wrapper.m_FlightMovement_Flight;
+        public InputAction @Cursor => m_Wrapper.m_FlightMovement_Cursor;
+        public InputActionMap Get() { return m_Wrapper.m_FlightMovement; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(FlightMovementActions set) { return set.Get(); }
+        public void SetCallbacks(IFlightMovementActions instance)
         {
-            void OnJump(InputAction.CallbackContext context);
-            void OnMove(InputAction.CallbackContext context);
-            void OnWest(InputAction.CallbackContext context);
-            void OnNorth(InputAction.CallbackContext context);
-            void OnToggleFlight(InputAction.CallbackContext context);
+            if (m_Wrapper.m_FlightMovementActionsCallbackInterface != null)
+            {
+                @Flight.started -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFlight;
+                @Flight.performed -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFlight;
+                @Flight.canceled -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFlight;
+                @Cursor.started -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnCursor;
+                @Cursor.performed -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnCursor;
+                @Cursor.canceled -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnCursor;
+            }
+            m_Wrapper.m_FlightMovementActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Flight.started += instance.OnFlight;
+                @Flight.performed += instance.OnFlight;
+                @Flight.canceled += instance.OnFlight;
+                @Cursor.started += instance.OnCursor;
+                @Cursor.performed += instance.OnCursor;
+                @Cursor.canceled += instance.OnCursor;
+            }
         }
-        public interface IFlightMovementActions
-        {
-            void OnFlight(InputAction.CallbackContext context);
-        }
+    }
+    public FlightMovementActions @FlightMovement => new FlightMovementActions(this);
+    public interface ILandMovementActions
+    {
+        void OnJump(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnWest(InputAction.CallbackContext context);
+        void OnNorth(InputAction.CallbackContext context);
+        void OnToggleFlight(InputAction.CallbackContext context);
+    }
+    public interface IFlightMovementActions
+    {
+        void OnFlight(InputAction.CallbackContext context);
+        void OnCursor(InputAction.CallbackContext context);
     }
 }
