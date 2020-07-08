@@ -11,27 +11,36 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealmOne/MainMenu.unity
     guid: 9299b396a47e5cd468577293cdeb2fd6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/First Chamber.unity
     guid: f254093f955705d49b7b7f6b5e284279
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/Left Miniboss.unity
     guid: 07909fe4545fa6948ad0d0254e949a67
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/Right Miniboss.unity
     guid: 510c5c60a67d42842b284e1499ea3a0c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/Double Jump Chamber.unity
     guid: 7a7043ac720288b48be3f816c68c6a73
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/Flight Chamber.unity
     guid: 010d8ebc452908f4aa2ddde9a9a7ab08
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/Realm Boss.unity
     guid: eec57e91ea007e946a112c9fe3c28b96
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RealmOne/Realm Exit.unity
     guid: 12c0f68d150999a47be219669f307ad0
+  - enabled: 1
+    path: Assets/Scenes/RealmOne/RealmOneTest.unity
+    guid: d9d5dc472e1fae94683c3a7e6f7512b2
+  - enabled: 1
+    path: Assets/Scenes/RealmOne/RealmTwoTest.unity
+    guid: ace25fe7d63d3334893fea0e4125571a
+  - enabled: 1
+    path: Assets/Scenes/RealmOne/RealmThreeTest.unity
+    guid: 114de10e0ecdc894793d311f2ebb2752
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 3b49c10e5df5fff46ba50c9ef91838ed,
       type: 2}
