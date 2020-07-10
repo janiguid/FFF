@@ -66,7 +66,7 @@ public class PlayerSoundHandler : MonoBehaviour
         AudioDictionary.Add(PlayerSoundType.footsteps, footstepsSound);
         AudioDictionary.Add(PlayerSoundType.landingSound, landingSound);
 
-        playerController = GetComponent<PlayerController>();
+        playerController = FindObjectOfType<PlayerController>();
     }
 
     void PlayFlightSound()
@@ -140,7 +140,7 @@ public class PlayerSoundHandler : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Ground")
+        if(collision.tag == "Ground" && inFlight == false)
         {
             PlayPlayerSound(PlayerSoundType.landingSound);
             inAir = false;

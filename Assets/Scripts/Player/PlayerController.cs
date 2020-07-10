@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
     private SpriteRenderer SRenderer;
+    
 
     private void Awake()
     {
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         InitializePhys();
         RefreshJump();
 
+        
         SRenderer = GetComponent<SpriteRenderer>();
     }
 

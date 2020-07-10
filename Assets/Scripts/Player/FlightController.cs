@@ -6,14 +6,20 @@ public class FlightController : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D MyRB2D;
     [SerializeField] private float speed;
+    private VFXHandler MyVFX;
 
     InputActions Inputs;
 
     private void Awake()
     {
         Inputs = new InputActions();
+        MyVFX = GetComponent<VFXHandler>();
     }
 
+    private void Start()
+    {
+        
+    }
 
     public void InitializeFlight()
     {
@@ -28,12 +34,14 @@ public class FlightController : MonoBehaviour
 
     private void OnEnable()
     {
+        MyVFX.BeginAura();
         InitializeFlight();
         Inputs.Enable();
     }
 
     private void OnDisable()
     {
+        MyVFX.StopAura();
         Inputs.Disable();
     }
 

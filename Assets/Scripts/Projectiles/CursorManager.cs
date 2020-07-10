@@ -7,7 +7,7 @@ public class CursorManager : MonoBehaviour
 {
     [SerializeField] private float cursorSpeed;
     InputActions Inputs;
-    Vector2 movement;
+    [SerializeField] private Vector2 movement;
 
 
     private void Awake()
