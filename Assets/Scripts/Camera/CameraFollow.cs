@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    [SerializeField]
+
     Transform Player;
 
     [SerializeField]
@@ -24,6 +24,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        this.Player = GameObject.FindWithTag("Player").transform;
     }
 
 
