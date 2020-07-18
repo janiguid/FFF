@@ -235,6 +235,14 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""a004b8ca-a4a8-408e-bc9e-cda4e15f6fb1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -270,6 +278,17 @@ public class @InputActions : IInputActionCollection, IDisposable
                     ""action"": ""Cursor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0adf2335-f941-4edc-a5c7-9a9a40675a79"",
+                    ""path"": ""<DualShockGamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -287,6 +306,7 @@ public class @InputActions : IInputActionCollection, IDisposable
         m_FlightMovement = asset.FindActionMap("FlightMovement", throwIfNotFound: true);
         m_FlightMovement_Flight = m_FlightMovement.FindAction("Flight", throwIfNotFound: true);
         m_FlightMovement_Cursor = m_FlightMovement.FindAction("Cursor", throwIfNotFound: true);
+        m_FlightMovement_Fire = m_FlightMovement.FindAction("Fire", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -403,12 +423,14 @@ public class @InputActions : IInputActionCollection, IDisposable
     private IFlightMovementActions m_FlightMovementActionsCallbackInterface;
     private readonly InputAction m_FlightMovement_Flight;
     private readonly InputAction m_FlightMovement_Cursor;
+    private readonly InputAction m_FlightMovement_Fire;
     public struct FlightMovementActions
     {
         private @InputActions m_Wrapper;
         public FlightMovementActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Flight => m_Wrapper.m_FlightMovement_Flight;
         public InputAction @Cursor => m_Wrapper.m_FlightMovement_Cursor;
+        public InputAction @Fire => m_Wrapper.m_FlightMovement_Fire;
         public InputActionMap Get() { return m_Wrapper.m_FlightMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -424,6 +446,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Cursor.started -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnCursor;
                 @Cursor.performed -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnCursor;
                 @Cursor.canceled -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnCursor;
+                @Fire.started -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFire;
+                @Fire.performed -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFire;
+                @Fire.canceled -= m_Wrapper.m_FlightMovementActionsCallbackInterface.OnFire;
             }
             m_Wrapper.m_FlightMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -434,6 +459,9 @@ public class @InputActions : IInputActionCollection, IDisposable
                 @Cursor.started += instance.OnCursor;
                 @Cursor.performed += instance.OnCursor;
                 @Cursor.canceled += instance.OnCursor;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
         }
     }
@@ -450,5 +478,6 @@ public class @InputActions : IInputActionCollection, IDisposable
     {
         void OnFlight(InputAction.CallbackContext context);
         void OnCursor(InputAction.CallbackContext context);
+        void OnFire(InputAction.CallbackContext context);
     }
 }

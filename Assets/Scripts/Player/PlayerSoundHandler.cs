@@ -71,7 +71,6 @@ public class PlayerSoundHandler : MonoBehaviour
 
     void PlayFlightSound()
     {
-        print("hit play");
         if (AudioDictionary[PlayerSoundType.flightAscent].isPlaying)
         {
             AudioDictionary[PlayerSoundType.flightAscent].Stop();
