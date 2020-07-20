@@ -11,12 +11,14 @@ public class VFXHandler : MonoBehaviour
 
     public void BeginAura()
     {
+        if (Aura == null) return;
         Aura.gameObject.SetActive(true);
         Aura.Play();    
     }
 
     public void StopAura()
     {
+        if (Aura == null) return;
         Aura.Stop();
         Aura.gameObject.SetActive(false);
     }

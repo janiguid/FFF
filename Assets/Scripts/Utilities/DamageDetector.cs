@@ -15,9 +15,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
     //public CameraShakeTest CameraShaker;
 
     [SerializeField] private AudioSource MyAudio;
-
     [SerializeField] private CharacterData MyData;
-
     [SerializeField] private Rigidbody2D MyRB2D;
 
     public float staggerTime;
