@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588c4d8d327507a42aacace12ae84382, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  direction: 0
+  direction: 1
+  pauseTime: 0
+  stunned: 0
+  health: 50

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class Leech : Monster
 {
+    [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
     [SerializeField] private float distBeforeBreaking;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject projectilePrefab;
+
     private Transform target;
+    private float shootTimer;
 
 
     public override void ApplyDamage(float dam)
@@ -34,8 +37,16 @@ public class Leech : Monster
         }
         else
         {
+            shootTimer -= Time.deltaTime;
             dist = GetDistance(transform.position, target.position);
-            transform.LookAt(target);
+
+            if (shootTimer <= 0)
+            {
+                shootTimer = shootCooldown;
+                BeginShoot();
+            }
+
+
         }
 
         
@@ -43,10 +54,15 @@ public class Leech : Monster
         {
             target = null;
         }
-        
+
+        CheckForPlayer();
+
     }
 
-
+    void BeginShoot()
+    {
+        Instantiate(projectilePrefab, transform, false);
+    }
 
     float GetDistance(Vector2 origin, Vector2 target)
     {
@@ -63,26 +79,37 @@ public class Leech : Monster
         if(timeForTravelling <= 0)
         {
             timeForTravelling = 5;
-            transform.Rotate(0, 180, 0);
+            TurnAround(1);
         }
 
-        print(transform.right);
         transform.Translate( transform.right * Time.deltaTime, Space.World);
 
+
+    }
+
+    bool CheckForPlayer()
+    {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 5, layerMask);
         Debug.DrawRay(transform.position, transform.right * 5);
-        if (hit.collider == null)
+        if (hit.collider == null && target != null)
         {
-
+            target = null;
+            return false;
         }
         else
         {
             target = hit.transform;
+            return true;
         }
     }
 
-    private void OnDrawGizmos()
+
+    void TurnAround(int dir)
     {
-        
+        print("Ladfd");
+        Vector3 rot = new Vector3(0,180,0) * dir;
+        transform.Rotate(0, 180, 0);
     }
+
+
 }

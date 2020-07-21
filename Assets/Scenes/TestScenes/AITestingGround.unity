@@ -438,6 +438,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1895837066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3557629774062640112, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1919639907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1895837077 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3557629774062640078, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1919639907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1895837080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1895837066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959572a8bd8fb6443a9e1cbea38e3c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravityScale: 0
+  jumpHeight: 5
+  jumpTime: 0.4
+  jumpVelocity: 0
+  MyAudio: {fileID: 0}
+  MyData: {fileID: 11400000, guid: afbf26640b6c16d4da7d8a7874465981, type: 2}
+  MyRB2D: {fileID: 1895837077}
+  staggerTime: 0
+  isFrozen: 0
+  savedVelocity: {x: 0, y: 0}
+  freezeTime: 0
+  fallingVelocity: 0
 --- !u!1001 &1919639907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -453,12 +489,12 @@ PrefabInstance:
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.7586539
+      value: -11.48
       objectReference: {fileID: 0}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.20114017
+      value: -0.24
       objectReference: {fileID: 0}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
@@ -545,6 +581,17 @@ PrefabInstance:
         type: 3}
       propertyPath: direction
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1351164430038710159, guid: 3b8b54dac03228648b6f969de67346fc,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 4339900234834931260, guid: 957888947f3999d4dbf1b301655269e9,
+        type: 3}
+    - target: {fileID: 1351164430038710159, guid: 3b8b54dac03228648b6f969de67346fc,
+        type: 3}
+      propertyPath: shootCooldown
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8999874313431070593, guid: 3b8b54dac03228648b6f969de67346fc,
         type: 3}
