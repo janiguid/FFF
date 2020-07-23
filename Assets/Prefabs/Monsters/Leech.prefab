@@ -98,7 +98,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.2217102, y: -0.63375473}
+  m_Offset: {x: 0.2217102, y: -0.008026123}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -109,7 +109,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.9725971, y: 5.4424906}
+  m_Size: {x: 2.9725971, y: 4.1910334}
   m_EdgeRadius: 0
 --- !u!50 &8999874314141535368
 Rigidbody2D:
@@ -131,7 +131,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!82 &8999874314141535375
 AudioSource:
   m_ObjectHideFlags: 0
@@ -241,3 +241,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialHealth: 50
+  shootCooldown: 1.5
+  timeForTravelling: 5
+  distBeforeBreaking: 2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  projectilePrefab: {fileID: 4339900234834931260, guid: 957888947f3999d4dbf1b301655269e9,
+    type: 3}
