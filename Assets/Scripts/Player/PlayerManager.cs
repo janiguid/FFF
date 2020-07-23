@@ -13,6 +13,10 @@ public class PlayerManager : MonoBehaviour, IDamageable
     {
         PlayerHealth = InitialPlayerHealth;
         health.SetMaxHealth(InitialPlayerHealth);
+        if(health == null)
+        {
+            health = FindObjectOfType<HealthBar>();
+        }
     }
 
     // Update is called once per frame

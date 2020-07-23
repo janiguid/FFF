@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Monster : MonoBehaviour, IDamageable
+public abstract class Monster : MonoBehaviour
 {
-    [SerializeField] private float InitialHealth;
-    protected float health;
+    [SerializeField] protected float InitialHealth;
+    [SerializeField] protected float health;
 
     private void Start()
     {
-        if (InitialHealth == 0) InitialHealth = 50f;
-        health = InitialHealth;
+
     }
 
     public virtual void ApplyDamage(float dam) { }
 
-
-
-
+    public virtual void ApplyForce(float horizontalForce, float verticalForce)
+    {
+    }
 }

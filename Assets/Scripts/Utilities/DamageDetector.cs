@@ -66,8 +66,6 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
     //DAMAGE: damage to be applied to our character data
     public void ApplyDamage(float damage)
     {
-        MyData.stunned = true;
-        MyData.health -= damage;
 
         Freeze(freezeTime);
         print(gameObject.name + "received " + damage + "damage");

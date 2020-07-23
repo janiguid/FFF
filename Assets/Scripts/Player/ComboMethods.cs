@@ -22,7 +22,8 @@ public class ComboMethods : MonoBehaviour
         {
             { 1, RegularPunch },
             { 2, UppercutPunch },
-            {11, PushPunch }
+            {11, PushPunch },
+            {12, UppercutPush }
         };
 
         if(PunchLength == 0)PunchLength = 1;
@@ -59,8 +60,8 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(10 * forwardVector.x, 50);
-            Debug.Log("uppercut punch!");
+            hit.transform.gameObject.GetComponent<IDamageable>().ApplyDamage(10);
+            Debug.Log("high punch!");
         }
         
         return true;
@@ -78,6 +79,22 @@ public class ComboMethods : MonoBehaviour
             hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 0);
             Debug.Log("final punch!");
         }
+        return true;
+    }
+
+    bool UppercutPush()
+    {
+        Vector2 forwardVector = Vector2.right * Math.Sign(transform.localScale.x);
+        RaycastHit2D hit = Physics2D.Raycast(punchPosition.position, forwardVector,
+            PunchLength, EnemyLayer);
+        Debug.DrawRay(punchPosition.position, forwardVector, Color.red, 2f);
+
+        if (hit)
+        {
+            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(10 * forwardVector.x, 50);
+            Debug.Log("uppercut punch!");
+        }
+
         return true;
     }
 }

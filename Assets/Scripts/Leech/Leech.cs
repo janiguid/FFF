@@ -19,13 +19,20 @@ public class Leech : Monster
         health -= dam;
     }
 
+    public override void ApplyForce(float horizontalForce, float verticalForce)
+    {
+
+    }
 
     private void Start()
     {
         if (timeForTravelling == 0) timeForTravelling = 5;
         if (distBeforeBreaking == 0) distBeforeBreaking = 2;
-
         if (layerMask != LayerMask.GetMask("Player")) layerMask = LayerMask.GetMask("Player");
+
+        if (InitialHealth == 0) InitialHealth = 50f;
+        health = InitialHealth;
+        
     }
 
     private void Update()

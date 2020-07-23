@@ -9,6 +9,9 @@ public class ComboManager : MonoBehaviour
     [SerializeField] private float comboTimer;
     [SerializeField] private float timeBeforeComboReset;
     [SerializeField] private float recoveryTime;
+    [SerializeField] private float regPunchPreTime;
+    [SerializeField] private float regPunchPostTime;
+    [SerializeField] private float finalPunchPostTime;
 
     private InputActions Inputs;
     private ComboNode RootNode;
@@ -30,9 +33,11 @@ public class ComboManager : MonoBehaviour
         ComboMethods combos = gameObject.GetComponent<ComboMethods>();
         combos.InitializeDict();
 
+        if (regPunchPreTime == 0) regPunchPreTime = 0.2f;
+        if (regPunchPostTime == 0) regPunchPostTime = 0.5f;
+        if (finalPunchPostTime == 0) finalPunchPostTime = 0.7f;
 
         MethodDict = combos.GetDictionary();
-
         InitializeCombos();
     }
 
@@ -58,17 +63,22 @@ public class ComboManager : MonoBehaviour
         //add first combo root
         //-----------------------------------
         //light punch
-        childToBeAdded = new ComboNode(1, 10, false, 1, 2);
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime);
         parent.AddChild(childToBeAdded);
 
         //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, 1, 2);
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime);
         parent.AddChild(childToBeAdded);
+
 
         //push light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 15, true, 1,5);
+        childToBeAdded = new ComboNode(1, 15, true, regPunchPreTime, finalPunchPostTime);
+        parent.AddChild(childToBeAdded);
+
+        //make triangle possible after second square
+        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime);
         parent.AddChild(childToBeAdded);
         //-----------------------------------
 
@@ -77,15 +87,15 @@ public class ComboManager : MonoBehaviour
         //-----------------------------------
         //light punch
         parent = RootNode;
-        childToBeAdded = new ComboNode(2, 15, false, 1, 2);
+        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime);
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 15, false, 1, 2);
+        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime);
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 20, true, 1, 2);
+        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime);
         parent.AddChild(childToBeAdded);
         //-----------------------------------
 
@@ -118,7 +128,8 @@ public class ComboManager : MonoBehaviour
 
     void UpperCut()
     {
-        CheckInput(3);
+        if (comboTimer < recoveryTime) return;
+        CheckInput(2);
     }
 
     void CheckInput(int i)
@@ -135,10 +146,7 @@ public class ComboManager : MonoBehaviour
             {
                 CommenceAttack(i);
             }
-            
            
-            
-
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
             print("valid node");
@@ -150,7 +158,13 @@ public class ComboManager : MonoBehaviour
 
     void CommenceAttack(int i)
     {
-        MethodDict[i]();
+        if (MethodDict.ContainsKey(i))
+        {
+            MethodDict[i]();
+            return;
+        }
+
+        print("Missing method key!");
     }
 
 
