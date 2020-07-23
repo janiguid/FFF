@@ -18,7 +18,10 @@ public class FlightController : MonoBehaviour
 
     private void Start()
     {
-        
+        if(MyRB2D == null)
+        {
+            MyRB2D = GetComponent<Rigidbody2D>();
+        }
     }
 
     public void InitializeFlight()

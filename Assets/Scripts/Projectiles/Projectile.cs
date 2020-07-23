@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     void Update()
     {
         lifetime -= Time.deltaTime;
-        myRigidBody.velocity = Vector2.right * speed * Time.deltaTime * direction;
+        
 
         if(lifetime < 0)
         {
@@ -29,14 +29,21 @@ public class Projectile : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        myRigidBody.velocity = transform.right * speed;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print(collision.gameObject.tag);
         if(collision.gameObject.tag == "Player")
         {
             IDamageable player = collision.gameObject.GetComponent<IDamageable>();
             if (player != null)
             {
                 player.ApplyDamage(10);
+                Destroy(gameObject);
             }
             else
             {

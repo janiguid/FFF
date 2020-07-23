@@ -8,16 +8,11 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
     [SerializeField] private float jumpHeight;
     [SerializeField] private float jumpTime;
     [SerializeField] private float jumpVelocity;
-    [SerializeField] private Vector2 movement;
-    [SerializeField] private float horizontalMovement;
-    [SerializeField] private float verticalMovement;
+
 
     //public CameraShakeTest CameraShaker;
-
     [SerializeField] private AudioSource MyAudio;
-
     [SerializeField] private CharacterData MyData;
-
     [SerializeField] private Rigidbody2D MyRB2D;
 
     public float staggerTime;
@@ -38,6 +33,11 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
 
     void InitializePhys()
     {
+        if(jumpHeight <= 0 || jumpTime <= 0)
+        {
+            jumpHeight = 5;
+            jumpTime = 0.4f;
+        }
         gravityScale = (2 * jumpHeight / Mathf.Pow(jumpTime, 2));
         jumpVelocity = gravityScale * jumpTime;
 
