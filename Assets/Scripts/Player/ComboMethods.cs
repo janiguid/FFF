@@ -76,7 +76,7 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 0);
+            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(200 * forwardVector.x, 0);
             Debug.Log("final punch!");
         }
         return true;
@@ -91,7 +91,7 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(10 * forwardVector.x, 50);
+            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
             Debug.Log("uppercut punch!");
         }
 

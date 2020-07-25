@@ -34,7 +34,7 @@ public class ComboManager : MonoBehaviour
         combos.InitializeDict();
 
         if (regPunchPreTime == 0) regPunchPreTime = 0.2f;
-        if (regPunchPostTime == 0) regPunchPostTime = 0.5f;
+        if (regPunchPostTime == 0) regPunchPostTime = 0.3f;
         if (finalPunchPostTime == 0) finalPunchPostTime = 0.7f;
 
         MethodDict = combos.GetDictionary();
@@ -78,8 +78,7 @@ public class ComboManager : MonoBehaviour
         parent.AddChild(childToBeAdded);
 
         //make triangle possible after second square
-        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime);
-        parent.AddChild(childToBeAdded);
+        parent.AddChild(new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime));
         //-----------------------------------
 
 
@@ -95,8 +94,19 @@ public class ComboManager : MonoBehaviour
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime);
+        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, regPunchPostTime);
         parent.AddChild(childToBeAdded);
+
+        parent = childToBeAdded;
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime);
+        parent.AddChild(childToBeAdded);
+
+        //light punch
+        parent = childToBeAdded;
+        childToBeAdded = new ComboNode(1, 10, true, regPunchPreTime, regPunchPostTime);
+        parent.AddChild(childToBeAdded);
+
+
         //-----------------------------------
 
 
@@ -112,7 +122,7 @@ public class ComboManager : MonoBehaviour
             comboTimer += Time.deltaTime;
         }
 
-        if(comboTimer > timeBeforeComboReset)
+        if (comboTimer > timeBeforeComboReset)
         {
             StopTimer();
             ResetCombo();
@@ -149,7 +159,7 @@ public class ComboManager : MonoBehaviour
            
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
-            print("valid node");
+            print("valid node: " + CurrentNode.attackType);
             return;
         }
 

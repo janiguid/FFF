@@ -233,7 +233,7 @@ MonoBehaviour:
   staggerTime: 0
   isFrozen: 0
   savedVelocity: {x: 0, y: 0}
-  freezeTime: 0
+  freezeTime: 0.3
   fallingVelocity: 0
 --- !u!1001 &442129624
 PrefabInstance:
@@ -616,6 +616,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3557629774062640072, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -1.7060955
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640072, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.27223969
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640072, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.008489609
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640072, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.18857
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640073, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Offset.y
+      value: -0.16743016
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640073, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.1644888
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640073, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: -0.06525469
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640073, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.5243807
+      objectReference: {fileID: 0}
     - target: {fileID: 3557629774062640074, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: regPunchPreTime
@@ -624,7 +664,7 @@ PrefabInstance:
     - target: {fileID: 3557629774062640074, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: regPunchPostTime
-      value: 0.4
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3557629774062640074, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
@@ -649,7 +689,7 @@ PrefabInstance:
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.48
+      value: -3.79
       objectReference: {fileID: 0}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
@@ -701,8 +741,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
+--- !u!1 &2074526241 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3557629774062640112, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1919639907}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2074526256
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074526241}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 808add27c0aeb474881fc147cefcca06, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &8999874314579204354
 PrefabInstance:
   m_ObjectHideFlags: 0
