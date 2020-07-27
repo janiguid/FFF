@@ -9,11 +9,11 @@ public class ComboMethods : MonoBehaviour
     [SerializeField] private float PunchLength;
     [SerializeField] private Transform punchPosition;
     private Dictionary<int, Func<bool>> ComboMethodDict;
-    
+    [SerializeField] private Animator animator;
 
     private void Start()
     {
-        
+        if (animator == null) animator = GetComponent<Animator>();
     }
 
     public void InitializeDict()
@@ -28,6 +28,7 @@ public class ComboMethods : MonoBehaviour
 
         if(PunchLength == 0)PunchLength = 1;
         punchPosition = GameObject.FindGameObjectWithTag("PunchPosition").transform;
+        
     }
 
     public Dictionary<int, Func<bool>> GetDictionary()
@@ -44,10 +45,11 @@ public class ComboMethods : MonoBehaviour
         if (hit)
         {
             hit.transform.gameObject.GetComponent<IDamageable>().ApplyDamage(5);
+            gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
             Debug.Log("regular punch!");
         }
-        
-        
+
+        animator.SetBool("IsPunching", true);
         return true;
     }
 
@@ -91,6 +93,7 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
+            gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
             hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
             Debug.Log("uppercut punch!");
         }

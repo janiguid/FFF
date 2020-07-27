@@ -12,6 +12,8 @@ public class ComboManager : MonoBehaviour
     [SerializeField] private float regPunchPreTime;
     [SerializeField] private float regPunchPostTime;
     [SerializeField] private float finalPunchPostTime;
+    [SerializeField] private Animator animator;
+
 
     private InputActions Inputs;
     private ComboNode RootNode;
@@ -36,7 +38,7 @@ public class ComboManager : MonoBehaviour
         if (regPunchPreTime == 0) regPunchPreTime = 0.2f;
         if (regPunchPostTime == 0) regPunchPostTime = 0.3f;
         if (finalPunchPostTime == 0) finalPunchPostTime = 0.7f;
-
+        if (animator == null) animator = GetComponent<Animator>();
         MethodDict = combos.GetDictionary();
         InitializeCombos();
     }
@@ -124,6 +126,7 @@ public class ComboManager : MonoBehaviour
 
         if (comboTimer > timeBeforeComboReset)
         {
+            animator.SetBool("IsPunching", false);
             StopTimer();
             ResetCombo();
         }

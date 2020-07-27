@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDetector : MonoBehaviour, IDamageable, IPushable
+public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 {
     [SerializeField] private float gravityScale;
     [SerializeField] private float jumpHeight;
@@ -15,6 +15,9 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
     [SerializeField] private CharacterData MyData;
     [SerializeField] private Rigidbody2D MyRB2D;
 
+    [SerializeField] private CameraShakeTest camShake;
+
+
     public float staggerTime;
     public bool isFrozen;
     public Vector2 savedVelocity;
@@ -25,8 +28,9 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
     // Start is called before the first frame update
     void Start()
     {
-        MyAudio = GetComponent<AudioSource>();
-        MyRB2D = GetComponent<Rigidbody2D>();
+        if(MyAudio == null) MyAudio = GetComponent<AudioSource>();
+        if(MyRB2D == null) MyRB2D = GetComponent<Rigidbody2D>();
+        if (camShake == null) camShake = FindObjectOfType<CameraShakeTest>();
 
         InitializePhys();
     }
@@ -68,8 +72,6 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
     {
 
         Freeze(freezeTime);
-        print(gameObject.name + "received " + damage + "damage");
-
         ShakeCam();
 
         if (MyAudio)
@@ -105,7 +107,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable
 
     public void ShakeCam()
     {
-        //CameraShaker.StartShake();
+        camShake.StartShake();
     }
 
 
