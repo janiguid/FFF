@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isFacingRight;
     [SerializeField] private float minYVelocity;
     [SerializeField] private float maxYVelocity;
+    [SerializeField] private Animator animator;
 
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
@@ -35,13 +36,13 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RB_2D = GetComponent<Rigidbody2D>();
+        if(RB_2D == null) RB_2D = GetComponent<Rigidbody2D>();
 
 
         InitializePhys();
         RefreshJump();
 
-        
+        if (animator == null) gameObject.GetComponent<Animator>();
         SRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -86,10 +87,32 @@ public class PlayerController : MonoBehaviour
 
         movement.x = Vector2.right.x * horizontalMovement * speed;
 
+        if(horizontalMovement != 0 && isGrounded)
+        {
+            if (animator)
+            {
+                if(animator.GetBool("IsRunning") == false)
+                {
+                    animator.SetBool("IsRunning", true);
+                }
+            }
+        }
+        else
+        {
+            if (animator)
+            {
+                if (animator.GetBool("IsRunning") == true)
+                {
+                    animator.SetBool("IsRunning", false);
+                }
+            }
+        }
+
         if (!isGrounded)
         {
             movement.y = Mathf.Clamp(movement.y - gravityScale * Time.deltaTime, minYVelocity, maxYVelocity);
-            
+
+
         }
 
         RB_2D.velocity = movement;
@@ -120,7 +143,15 @@ public class PlayerController : MonoBehaviour
         if (jumpsLeft == 0) return;
         movement.y = Vector2.up.y * jumpVelocity;
         isGrounded = false;
-        
+
+        if (animator)
+        {
+            if (animator.GetBool("IsJumping") == false)
+            {
+                animator.SetBool("IsJumping", true);
+            }
+        }
+
         jumpsLeft -= 1;
     }
 
@@ -137,6 +168,14 @@ public class PlayerController : MonoBehaviour
             movement.y = 0;
             RefreshJump();
             print("Refreshed");
+
+            if (animator)
+            {
+                if (animator.GetBool("IsJumping") == true)
+                {
+                    animator.SetBool("IsJumping", false);
+                }
+            }
         }
     }
 
@@ -145,6 +184,8 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Ground")
         {
             isGrounded = false;
+
+
         }
     }
 

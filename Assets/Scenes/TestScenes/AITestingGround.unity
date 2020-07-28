@@ -672,6 +672,11 @@ PrefabInstance:
       propertyPath: finalPunchPostTime
       value: 0.8
       objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640075, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 2074526256}
     - target: {fileID: 3557629774062640112, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_Name
