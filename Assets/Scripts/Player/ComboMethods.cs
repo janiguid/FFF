@@ -28,6 +28,7 @@ public class ComboMethods : MonoBehaviour
 
         if(PunchLength == 0)PunchLength = 1;
         punchPosition = GameObject.FindGameObjectWithTag("PunchPosition").transform;
+
         
     }
 
@@ -49,7 +50,9 @@ public class ComboMethods : MonoBehaviour
             Debug.Log("regular punch!");
         }
 
-        animator.SetBool("IsPunching", true);
+        //animator.SetBool("IsPunching", true);
+        animator.Play("Base Layer.Punch", 0);
+        
         return true;
     }
 
@@ -65,7 +68,8 @@ public class ComboMethods : MonoBehaviour
             hit.transform.gameObject.GetComponent<IDamageable>().ApplyDamage(10);
             Debug.Log("high punch!");
         }
-        
+
+        animator.Play("Base Layer.RegularKick", 0);
         return true;
     }
 
@@ -97,6 +101,8 @@ public class ComboMethods : MonoBehaviour
             hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
             Debug.Log("uppercut punch!");
         }
+
+        animator.Play("Base Layer.HighKick", 0);
 
         return true;
     }
