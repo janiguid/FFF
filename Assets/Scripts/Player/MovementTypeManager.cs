@@ -7,6 +7,9 @@ public class MovementTypeManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private FlightController flightController;
 
+    [SerializeField] private ParticleSystem particles;
+    private Animator anim;
+
     InputActions Inputs;
 
     private void Awake()
@@ -17,6 +20,11 @@ public class MovementTypeManager : MonoBehaviour
 
     void Start()
     {
+        if(particles == null)
+        {
+            particles = GetComponentInChildren<ParticleSystem>();
+        }
+        anim = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         flightController = GetComponent<FlightController>();
 
@@ -38,11 +46,14 @@ public class MovementTypeManager : MonoBehaviour
     {
         if (playerController.isActiveAndEnabled)
         {
+            anim.Play("Transform");
+            particles.Play();
             flightController.enabled = true;
             playerController.enabled = false;
         }
         else
         {
+            anim.Play("Idle");
             playerController.enabled = true;
             flightController.enabled = false;
         }
