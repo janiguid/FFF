@@ -51,7 +51,7 @@ public class ComboMethods : MonoBehaviour
         }
 
         //animator.SetBool("IsPunching", true);
-        animator.Play("Base Layer.Punch", 0);
+        //animator.Play("Base Layer.Punch", 0);
         
         return true;
     }
@@ -69,7 +69,7 @@ public class ComboMethods : MonoBehaviour
             Debug.Log("high punch!");
         }
 
-        animator.Play("Base Layer.RegularKick", 0);
+        //animator.Play("Base Layer.RegularKick", 0);
         return true;
     }
 
@@ -102,7 +102,7 @@ public class ComboMethods : MonoBehaviour
             Debug.Log("uppercut punch!");
         }
 
-        animator.Play("Base Layer.HighKick", 0);
+        //animator.Play("Base Layer.HighKick", 0);
 
         return true;
     }

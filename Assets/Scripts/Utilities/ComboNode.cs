@@ -18,18 +18,21 @@ public class ComboNode
     private float preRecoveryTime;
     private float postRecoveryTime;
 
+    private string animationName;
+
 
 
     //TYPE: 0,1,2,3,4,5
     //DAMAGE: amount it deals
     //ENDER: whether it ends the combo or not
-    public ComboNode(int type, int damage, bool ender, float pre, float post)
+    public ComboNode(int type, int damage, bool ender, float pre, float post, string animName)
     {
         attackType = type;
         hitValue = damage;
         isFinisher = ender;
         preRecoveryTime = pre;
         postRecoveryTime = post;
+        animationName = animName;
     }
 
     //adds child
@@ -61,7 +64,12 @@ public class ComboNode
             }
         }
 
-        return new ComboNode(99, 0, false, 10, 10);
+        return new ComboNode(99, 0, false, 10, 10, "Base Layer.Idle");
+    }
+
+    public string GetAnimation()
+    {
+        return animationName;
     }
 
     //loops through children nodes to see if input

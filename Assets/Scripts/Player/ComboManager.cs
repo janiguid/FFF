@@ -56,7 +56,7 @@ public class ComboManager : MonoBehaviour
     void InitializeCombos()
     {
         //start tree
-        RootNode = new ComboNode(0, 0, false, 0,0);
+        RootNode = new ComboNode(0, 0, false, 0,0, "Base Layer.Idle");
 
         //define temp to help with initializing children
         ComboNode parent = RootNode;
@@ -65,22 +65,22 @@ public class ComboManager : MonoBehaviour
         //add first combo root
         //-----------------------------------
         //light punch
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
         parent.AddChild(childToBeAdded);
 
         //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
         parent.AddChild(childToBeAdded);
 
 
         //push light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 15, true, regPunchPreTime, finalPunchPostTime);
+        childToBeAdded = new ComboNode(1, 15, true, regPunchPreTime, finalPunchPostTime, "Base Layer.Punch");
         parent.AddChild(childToBeAdded);
 
         //make triangle possible after second square
-        parent.AddChild(new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime));
+        parent.AddChild(new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime, "Base Layer.RegularKick"));
         //-----------------------------------
 
 
@@ -88,24 +88,24 @@ public class ComboManager : MonoBehaviour
         //-----------------------------------
         //light punch
         parent = RootNode;
-        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime, "Base Layer.RegularKick");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime, "Base Layer.RegularKick");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, regPunchPostTime, "Base Layer.HighKick");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
         parent.AddChild(childToBeAdded);
 
         //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, true, regPunchPreTime, regPunchPostTime);
+        childToBeAdded = new ComboNode(1, 10, true, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
         parent.AddChild(childToBeAdded);
 
 
@@ -145,21 +145,21 @@ public class ComboManager : MonoBehaviour
         CheckInput(2);
     }
 
-    void CheckInput(int i)
+    void CheckInput(int attackType)
     {
-        if (CurrentNode.CheckChildren(i))
+        if (CurrentNode.CheckChildren(attackType))
         {
-            CurrentNode = CurrentNode.GetChild(i);
-            //add 10 to add finisher 
+            CurrentNode = CurrentNode.GetChild(attackType);
+
             if (CurrentNode.isFinisher)
             {
-                CommenceAttack(i + 10);
+                //upgrade to finisher
+                attackType += 10;
             }
-            else
-            {
-                CommenceAttack(i);
-            }
-           
+
+            CommenceAttack(attackType);
+            animator.Play(CurrentNode.GetAnimation());
+
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
             print("valid node: " + CurrentNode.attackType);
