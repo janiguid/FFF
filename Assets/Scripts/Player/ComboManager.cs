@@ -119,6 +119,9 @@ public class ComboManager : MonoBehaviour
 
     private void Update()
     {
+        //need something here to stop this when Firena gets hit
+
+
         if (timerStarted)
         {
             comboTimer += Time.deltaTime;
@@ -162,12 +165,14 @@ public class ComboManager : MonoBehaviour
 
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
+
             print("valid node: " + CurrentNode.attackType);
             return;
         }
 
         print("invalid node");
     }
+
 
     void CommenceAttack(int i)
     {

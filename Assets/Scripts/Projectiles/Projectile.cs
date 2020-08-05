@@ -36,13 +36,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject.tag);
         if(collision.gameObject.tag == "Player")
         {
-            IDamageable player = collision.gameObject.GetComponent<IDamageable>();
+            IDamageable[] player = collision.gameObject.GetComponents<IDamageable>();
+
             if (player != null)
             {
-                player.ApplyDamage(10);
+                foreach (IDamageable damageable in player) damageable.ApplyDamage(10);
                 Destroy(gameObject);
             }
             else

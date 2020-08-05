@@ -20,7 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isFacingRight;
     [SerializeField] private float minYVelocity;
     [SerializeField] private float maxYVelocity;
+
+
     [SerializeField] private Animator animator;
+    private bool hasAnim;
 
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
@@ -43,6 +46,8 @@ public class PlayerController : MonoBehaviour
         RefreshJump();
 
         if (animator == null) gameObject.GetComponent<Animator>();
+
+        if (animator != null) hasAnim = true;
         SRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -81,25 +86,22 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //need something here to stop this when Firena gets hit
+
+
 
         horizontalMovement = Inputs.LandMovement.Move.ReadValue<float>();
 
-
-        movement.x = Vector2.right.x * horizontalMovement * speed;
-
-        if(horizontalMovement != 0 && isGrounded)
+        if (hasAnim)
         {
-            if (animator)
+            if (horizontalMovement != 0 && isGrounded)
             {
-                if(animator.GetBool("IsRunning") == false)
+                if (animator.GetBool("IsRunning") == false)
                 {
-                    animator.SetBool("IsRunning", true);
+                   animator.SetBool("IsRunning", true);
                 }
             }
-        }
-        else
-        {
-            if (animator)
+            else
             {
                 if (animator.GetBool("IsRunning") == true)
                 {
@@ -108,19 +110,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        movement.x = Vector2.right.x * horizontalMovement * speed;
+
+
         if (!isGrounded)
         {
             movement.y = Mathf.Clamp(movement.y - gravityScale * Time.deltaTime, minYVelocity, maxYVelocity);
 
-
         }
 
-        RB_2D.velocity = movement;
 
         if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
         {
             Flip();
         }
+
+    }
+
+    private void FixedUpdate()
+    {
+        RB_2D.velocity = movement;
+
 
     }
 

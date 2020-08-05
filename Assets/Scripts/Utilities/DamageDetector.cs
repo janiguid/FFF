@@ -14,7 +14,6 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     [SerializeField] private AudioSource MyAudio;
     [SerializeField] private CharacterData MyData;
     [SerializeField] private Rigidbody2D MyRB2D;
-
     [SerializeField] private CameraShakeTest camShake;
 
 
@@ -70,16 +69,18 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     //DAMAGE: damage to be applied to our character data
     public void ApplyDamage(float damage)
     {
-
-        Freeze(freezeTime);
+        
+        //Freeze(freezeTime);
         ShakeCam();
 
         if (MyAudio)
         {
             MyAudio.Play();
         }
-        
+
     }
+
+
 
     //Applies force to this character
     public void ApplyForce(float HorizontalForce, float VerticalForce)
@@ -107,7 +108,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 
     public void ShakeCam()
     {
-        camShake.StartShake();
+        //camShake.StartShake();
     }
 
 

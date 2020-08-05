@@ -113,7 +113,6 @@ public class Leech : Monster
 
     void TurnAround(int dir)
     {
-        print("Ladfd");
         Vector3 rot = new Vector3(0,180,0) * dir;
         transform.Rotate(0, 180, 0);
     }
