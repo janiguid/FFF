@@ -5,8 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    public AudioSource selectSource;
+
     public void PlayGame()
     {
+        while (selectSource.isPlaying)
+        {
+            
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -15,4 +22,10 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quitting");
         Application.Quit();
     }
+
+    public void Back()
+    {
+        
+    }
+
 }
