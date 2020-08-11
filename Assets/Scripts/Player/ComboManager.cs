@@ -129,7 +129,6 @@ public class ComboManager : MonoBehaviour
 
         if (comboTimer > timeBeforeComboReset)
         {
-            animator.SetBool("IsPunching", false);
             StopTimer();
             ResetCombo();
         }

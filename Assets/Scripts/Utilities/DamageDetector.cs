@@ -69,8 +69,8 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     //DAMAGE: damage to be applied to our character data
     public void ApplyDamage(float damage)
     {
-        
-        //Freeze(freezeTime);
+        //FreezeTime(1);
+        Freeze(freezeTime);
         ShakeCam();
 
         if (MyAudio)
@@ -94,6 +94,25 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         }
     }
 
+
+    void FreezeTime(float duration)
+    {
+        StartCoroutine(Freezer(duration));
+    }
+
+
+    //instead of waiting for 0.3 seconds for animation to finish, we can 
+    //change the time scale of the animation to be unscaled with time,
+    //making it independent of time
+    IEnumerator Freezer(float duration)
+    {
+        yield return new WaitForSecondsRealtime(0.3f);
+        Time.timeScale = 0;
+
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1;
+    }
+
     //This function saves the current velocity of this entity and 
     //changes it to zero, effectively "freezing" the character
     //PAUSETIME: amount of time to freeze velocity for
@@ -108,7 +127,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 
     public void ShakeCam()
     {
-        //camShake.StartShake();
+        camShake.StartShake();
     }
 
 

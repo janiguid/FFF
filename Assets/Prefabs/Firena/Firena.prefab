@@ -5208,9 +5208,9 @@ MonoBehaviour:
   MyRB2D: {fileID: 3557629774062640078}
   camShake: {fileID: 0}
   staggerTime: 0
-  isFrozen: 0
+  isFrozen: 1
   savedVelocity: {x: 0, y: 0}
-  freezeTime: 0
+  freezeTime: 5
   fallingVelocity: 0
 --- !u!95 &2074526256
 Animator:

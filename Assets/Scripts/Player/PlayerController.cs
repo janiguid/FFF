@@ -88,8 +88,6 @@ public class PlayerController : MonoBehaviour
     {
         //need something here to stop this when Firena gets hit
 
-
-
         horizontalMovement = Inputs.LandMovement.Move.ReadValue<float>();
 
         if (hasAnim)
