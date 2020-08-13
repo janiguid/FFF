@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDamageable
 {
-    [SerializeField] private float InitialPlayerHealth;
-    [SerializeField] private float PlayerHealth;
+    [SerializeField] private float initialPlayerHealth;
+    [SerializeField] private float playerHealth;
     public HealthBar health;
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerHealth = InitialPlayerHealth;
-        health.SetMaxHealth(InitialPlayerHealth);
+        playerHealth = initialPlayerHealth;
+        health.SetMaxHealth(initialPlayerHealth);
         if(health == null)
         {
             health = FindObjectOfType<HealthBar>();
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ApplyDamage(float dam)
     {
-        PlayerHealth -= dam;
-        health.SetHealth(PlayerHealth);
+        playerHealth -= dam;
+        health.SetHealth(playerHealth);
+
+        if (playerHealth <= 0) Destroy(gameObject);
     }
 }

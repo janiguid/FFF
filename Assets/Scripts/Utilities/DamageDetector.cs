@@ -70,7 +70,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     public void ApplyDamage(float damage)
     {
         //FreezeTime(1);
-        Freeze(freezeTime);
+        //Freeze(freezeTime);
         ShakeCam();
 
         if (MyAudio)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Monster
+public class Leech : Monster, IDamageable
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -17,6 +17,7 @@ public class Leech : Monster
     public override void ApplyDamage(float dam)
     {
         health -= dam;
+        if (health <= 0) Destroy(gameObject);
     }
 
     public override void ApplyForce(float horizontalForce, float verticalForce)
