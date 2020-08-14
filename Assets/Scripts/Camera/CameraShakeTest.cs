@@ -32,6 +32,7 @@ public class CameraShakeTest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerTransform == null) this.enabled = false;
         if(combatModeTimer > 0)
         {
             combatModeTimer -= Time.deltaTime;
