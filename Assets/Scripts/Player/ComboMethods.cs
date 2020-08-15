@@ -10,6 +10,7 @@ public class ComboMethods : MonoBehaviour
     [SerializeField] private Transform punchPosition;
     private Dictionary<int, Func<bool>> comboMethodDict;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource firenaGrunt;
 
 
     /* For VFX
@@ -127,6 +128,12 @@ public class ComboMethods : MonoBehaviour
 
     void ApplyDamage(float dam, IDamageable[] damageables)
     {
+        if(firenaGrunt != null)
+        {
+            if (firenaGrunt.isPlaying) firenaGrunt.Stop();
+            firenaGrunt.Play();
+        }
+
         foreach (IDamageable obj in damageables)
         {
             obj.ApplyDamage(dam);

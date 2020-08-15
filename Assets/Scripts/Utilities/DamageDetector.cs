@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 {
+    [Header("Velocity Handlers")]
     [SerializeField] private float gravityScale;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float jumpTime;

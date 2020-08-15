@@ -222,7 +222,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void ShortFreeze()
     {
-        movement.x = 0;
+        movement = Vector2.zero;
+        movement = Vector2.down;
         recoveryTimer = timeBeforeRecovery;
     }
 }
