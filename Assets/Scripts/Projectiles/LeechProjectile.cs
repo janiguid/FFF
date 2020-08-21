@@ -12,32 +12,32 @@ public class LeechProjectile : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        initialCooldownTime = 5f;
-        cooldown = initialCooldownTime;
-        Ball = Instantiate(myProjectile, animator.transform);
-        Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
+        //initialCooldownTime = 5f;
+        //cooldown = initialCooldownTime;
+        //Ball = Instantiate(myProjectile, animator.transform);
+        //Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
         
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        cooldown -= Time.deltaTime;
+        //cooldown -= Time.deltaTime;
 
 
-        //really buggy. temp code to test projectile spawning
-        if(cooldown < 0)
-        {
-            cooldown = initialCooldownTime;
-            Ball = Instantiate(myProjectile, animator.transform);
-            Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
-        }
+        ////really buggy. temp code to test projectile spawning
+        //if(cooldown < 0)
+        //{
+        //    cooldown = initialCooldownTime;
+        //    Ball = Instantiate(myProjectile, animator.transform);
+        //    Ball.direction = 2f * animator.GetComponent<Transform>().localScale.x;
+        //}
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        cooldown = initialCooldownTime;
+        //cooldown = initialCooldownTime;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

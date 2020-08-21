@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Monster
+public class Leech : Monster, IDamageable
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -10,13 +10,32 @@ public class Leech : Monster
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject projectilePrefab;
 
+    [Header("Timers")]
+    [SerializeField] private float recoveryTimer;
+    [SerializeField] private float timeBeforeRecovery;
+
+    [Header("Visual Effects")]
+    [SerializeField] private ParticleSystem deathCloud;
+
     private Transform target;
     private float shootTimer;
 
-
     public override void ApplyDamage(float dam)
     {
+        if (health <= 0) return;
+        recoveryTimer = timeBeforeRecovery;
         health -= dam;
+        if (health <= 0) StartCoroutine(PlayDeathAnimAndDie());
+        
+    }
+
+    IEnumerator PlayDeathAnimAndDie()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        
+        deathCloud.Play();
+        yield return new WaitForSeconds(deathCloud.main.duration);
+        Destroy(gameObject);
     }
 
     public override void ApplyForce(float horizontalForce, float verticalForce)
@@ -37,6 +56,10 @@ public class Leech : Monster
 
     private void Update()
     {
+        if (health <= 0) return;
+        recoveryTimer -= Time.deltaTime;
+        if (recoveryTimer >= 0) return;
+
         float dist = 0;
         if (target == null)
         {

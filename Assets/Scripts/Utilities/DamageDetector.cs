@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 {
+    [Header("Velocity Handlers")]
     [SerializeField] private float gravityScale;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float jumpTime;
@@ -70,7 +71,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     public void ApplyDamage(float damage)
     {
         //FreezeTime(1);
-        Freeze(freezeTime);
+        //Freeze(freezeTime);
         ShakeCam();
 
         if (MyAudio)

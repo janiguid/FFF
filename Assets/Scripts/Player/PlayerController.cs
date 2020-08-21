@@ -4,22 +4,34 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
+    [Header("Jump Settings")]
     [SerializeField] private float gravityScale;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float jumpTime;
     [SerializeField] private float jumpVelocity;
+    [SerializeField] private float verticalMovement;
+
+    [Header("Land Movement")]
     [SerializeField] private Vector2 movement;
     [SerializeField] private float horizontalMovement;
-    [SerializeField] private float verticalMovement;
     [SerializeField] private float speed;
+
+    [Header("Velocity Caps")]
+    [SerializeField] private float minYVelocity;
+    [SerializeField] private float maxYVelocity;
+
+    [Header("Checks")]
     [SerializeField] private bool isGrounded;
     [SerializeField] private int maxJumps;
     [SerializeField] private int jumpsLeft;
     [SerializeField] private bool isFacingRight;
-    [SerializeField] private float minYVelocity;
-    [SerializeField] private float maxYVelocity;
+    [SerializeField] private bool isAttacking;
+
+    [Header("Timers")]
+    [SerializeField] private float timeBeforeRecovery;
+    [SerializeField] private float recoveryTimer;
 
 
     [SerializeField] private Animator animator;
@@ -34,6 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         Inputs = new InputActions();
         Inputs.LandMovement.Jump.performed += _ => Jump();
+        Inputs.LandMovement.North.performed += _ => ShortFreeze();
+        Inputs.LandMovement.West.performed += _ => ShortFreeze();
     }
 
     // Start is called before the first frame update
@@ -45,6 +59,7 @@ public class PlayerController : MonoBehaviour
         InitializePhys();
         RefreshJump();
 
+        if (timeBeforeRecovery == 0) timeBeforeRecovery = 0.1f;
         if (animator == null) gameObject.GetComponent<Animator>();
 
         if (animator != null) hasAnim = true;
@@ -86,7 +101,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //need something here to stop this when Firena gets hit
+        recoveryTimer -= Time.deltaTime;
+        if (recoveryTimer >= 0) return;
+
+
 
         horizontalMovement = Inputs.LandMovement.Move.ReadValue<float>();
 
@@ -197,4 +215,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ApplyDamage(float dam)
+    {
+        ShortFreeze();
+    }
+
+    private void ShortFreeze()
+    {
+        movement = Vector2.zero;
+        movement = Vector2.down;
+        recoveryTimer = timeBeforeRecovery;
+    }
 }
