@@ -51,6 +51,9 @@ MonoBehaviour:
   speed: 400
   damage: 0
   lifetime: 0
+  particleSystem: {fileID: 0}
+  isAlive: 0
+  target: {x: 0, y: 0}
 --- !u!212 &1719812379910414472
 SpriteRenderer:
   m_ObjectHideFlags: 0

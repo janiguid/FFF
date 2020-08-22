@@ -222,6 +222,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Fireball",
+                    "type": "Button",
+                    "id": "582fa23c-bf17-4841-b06b-c5e68248dd56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -255,6 +263,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5ecc9941-1549-494d-b477-139244ce0121",
+                    "path": "<DualShockGamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fireball",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

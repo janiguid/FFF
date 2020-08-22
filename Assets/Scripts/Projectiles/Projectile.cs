@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float lifetime;
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private bool isAlive;
+    [SerializeField] private Vector2 target;
     
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,21 @@ public class Projectile : MonoBehaviour
     private void FixedUpdate()
     {
         if (isAlive == false) return;
-        myRigidBody.velocity = transform.right * speed;
+
+        if(target == null)
+        {
+            myRigidBody.velocity = transform.right * speed;
+        }
+        else
+        {
+            transform.position = Vector2.MoveTowards(transform.position, target, .5f);
+        }
+        
+    }
+
+    public void SetTarget(Vector2 tgt)
+    {
+        target = tgt * 10;
     }
 
     IEnumerator SelfDestruct(float timeTilDeath)

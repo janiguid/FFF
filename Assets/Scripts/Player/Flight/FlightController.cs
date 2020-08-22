@@ -38,19 +38,11 @@ public class FlightController : MonoBehaviour
     {
         inputValue = Inputs.FlightMovement.Flight.ReadValue<Vector2>();
 
-        if(isFacingRight && (inputValue.x < -0.1f) || !isFacingRight && inputValue.x > 0.1f)
+        if (inputValue.x != 0)
         {
-            Flip();
+            transform.SetXScale((int)Mathf.Sign(inputValue.x));
         }
         MyRB2D.AddForce(inputValue * speed);
-    }
-
-    void Flip()
-    {
-        Vector2 turner = Vector2.left;
-        turner.y += 1;
-        transform.localScale *= turner;
-        isFacingRight = !isFacingRight;
     }
 
     private void OnEnable()
