@@ -11,12 +11,13 @@ public class PlayerManager : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
-        playerHealth = initialPlayerHealth;
-        health.SetMaxHealth(initialPlayerHealth);
-        if(health == null)
+        if (health == null)
         {
             health = FindObjectOfType<HealthBar>();
         }
+        playerHealth = initialPlayerHealth;
+        health.SetMaxHealth(initialPlayerHealth);
+
     }
 
 

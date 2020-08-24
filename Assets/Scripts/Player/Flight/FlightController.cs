@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FlightController : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D MyRB2D;
     [SerializeField] private float speed;
     [SerializeField] private bool isFacingRight;
+    [SerializeField] private GameObject cursor;
 
     private Vector2 inputValue;
     private VFXHandler MyVFX;
-
+    private Rigidbody2D MyRB2D;
 
     InputActions Inputs;
 
@@ -50,12 +50,14 @@ public class FlightController : MonoBehaviour
         MyVFX.BeginAura();
         InitializeFlight();
         Inputs.Enable();
+        cursor.SetActive(true);
     }
 
     private void OnDisable()
     {
         MyVFX.StopAura();
         Inputs.Disable();
+        cursor.SetActive(false);
     }
 
 

@@ -124,6 +124,11 @@ MonoBehaviour:
   damage: 10
   lifetime: 5
   particleSystem: {fileID: 8443469593930450}
+  isAlive: 0
+  target: {x: 0, y: 0}
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!58 &4339900234834931263
 CircleCollider2D:
   m_ObjectHideFlags: 0

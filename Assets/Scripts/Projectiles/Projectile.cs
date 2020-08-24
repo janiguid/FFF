@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private bool isAlive;
     [SerializeField] private Vector2 target;
+    [SerializeField] private LayerMask targetLayer;
     
     // Start is called before the first frame update
     void Start()
@@ -65,6 +66,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.layer != targetLayer) return;
         if(collision.gameObject.tag == "Player")
         {
             IDamageable[] player = collision.gameObject.GetComponents<IDamageable>();

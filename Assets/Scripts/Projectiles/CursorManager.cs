@@ -11,7 +11,7 @@ public class CursorManager : MonoBehaviour
     [SerializeField] private float radius;
 
 
-
+    private Transform playerTransform;
     InputActions Inputs;
 
     private void Awake()
@@ -21,7 +21,7 @@ public class CursorManager : MonoBehaviour
 
     private void Start()
     {
-
+        playerTransform = FindObjectOfType<PlayerController>().transform;
         Inputs.FlightMovement.Fireball.started += _ => FireProjectile();
     }
 
@@ -38,7 +38,9 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement += Inputs.FlightMovement.Cursor.ReadValue<Vector2>() * Time.deltaTime *cursorSpeed;
+        movement.y += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().y * Time.deltaTime *cursorSpeed;
+        movement.x += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+
         Vector2 lastKnownLoc = movement;
 
         if(movement.x == 0)
@@ -59,11 +61,15 @@ public class CursorManager : MonoBehaviour
     void FireProjectile()
     {
         var temp = Instantiate(fireBall);
-        temp.transform.position = transform.position;
+        print(transform.parent.position);
+        temp.transform.position = transform.parent.position;
         print("balh");
         temp.SetActive(false);
-        temp.transform.position = Vector3.zero;
-        temp.GetComponent<Projectile>().SetTarget(transform.position);
+
+        Vector2 correctTarget = transform.localPosition;
+        correctTarget.x *= Mathf.Sign(transform.parent.localScale.x);
+
+        temp.GetComponent<Projectile>().SetTarget(correctTarget);
         temp.SetActive(true);
     }
 }
