@@ -40,20 +40,21 @@ public class Projectile : MonoBehaviour
     {
         if (isAlive == false) return;
 
-        if(target == null)
+        if(target == null || target == Vector2.zero)
         {
             myRigidBody.velocity = transform.right * speed;
         }
         else
         {
-            transform.position = Vector2.MoveTowards(transform.position, target, .5f);
+            //transform.position = Vector2.MoveTowards(transform.position, target, .5f);
+            myRigidBody.velocity = target * speed;
         }
         
     }
 
     public void SetTarget(Vector2 tgt)
     {
-        target = tgt * 10;
+        target = tgt;
     }
 
     IEnumerator SelfDestruct(float timeTilDeath)

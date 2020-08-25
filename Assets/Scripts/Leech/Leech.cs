@@ -9,6 +9,7 @@ public class Leech : Monster, IDamageable
     [SerializeField] private float distBeforeBreaking;
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private float eyesightLength;
 
     [Header("Timers")]
     [SerializeField] private float recoveryTimer;
@@ -18,7 +19,7 @@ public class Leech : Monster, IDamageable
     [SerializeField] private ParticleSystem deathCloud;
 
     private Transform target;
-    private float shootTimer;
+    [SerializeField]private float shootTimer;
 
     public override void ApplyDamage(float dam)
     {
@@ -51,6 +52,7 @@ public class Leech : Monster, IDamageable
 
         if (InitialHealth == 0) InitialHealth = 50f;
         health = InitialHealth;
+        shootTimer = 2;
         
     }
 
@@ -91,6 +93,7 @@ public class Leech : Monster, IDamageable
 
     void BeginShoot()
     {
+        print("shooting!");
         Instantiate(projectilePrefab, transform, false);
     }
 
@@ -119,8 +122,8 @@ public class Leech : Monster, IDamageable
 
     bool CheckForPlayer()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 5, layerMask);
-        Debug.DrawRay(transform.position, transform.right * 5);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, eyesightLength, layerMask);
+        Debug.DrawRay(transform.position, transform.right * eyesightLength);
         if (hit.collider == null && target != null)
         {
             target = null;

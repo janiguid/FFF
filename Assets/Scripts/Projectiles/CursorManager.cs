@@ -27,6 +27,7 @@ public class CursorManager : MonoBehaviour
 
     private void OnEnable()
     {
+        playerTransform = FindObjectOfType<PlayerController>().transform;
         Inputs.Enable();
     }
 
@@ -38,12 +39,31 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.y += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().y * Time.deltaTime *cursorSpeed;
-        movement.x += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+        movement.y += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().y * Time.deltaTime * cursorSpeed;
+
+        if(playerTransform.localScale.x > 0)
+        {
+            movement.x += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+        }
+        else
+        {
+            movement.x -= Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+        }
+        
+
+        //movement = Inputs.FlightMovement.Cursor.ReadValue<Vector2>() * cursorSpeed;
+
+        //Vector2 lastKnownLoc = movement;
+
+        //if (playerTransform.localScale.x < 0)
+        //{
+        //    movement.x *= -1;
+        //}
+
 
         Vector2 lastKnownLoc = movement;
 
-        if(movement.x == 0)
+        if (movement.x == 0)
         {
             movement.x = lastKnownLoc.x;
         }
@@ -63,12 +83,13 @@ public class CursorManager : MonoBehaviour
         var temp = Instantiate(fireBall);
         print(transform.parent.position);
         temp.transform.position = transform.parent.position;
-        print("balh");
+        
         temp.SetActive(false);
 
         Vector2 correctTarget = transform.localPosition;
         correctTarget.x *= Mathf.Sign(transform.parent.localScale.x);
 
+        print(correctTarget);
         temp.GetComponent<Projectile>().SetTarget(correctTarget);
         temp.SetActive(true);
     }
