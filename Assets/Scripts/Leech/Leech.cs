@@ -8,6 +8,7 @@ public class Leech : Monster, IDamageable
     [SerializeField] private float timeForTravelling;
     [SerializeField] private float distBeforeBreaking;
     [SerializeField] private LayerMask layerMask;
+    [SerializeField] private Projectile.targetTag targetTag;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private float eyesightLength;
 
@@ -93,8 +94,8 @@ public class Leech : Monster, IDamageable
 
     void BeginShoot()
     {
-        print("shooting!");
-        Instantiate(projectilePrefab, transform, false);
+        var GameObject = Instantiate(projectilePrefab, transform, false);
+        GameObject.GetComponent<Projectile>().SetTargetTag(targetTag);
     }
 
     float GetDistance(Vector2 origin, Vector2 target)

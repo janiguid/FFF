@@ -128,7 +128,11 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 
     public void ShakeCam()
     {
-        camShake.StartShake();
+        if (camShake)
+        {
+            camShake.StartShake();
+        }
+        
     }
 
 

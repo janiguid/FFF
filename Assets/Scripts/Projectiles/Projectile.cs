@@ -13,7 +13,15 @@ public class Projectile : MonoBehaviour
     [SerializeField] private ParticleSystem particleSystem;
     [SerializeField] private bool isAlive;
     [SerializeField] private Vector2 target;
-    [SerializeField] private LayerMask targetLayer;
+
+
+    public  enum targetTag
+    {
+        Player, 
+        Enemy
+    }
+
+    [SerializeField] private targetTag targettedTag;
     
     // Start is called before the first frame update
     void Start()
@@ -57,19 +65,30 @@ public class Projectile : MonoBehaviour
         target = tgt;
     }
 
+    public void SetTargetTag(targetTag tag)
+    {
+        targettedTag = tag;
+    }
+
     IEnumerator SelfDestruct(float timeTilDeath)
     {
+        if (!gameObject.activeSelf) yield return null;
+        if (particleSystem)
+        {
+            particleSystem.Play();
+            yield return new WaitForSeconds(particleSystem.main.duration);
+            
+        }
 
-        particleSystem.Play();
-        yield return new WaitForSeconds(particleSystem.main.duration);
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer != targetLayer) return;
-        if(collision.gameObject.tag == "Player")
+
+        if(collision.gameObject.tag == targettedTag.ToString())
         {
+            print("Detected player");
             IDamageable[] player = collision.gameObject.GetComponents<IDamageable>();
 
             if (player != null)

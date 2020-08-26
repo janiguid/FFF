@@ -24,7 +24,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
     public void ApplyDamage(float dam)
     {
         playerHealth -= dam;
-        health.SetHealth(playerHealth);
+
+        if (health)
+        {
+            health.SetHealth(playerHealth);
+        }
+        
 
         if (playerHealth <= 0) Destroy(gameObject);
     }
