@@ -145,6 +145,9 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void FixedUpdate()
     {
+
+        recoveryTimer -= Time.deltaTime;
+        if (recoveryTimer >= 0) return;
         RB_2D.velocity = movement;
 
 
