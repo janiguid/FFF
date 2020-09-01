@@ -67,7 +67,7 @@ public class ComboMethods : MonoBehaviour
 
             gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
 
-            particleSystems[0].Play();
+            if(particleSystems.Length != 0) particleSystems[0].Play();
         }
         
         return true;
@@ -84,7 +84,8 @@ public class ComboMethods : MonoBehaviour
         {
             ApplyDamage(10, hit.transform.gameObject.GetComponents<IDamageable>());
             hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(200 * forwardVector.x, 0);
-            particleSystems[1].Play();
+
+            if (particleSystems.Length != 0) particleSystems[1].Play();
         }
         return true;
     }
@@ -99,7 +100,7 @@ public class ComboMethods : MonoBehaviour
         if (hit)
         {
             ApplyDamage(5, hit.transform.gameObject.GetComponents<IDamageable>());
-            particleSystems[2].Play();
+            if (particleSystems.Length != 0) particleSystems[2].Play();
         }
 
         //animator.Play("Base Layer.RegularKick", 0);
@@ -118,7 +119,7 @@ public class ComboMethods : MonoBehaviour
             gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
             ApplyDamage(15, hit.transform.gameObject.GetComponents<IDamageable>());
             hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
-            particleSystems[3].Play();
+            if (particleSystems.Length != 0) particleSystems[3].Play();
         }
 
         //animator.Play("Base Layer.HighKick", 0);

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ToadManager : MonoBehaviour
+public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
 {
     [SerializeField] private string targetTag;
     private PlayerManager player;
@@ -28,19 +28,17 @@ public class ToadManager : MonoBehaviour
         return player.transform.position;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == targetTag)
-        {
-            print(Mathf.Sign(transform.localScale.x));
-            IDamageable[] dam = collision.GetComponents<IDamageable>();
-            IPushable push = collision.GetComponent<IPushable>();
-            for(int i = 0; i < dam.Length; ++i)
-            {
-                dam[i].ApplyDamage(1);
-            }
 
-            push.ApplyForce(-50, 20);
-        }
+    public void ApplyDamage(float dam)
+    {
+        
+    }
+
+    public void Freeze(float freezeDuration)
+    {
+    }
+
+    public void ApplyForce(float horizontalForce, float verticalForce)
+    {
     }
 }

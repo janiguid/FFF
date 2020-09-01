@@ -6,6 +6,7 @@ public class ToadSearch : StateMachineBehaviour
 {
     [SerializeField] private float minDistance;
     [SerializeField] private float currDistance;
+    [SerializeField] private float speed;
     ToadManager toad;
     Rigidbody2D rb;
     Transform transform;
@@ -21,6 +22,7 @@ public class ToadSearch : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (animator.GetFloat("ToungeLashCD") > 0) animator.SetFloat("ToungeLashCD", animator.GetFloat("ToungeLashCD") - Time.deltaTime);
         if (toad.HasPlayer())
         {
             currDistance = Vector2.Distance(animator.transform.position, toad.GetPlayerPosition());
@@ -36,12 +38,12 @@ public class ToadSearch : StateMachineBehaviour
 
             if ( currDistance > minDistance)
             {
-                rb.MovePosition(Vector2.MoveTowards(transform.position, toad.GetPlayerPosition(), Time.deltaTime * 5));
-                //transform.LookAt(toad.GetPlayerPosition(), Vector3.r);
+                rb.MovePosition(Vector2.MoveTowards(transform.position, toad.GetPlayerPosition(), Time.deltaTime * speed));
             }
             else
             {
-                animator.SetBool("PlayerWithinRange", true);
+                if (animator.GetFloat("ToungeLashCD") <= 0)
+                    animator.SetBool("PlayerWithinRange", true);
             }
         }
 

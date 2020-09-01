@@ -6,6 +6,7 @@ public class ToungeLash : StateMachineBehaviour
 {
     [SerializeField] private float minDistance;
     [SerializeField] private float currDistance;
+    [SerializeField] private float cooldown;
     ToadManager toad;
     Rigidbody2D rb;
     Transform transform;
@@ -34,7 +35,7 @@ public class ToungeLash : StateMachineBehaviour
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        animator.SetFloat("ToungeLashCD", 1.7f);
     }
 
 

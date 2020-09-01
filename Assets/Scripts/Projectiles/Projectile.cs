@@ -10,7 +10,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private int damage;
     [SerializeField] private float lifetime;
-    [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private ParticleSystem particleSys;
+    [SerializeField] private AudioSource audioSrc;
     [SerializeField] private bool isAlive;
     [SerializeField] private Vector2 target;
 
@@ -29,7 +30,8 @@ public class Projectile : MonoBehaviour
         isAlive = true;
         lifetime = 4;
         if(myRigidBody == null) myRigidBody = GetComponent<Rigidbody2D>();
-        if (particleSystem == null) particleSystem = GetComponentInChildren<ParticleSystem>();
+        if (particleSys == null) particleSys = GetComponentInChildren<ParticleSystem>();
+        if (audioSrc == null) audioSrc = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -73,10 +75,11 @@ public class Projectile : MonoBehaviour
     IEnumerator SelfDestruct(float timeTilDeath)
     {
         if (!gameObject.activeSelf) yield return null;
-        if (particleSystem)
+        if (particleSys && audioSrc)
         {
-            particleSystem.Play();
-            yield return new WaitForSeconds(particleSystem.main.duration);
+            audioSrc.Play();
+            particleSys.Play();
+            yield return new WaitForSeconds(particleSys.main.duration);
             
         }
 

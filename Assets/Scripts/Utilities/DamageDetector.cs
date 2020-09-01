@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
+public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable, ITargetable
 {
     [Header("Velocity Handlers")]
     [SerializeField] private float gravityScale;
@@ -17,13 +17,14 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     [SerializeField] private Rigidbody2D MyRB2D;
     [SerializeField] private CameraShakeTest camShake;
 
-
-    public float staggerTime;
-    public bool isFrozen;
-    public Vector2 savedVelocity;
-
-    public float freezeTime;
-    public float fallingVelocity;
+    [Header("Timers")]
+    [SerializeField] private float staggerTime;
+    [SerializeField] private bool isFrozen;
+    [SerializeField] private Vector2 savedVelocity;
+    [SerializeField] private float freezeTime;
+    [SerializeField] private float fallingVelocity;
+    [SerializeField] private float immunityTime;
+    [SerializeField] private bool canBeTargeted;
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         if(MyAudio == null) MyAudio = GetComponent<AudioSource>();
         if(MyRB2D == null) MyRB2D = GetComponent<Rigidbody2D>();
         if (camShake == null) camShake = FindObjectOfType<CameraShakeTest>();
-
+        canBeTargeted = true;
         InitializePhys();
     }
 
@@ -51,6 +52,8 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     // Update is called once per frame
     void Update()
     {
+        if (immunityTime > 0) immunityTime -= Time.deltaTime;
+        if (immunityTime <= 0 && canBeTargeted == false) canBeTargeted = true;
 
         //if character is frozen, keep it freezed
         //until timer runs out
@@ -65,6 +68,18 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         {
             isFrozen = false;
         }
+    }
+
+    public bool IsTargetable()
+    {
+        if (canBeTargeted)
+        {
+            canBeTargeted = false;
+            immunityTime = 1f;
+            return true;
+        }
+
+        return false;
     }
 
     //DAMAGE: damage to be applied to our character data

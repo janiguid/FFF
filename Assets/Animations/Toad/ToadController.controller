@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 9
   currDistance: 0
+  speed: 10
 --- !u!1102 &-7457782284379359471
 AnimatorState:
   serializedVersion: 5
@@ -106,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDistance: 9
   currDistance: 0
+  cooldown: 0
 --- !u!1101 &-2137500330338049292
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -113,10 +115,7 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: PlayerWithinRange
-    m_EventTreshold: 0
+  m_Conditions: []
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7457782284379359471}
   m_Solo: 0
@@ -170,6 +169,12 @@ AnimatorController:
   m_AnimatorParameters:
   - m_Name: PlayerWithinRange
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: ToungeLashCD
+    m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
