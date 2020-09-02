@@ -221,6 +221,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void ApplyDamage(float dam)
     {
         ShortFreeze();
+        animator.Play("Damaged");
     }
 
     private void ShortFreeze()

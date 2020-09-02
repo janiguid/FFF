@@ -100,12 +100,15 @@ public class Projectile : MonoBehaviour
                 isAlive = false;
                 myRigidBody.velocity = Vector2.zero;
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                StartCoroutine(SelfDestruct(1));
+                
             }
             else
             {
                 Debug.Log("Player doesn't have damage detector. Make sure to attach.", gameObject);
             }
+
+            gameObject.GetComponent<CircleCollider2D>().enabled = false;
+            StartCoroutine(SelfDestruct(1));
         }
 
         

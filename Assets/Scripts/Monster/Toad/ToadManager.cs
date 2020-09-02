@@ -5,6 +5,8 @@ using UnityEngine;
 public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
 {
     [SerializeField] private string targetTag;
+
+    private Animator anim;
     private PlayerManager player;
 
 
@@ -12,7 +14,7 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
     void Start()
     {
         player = FindObjectOfType<PlayerManager>();
-
+        anim = GetComponent<Animator>();
         if (targetTag == "") targetTag = "Player";
     }
 
@@ -31,7 +33,8 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
 
     public void ApplyDamage(float dam)
     {
-        
+        print("Set bool");
+        anim.SetBool("ReceivedDamage", true);
     }
 
     public void Freeze(float freezeDuration)

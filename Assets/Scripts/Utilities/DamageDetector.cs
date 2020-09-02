@@ -23,7 +23,8 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     [SerializeField] private Vector2 savedVelocity;
     [SerializeField] private float freezeTime;
     [SerializeField] private float fallingVelocity;
-    [SerializeField] private float immunityTime;
+    [SerializeField] private float initialImmunityTime;
+    [SerializeField] private float immunityTimer;
     [SerializeField] private bool canBeTargeted;
 
     // Start is called before the first frame update
@@ -52,8 +53,8 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     // Update is called once per frame
     void Update()
     {
-        if (immunityTime > 0) immunityTime -= Time.deltaTime;
-        if (immunityTime <= 0 && canBeTargeted == false) canBeTargeted = true;
+        if (immunityTimer > 0) immunityTimer -= Time.deltaTime;
+        if (immunityTimer <= 0 && canBeTargeted == false) canBeTargeted = true;
 
         //if character is frozen, keep it freezed
         //until timer runs out
@@ -75,7 +76,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         if (canBeTargeted)
         {
             canBeTargeted = false;
-            immunityTime = 1f;
+            immunityTimer = initialImmunityTime;
             return true;
         }
 
@@ -103,6 +104,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     {
         print("force applied");
         isFrozen = false;
+        MyRB2D.velocity = Vector2.zero;
         MyRB2D.AddForce(new Vector2(HorizontalForce, VerticalForce), ForceMode2D.Impulse);
         ShakeCam();
         if (MyAudio)

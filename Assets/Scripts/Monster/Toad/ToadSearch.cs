@@ -22,7 +22,11 @@ public class ToadSearch : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetFloat("ToungeLashCD") > 0) animator.SetFloat("ToungeLashCD", animator.GetFloat("ToungeLashCD") - Time.deltaTime);
+        if (animator.GetFloat("ToungeLashCD") > 0)
+        {
+
+            animator.SetFloat("ToungeLashCD", animator.GetFloat("ToungeLashCD") - Time.deltaTime);
+        }
         if (toad.HasPlayer())
         {
             currDistance = Vector2.Distance(animator.transform.position, toad.GetPlayerPosition());

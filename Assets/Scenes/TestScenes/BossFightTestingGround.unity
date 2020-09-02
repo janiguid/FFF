@@ -290,25 +290,25 @@ MonoBehaviour:
   maxYShake: 0.2
   combatMode: 0
   combatModeTimer: 0
---- !u!1 &818325475 stripped
+--- !u!1 &439068198 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 3557629774860075999, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+  m_CorrespondingSourceObject: {fileID: 8285724313990949511, guid: d9748ca4242e3c945be771e129760d3f,
     type: 3}
-  m_PrefabInstance: {fileID: 1731146773}
+  m_PrefabInstance: {fileID: 2856846099746999548}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &818325485
+--- !u!82 &439068206
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 818325475}
+  m_GameObject: {fileID: 439068198}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a1dfadda5e87c744da4e263b4a1cb0cd, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4496126f584639e42908a22fc6281d5b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -469,24 +469,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1895837080, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
-      propertyPath: MyAudio
-      value: 
+      propertyPath: immunityTimer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1895837080, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
+      propertyPath: initialImmunityTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3557629774062640112, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_Name
       value: Firena
       objectReference: {fileID: 0}
-    - target: {fileID: 3557629774062640113, guid: ec7dff9ddf0c6104d94d837eb419fa26,
-        type: 3}
-      propertyPath: flightAscentSound
-      value: 
-      objectReference: {fileID: 818325485}
-    - target: {fileID: 3557629774062640118, guid: ec7dff9ddf0c6104d94d837eb419fa26,
-        type: 3}
-      propertyPath: audioSrc
-      value: 
-      objectReference: {fileID: 818325485}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -581,6 +575,11 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2856846099746999552, guid: d9748ca4242e3c945be771e129760d3f,
+        type: 3}
+      propertyPath: MyAudio
+      value: 
+      objectReference: {fileID: 439068206}
     - target: {fileID: 8285724313990949511, guid: d9748ca4242e3c945be771e129760d3f,
         type: 3}
       propertyPath: m_Name
@@ -589,7 +588,7 @@ PrefabInstance:
     - target: {fileID: 8285724313990949511, guid: d9748ca4242e3c945be771e129760d3f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8285724313990949562, guid: d9748ca4242e3c945be771e129760d3f,
         type: 3}
