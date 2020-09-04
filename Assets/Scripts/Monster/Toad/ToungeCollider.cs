@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ToungeCollider : MonoBehaviour
 {
+    [SerializeField] private float tongueDamage;
     [SerializeField] private string targetTag;
 
 
@@ -19,7 +20,7 @@ public class ToungeCollider : MonoBehaviour
                 IPushable push = collision.GetComponent<IPushable>();
                 for (int i = 0; i < dam.Length; ++i)
                 {
-                    dam[i].ApplyDamage(1);
+                    dam[i].ApplyDamage(tongueDamage);
                 }
 
                 for (int i = 0; i < freezeables.Length; ++i)

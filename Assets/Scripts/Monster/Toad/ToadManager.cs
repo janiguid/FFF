@@ -6,6 +6,7 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
 {
     [SerializeField] private string targetTag;
 
+    private float health;
     private Animator anim;
     private PlayerManager player;
 
@@ -13,6 +14,7 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
     // Start is called before the first frame update
     void Start()
     {
+        health = 50;
         player = FindObjectOfType<PlayerManager>();
         anim = GetComponent<Animator>();
         if (targetTag == "") targetTag = "Player";
@@ -33,7 +35,9 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
 
     public void ApplyDamage(float dam)
     {
-        print("Set bool");
+        health -= (dam);
+        if (health <= 0) Destroy(gameObject);
+
         anim.SetBool("ReceivedDamage", true);
     }
 

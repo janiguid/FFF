@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108a7e5b1bff21f4c9c7be7cb00e6976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tongueDamage: 15
   targetTag: Player
 --- !u!4 &2078586729 stripped
 Transform:

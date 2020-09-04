@@ -16,7 +16,12 @@ public class PlayerManager : MonoBehaviour, IDamageable
             health = FindObjectOfType<HealthBar>();
         }
         playerHealth = initialPlayerHealth;
-        health.SetMaxHealth(initialPlayerHealth);
+
+        if (health)
+        {
+            health.SetMaxHealth(initialPlayerHealth);
+        }
+        
 
     }
 

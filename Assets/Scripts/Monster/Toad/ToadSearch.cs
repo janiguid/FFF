@@ -22,16 +22,32 @@ public class ToadSearch : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (animator.GetFloat("ToungeLashCD") > 0)
-        {
 
-            animator.SetFloat("ToungeLashCD", animator.GetFloat("ToungeLashCD") - Time.deltaTime);
-        }
+
+
         if (toad.HasPlayer())
         {
             currDistance = Vector2.Distance(animator.transform.position, toad.GetPlayerPosition());
-            
-            if(animator.transform.position.x > toad.GetPlayerPosition().x)
+
+            Debug.Log("Current Distance: " + currDistance);
+            if (currDistance > minDistance && animator.GetFloat("ToungeLashCD") <= 0.5)
+            {
+                rb.MovePosition(Vector2.MoveTowards(transform.position, toad.GetPlayerPosition(), Time.deltaTime * speed));
+                animator.SetBool("PlayerWithinRange", false);
+            }
+            else if(currDistance <= minDistance)
+            {
+                animator.SetBool("PlayerWithinRange", true);
+            }
+
+            if (animator.GetFloat("ToungeLashCD") > 0.1)
+            {
+
+                animator.SetFloat("ToungeLashCD", animator.GetFloat("ToungeLashCD") - Time.deltaTime);
+                return;
+            }
+
+            if (animator.transform.position.x > toad.GetPlayerPosition().x)
             {
                 animator.transform.SetXScale(-1);
             }
@@ -40,15 +56,7 @@ public class ToadSearch : StateMachineBehaviour
                 animator.transform.SetXScale(1);
             }
 
-            if ( currDistance > minDistance)
-            {
-                rb.MovePosition(Vector2.MoveTowards(transform.position, toad.GetPlayerPosition(), Time.deltaTime * speed));
-            }
-            else
-            {
-                if (animator.GetFloat("ToungeLashCD") <= 0)
-                    animator.SetBool("PlayerWithinRange", true);
-            }
+
         }
 
     }
