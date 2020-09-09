@@ -6,7 +6,11 @@ public class PlayerManager : MonoBehaviour, IDamageable
 {
     [SerializeField] private float initialPlayerHealth;
     [SerializeField] private float playerHealth;
-    public HealthBar health;
+    [SerializeField] private float initialWingValue;
+    [SerializeField] private float wingValue;
+
+    private HealthBar health;
+    private WingBar wings;
 
     // Start is called before the first frame update
     void Start()
@@ -15,11 +19,24 @@ public class PlayerManager : MonoBehaviour, IDamageable
         {
             health = FindObjectOfType<HealthBar>();
         }
+
+        if(wings == null)
+        {
+            wings = FindObjectOfType<WingBar>();
+        }
+
+        wingValue = initialWingValue;
         playerHealth = initialPlayerHealth;
 
         if (health)
         {
             health.SetMaxHealth(initialPlayerHealth);
+        }
+
+        if (wings)
+        {
+            wings.SetMax(50f);
+            wings.SetWingValue(initialWingValue);
         }
         
 
@@ -37,5 +54,31 @@ public class PlayerManager : MonoBehaviour, IDamageable
         
 
         if (playerHealth <= 0) Destroy(gameObject);
+    }
+
+    public void RegainHealth(float value)
+    {
+        playerHealth += value;
+
+        if (health)
+        {
+            health.SetHealth(playerHealth);
+        }
+    }
+
+    public void IncreaseWingValue(float value)
+    {
+        wingValue += value;
+
+        if (wings)
+        {
+            wings.SetWingValue(wingValue);
+        }
+    }
+
+
+    public float GetWingValue()
+    {
+        return wingValue;
     }
 }
