@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stalagmite : Hazard
+public class Stalactite : Hazard
 {
     [SerializeField] float xForceMultiplier;
     [SerializeField] float yForceMultiplier;
@@ -15,7 +15,7 @@ public class Stalagmite : Hazard
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             IDamageable damageable;
             IPushable pushable;
@@ -24,7 +24,7 @@ public class Stalagmite : Hazard
 
             if (collision.gameObject.TryGetComponent<IDamageable>(out damageable))
             {
-                
+
                 damageable.ApplyDamage(damage);
             }
             else
@@ -37,7 +37,7 @@ public class Stalagmite : Hazard
                 Vector3 myCenter = GetComponent<SpriteRenderer>().bounds.center;
                 float xForce = collision.transform.position.x - myCenter.x;
                 float yForce = collision.transform.position.y - myCenter.y;
-                pushable.ApplyForce(xForce*xForceMultiplier, yForce*yForceMultiplier);
+                pushable.ApplyForce(xForce * xForceMultiplier, yForce * yForceMultiplier);
                 Debug.DrawLine(myCenter, collision.transform.position, Color.red, 5f);
             }
             else
@@ -46,5 +46,8 @@ public class Stalagmite : Hazard
             }
 
         }
+
+        gameObject.SetActive(false);
     }
+
 }
