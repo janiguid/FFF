@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : MonoBehaviour
 {
     [Header("Jump Settings")]
     [SerializeField] private float gravityScale;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
     private SpriteRenderer SRenderer;
-    
+    private DamageDetector damageDetector;
 
     private void Awake()
     {
@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if(RB_2D == null) RB_2D = GetComponent<Rigidbody2D>();
 
+        if(damageDetector == null) damageDetector = GetComponent<DamageDetector>();
+
+        if (damageDetector) damageDetector.detectorDelegate += ApplyDamage;
 
         InitializePhys();
         RefreshJump();
@@ -220,6 +223,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     public void ApplyDamage(float dam)
     {
+        print("Player controller received delegate call");
         ShortFreeze();
         animator.Play("Damaged");
     }

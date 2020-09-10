@@ -2,19 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour, IDamageable
+public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float initialPlayerHealth;
     [SerializeField] private float playerHealth;
     [SerializeField] private float initialWingValue;
     [SerializeField] private float wingValue;
 
+    [SerializeField] private DamageDetector damageDetector;
     private HealthBar health;
     private WingBar wings;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
+
+        if (damageDetector == null) GetComponent<DamageDetector>();
+        if (damageDetector)
+        {
+            damageDetector.detectorDelegate += ApplyDamage;
+        }
+        else
+        {
+            print("couldn't find dma dec");
+        }
+
         if (health == null)
         {
             health = FindObjectOfType<HealthBar>();
@@ -51,9 +65,10 @@ public class PlayerManager : MonoBehaviour, IDamageable
         {
             health.SetHealth(playerHealth);
         }
-        
 
         if (playerHealth <= 0) Destroy(gameObject);
+
+        print("Player manager received delegate call");
     }
 
     public void RegainHealth(float value)

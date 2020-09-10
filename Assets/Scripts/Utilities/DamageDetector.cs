@@ -27,6 +27,9 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     [SerializeField] private float immunityTimer;
     [SerializeField] private bool canBeTargeted;
 
+    public delegate void DetectedDamage(float dam);
+    public DetectedDamage detectorDelegate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -95,6 +98,12 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
             MyAudio.Play();
         }
 
+        if(detectorDelegate != null)
+        {
+            detectorDelegate(damage);
+        }
+
+        canBeTargeted = false;
     }
 
 
