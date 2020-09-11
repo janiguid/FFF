@@ -582,7 +582,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1141067416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.15, y: 9.91, z: -1.2164052}
+  m_LocalPosition: {x: 5.15, y: 9.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -889,7 +889,7 @@ PrefabInstance:
     - target: {fileID: 2989313001141197302, guid: 8de4ae84af5ce864fb4ff552e0d96f03,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.93
+      value: -1.47
       objectReference: {fileID: 0}
     - target: {fileID: 2989313001141197302, guid: 8de4ae84af5ce864fb4ff552e0d96f03,
         type: 3}
@@ -953,12 +953,12 @@ PrefabInstance:
     - target: {fileID: 3456264468487865749, guid: c1716e65616faf24abeeb8eda8cebd68,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.87
+      value: 3.47
       objectReference: {fileID: 0}
     - target: {fileID: 3456264468487865749, guid: c1716e65616faf24abeeb8eda8cebd68,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.19
+      value: 8.45
       objectReference: {fileID: 0}
     - target: {fileID: 3456264468487865749, guid: c1716e65616faf24abeeb8eda8cebd68,
         type: 3}
@@ -1009,11 +1009,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stalactite
-      objectReference: {fileID: 0}
-    - target: {fileID: 3456264468487865750, guid: c1716e65616faf24abeeb8eda8cebd68,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1716e65616faf24abeeb8eda8cebd68, type: 3}
