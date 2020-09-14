@@ -6,11 +6,32 @@ public class Stalactite : Hazard
 {
     [SerializeField] float xForceMultiplier;
     [SerializeField] float yForceMultiplier;
+    [SerializeField] Rigidbody2D spike;
+    private Transform firena;
 
     private void Start()
     {
         if (xForceMultiplier == 0) xForceMultiplier = 15;
         if (yForceMultiplier == 0) yForceMultiplier = 15;
+        spike.bodyType = RigidbodyType2D.Static;
+        firena = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    private void Update()
+    {
+        float dist = GetDistance(spike.position, firena.position);
+        if(dist < 8)
+        {
+            spike.bodyType = RigidbodyType2D.Dynamic;
+        }
+    }
+
+    float GetDistance(Vector2 origin, Vector2 target)
+    {
+        float xDist = Mathf.Pow((origin.x - target.x), 2);
+        float yDist = Mathf.Pow((origin.y - target.y), 2);
+
+        return Mathf.Sqrt(xDist + yDist);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
