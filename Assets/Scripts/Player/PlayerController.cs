@@ -139,9 +139,14 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
+        //if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
+        //{
+        //    Flip();
+        //}
+
+        if (horizontalMovement != 0)
         {
-            Flip();
+            transform.SetXScale((int)Mathf.Sign(horizontalMovement));
         }
 
     }

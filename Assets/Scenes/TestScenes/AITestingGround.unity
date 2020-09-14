@@ -429,6 +429,9 @@ MonoBehaviour:
   savedVelocity: {x: 0, y: 0}
   freezeTime: 0.3
   fallingVelocity: 0
+  initialImmunityTime: 0
+  immunityTimer: 0
+  canBeTargeted: 0
 --- !u!1001 &966035767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -436,6 +439,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 658294186, guid: f6f021e6525792d418274f0e94d6a4ed, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 658294186, guid: f6f021e6525792d418274f0e94d6a4ed, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5899161147954492152, guid: f6f021e6525792d418274f0e94d6a4ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -661,6 +672,9 @@ MonoBehaviour:
   savedVelocity: {x: 0, y: 0}
   freezeTime: 0.3
   fallingVelocity: 0
+  initialImmunityTime: 0
+  immunityTimer: 0
+  canBeTargeted: 0
 --- !u!1 &1320326767
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,6 +890,11 @@ PrefabInstance:
       propertyPath: health
       value: 
       objectReference: {fileID: 1696113577}
+    - target: {fileID: 3557629774062640117, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: initialWingValue
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -946,6 +965,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1351164430038710159, guid: 3b8b54dac03228648b6f969de67346fc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8999874314141535364, guid: 3b8b54dac03228648b6f969de67346fc,
         type: 3}
       propertyPath: m_Name

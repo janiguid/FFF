@@ -45,7 +45,7 @@ public class ComboMethods : MonoBehaviour
         };
 
         if(punchLength == 0)punchLength = 1;
-        punchPosition = GameObject.FindGameObjectWithTag("PunchPosition").transform;
+        if(punchPosition == null) punchPosition = GameObject.FindGameObjectWithTag("PunchPosition").transform;
     }
 
     public Dictionary<int, Func<bool>> GetDictionary()
