@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
+public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable, ITargetable
 {
+    [Header("Velocity Handlers")]
     [SerializeField] private float gravityScale;
     [SerializeField] private float jumpHeight;
     [SerializeField] private float jumpTime;
@@ -16,13 +17,18 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     [SerializeField] private Rigidbody2D MyRB2D;
     [SerializeField] private CameraShakeTest camShake;
 
+    [Header("Timers")]
+    [SerializeField] private float staggerTime;
+    [SerializeField] private bool isFrozen;
+    [SerializeField] private Vector2 savedVelocity;
+    [SerializeField] private float freezeTime;
+    [SerializeField] private float fallingVelocity;
+    [SerializeField] private float initialImmunityTime;
+    [SerializeField] private float immunityTimer;
+    [SerializeField] private bool canBeTargeted;
 
-    public float staggerTime;
-    public bool isFrozen;
-    public Vector2 savedVelocity;
-
-    public float freezeTime;
-    public float fallingVelocity;
+    public delegate void DetectedDamage(float dam);
+    public DetectedDamage detectorDelegate;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +36,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         if(MyAudio == null) MyAudio = GetComponent<AudioSource>();
         if(MyRB2D == null) MyRB2D = GetComponent<Rigidbody2D>();
         if (camShake == null) camShake = FindObjectOfType<CameraShakeTest>();
-
+        canBeTargeted = true;
         InitializePhys();
     }
 
@@ -50,6 +56,8 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     // Update is called once per frame
     void Update()
     {
+        if (immunityTimer > 0) immunityTimer -= Time.deltaTime;
+        if (immunityTimer <= 0 && canBeTargeted == false) canBeTargeted = true;
 
         //if character is frozen, keep it freezed
         //until timer runs out
@@ -66,11 +74,23 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         }
     }
 
+    public bool IsTargetable()
+    {
+        if (canBeTargeted)
+        {
+            canBeTargeted = false;
+            immunityTimer = initialImmunityTime;
+            return true;
+        }
+
+        return false;
+    }
+
     //DAMAGE: damage to be applied to our character data
     public void ApplyDamage(float damage)
     {
         //FreezeTime(1);
-        Freeze(freezeTime);
+        //Freeze(freezeTime);
         ShakeCam();
 
         if (MyAudio)
@@ -78,6 +98,12 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
             MyAudio.Play();
         }
 
+        if(detectorDelegate != null)
+        {
+            detectorDelegate(damage);
+        }
+
+        canBeTargeted = false;
     }
 
 
@@ -85,7 +111,9 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     //Applies force to this character
     public void ApplyForce(float HorizontalForce, float VerticalForce)
     {
+        print("force applied");
         isFrozen = false;
+        MyRB2D.velocity = Vector2.zero;
         MyRB2D.AddForce(new Vector2(HorizontalForce, VerticalForce), ForceMode2D.Impulse);
         ShakeCam();
         if (MyAudio)
@@ -127,7 +155,11 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
 
     public void ShakeCam()
     {
-        camShake.StartShake();
+        if (camShake)
+        {
+            camShake.StartShake();
+        }
+        
     }
 
 

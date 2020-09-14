@@ -23,7 +23,7 @@ TagManager:
   - Combustable
   - Enemy
   - EnemyDamageable
-  - EnemyBlock
+  - DeadEnemy
   - 
   - 
   - 

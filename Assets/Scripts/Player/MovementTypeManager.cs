@@ -7,8 +7,9 @@ public class MovementTypeManager : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private FlightController flightController;
     [SerializeField] private ComboManager comboManager;
-
     [SerializeField] private ParticleSystem particles;
+
+    private PlayerManager pMan;
     private Animator anim;
 
     InputActions Inputs;
@@ -25,11 +26,15 @@ public class MovementTypeManager : MonoBehaviour
         {
             particles = GetComponentInChildren<ParticleSystem>();
         }
+
+        if(pMan == null)
+        {
+            pMan = GetComponent<PlayerManager>();
+        }
         anim = GetComponent<Animator>();
         playerController = GetComponent<PlayerController>();
         flightController = GetComponent<FlightController>();
         comboManager = GetComponent<ComboManager>();
-
     }
 
     private void OnEnable()
@@ -48,8 +53,16 @@ public class MovementTypeManager : MonoBehaviour
     {
         if (playerController.isActiveAndEnabled)
         {
+            if (pMan)
+            {
+                if(pMan.GetWingValue() < 50)
+                {
+                    return;
+                }
+            }
             anim.Play("Transform");
             particles.Play();
+
             comboManager.enabled = false;
             flightController.enabled = true;
             playerController.enabled = false;

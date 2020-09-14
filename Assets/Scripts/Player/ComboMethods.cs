@@ -10,6 +10,7 @@ public class ComboMethods : MonoBehaviour
     [SerializeField] private Transform punchPosition;
     private Dictionary<int, Func<bool>> comboMethodDict;
     [SerializeField] private Animator animator;
+    [SerializeField] private AudioSource firenaGrunt;
 
 
     /* For VFX
@@ -45,13 +46,6 @@ public class ComboMethods : MonoBehaviour
 
         if(punchLength == 0)punchLength = 1;
         punchPosition = GameObject.FindGameObjectWithTag("PunchPosition").transform;
-        //if(enemyLayer.value != 13)
-        //{
-        //    print("ENEMY LAYER ISN'T SET PROPERLY");
-        //    enemyLayer.value = 13;
-        //    print(enemyLayer.value);
-        //}
-        
     }
 
     public Dictionary<int, Func<bool>> GetDictionary()
@@ -68,10 +62,15 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            hit.transform.gameObject.GetComponent<IDamageable>().ApplyDamage(5);
-            gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
+            if (hit.transform.gameObject.GetComponent<ITargetable>().IsTargetable())
+            {
+                ApplyDamage(5, hit.transform.gameObject.GetComponents<IDamageable>());
 
-            particleSystems[0].Play();
+                gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
+
+                if (particleSystems.Length != 0) particleSystems[0].Play();
+            }
+
         }
         
         return true;
@@ -86,8 +85,15 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(200 * forwardVector.x, 0);
-            particleSystems[1].Play();
+            if (hit.transform.gameObject.GetComponent<ITargetable>().IsTargetable())
+            {
+                ApplyDamage(10, hit.transform.gameObject.GetComponents<IDamageable>());
+                hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(200 * forwardVector.x, 0);
+
+                if (particleSystems.Length != 0) particleSystems[1].Play();
+            }
+
+
         }
         return true;
     }
@@ -101,8 +107,14 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            hit.transform.gameObject.GetComponent<IDamageable>().ApplyDamage(10);
-            particleSystems[2].Play();
+
+            if (hit.transform.gameObject.GetComponent<ITargetable>().IsTargetable())
+            {
+                ApplyDamage(5, hit.transform.gameObject.GetComponents<IDamageable>());
+                if (particleSystems.Length != 0) particleSystems[2].Play();
+            }
+
+
         }
 
         //animator.Play("Base Layer.RegularKick", 0);
@@ -118,13 +130,34 @@ public class ComboMethods : MonoBehaviour
 
         if (hit)
         {
-            gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
-            hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
-            particleSystems[3].Play();
+            if (hit.transform.gameObject.GetComponent<ITargetable>().IsTargetable())
+            {
+                gameObject.GetComponent<IFreezeable>().Freeze(0.3f);
+                ApplyDamage(15, hit.transform.gameObject.GetComponents<IDamageable>());
+                hit.transform.gameObject.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
+                if (particleSystems.Length != 0) particleSystems[3].Play();
+            }
+
         }
 
         //animator.Play("Base Layer.HighKick", 0);
 
         return true;
+    }
+
+    void ApplyDamage(float dam, IDamageable[] damageables)
+    {
+
+
+        if(firenaGrunt != null)
+        {
+            if (firenaGrunt.isPlaying) firenaGrunt.Stop();
+            firenaGrunt.Play();
+        }
+
+        foreach (IDamageable obj in damageables)
+        {
+            obj.ApplyDamage(dam);
+        }
     }
 }

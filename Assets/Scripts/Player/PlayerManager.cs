@@ -2,32 +2,98 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerManager : MonoBehaviour, IDamageable
+public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] private float InitialPlayerHealth;
-    [SerializeField] private float PlayerHealth;
-    public HealthBar health;
+    [SerializeField] private float initialPlayerHealth;
+    [SerializeField] private float playerHealth;
+    [SerializeField] private float initialWingValue;
+    [SerializeField] private float wingValue;
+
+    [SerializeField] private DamageDetector damageDetector;
+    private HealthBar health;
+    private WingBar wings;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerHealth = InitialPlayerHealth;
-        health.SetMaxHealth(InitialPlayerHealth);
-        if(health == null)
+
+        if (damageDetector == null) GetComponent<DamageDetector>();
+        if (damageDetector)
+        {
+            damageDetector.detectorDelegate += ApplyDamage;
+        }
+        else
+        {
+            print("couldn't find dma dec");
+        }
+
+        if (health == null)
         {
             health = FindObjectOfType<HealthBar>();
         }
+
+        if(wings == null)
+        {
+            wings = FindObjectOfType<WingBar>();
+        }
+
+        wingValue = initialWingValue;
+        playerHealth = initialPlayerHealth;
+
+        if (health)
+        {
+            health.SetMaxHealth(initialPlayerHealth);
+        }
+
+        if (wings)
+        {
+            wings.SetMax(50f);
+            wings.SetWingValue(initialWingValue);
+        }
+        
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void ApplyDamage(float dam)
     {
-        PlayerHealth -= dam;
-        health.SetHealth(PlayerHealth);
+        playerHealth -= dam;
+
+        if (health)
+        {
+            health.SetHealth(playerHealth);
+        }
+
+        if (playerHealth <= 0) Destroy(gameObject);
+
+        print("Player manager received delegate call");
+    }
+
+    public void RegainHealth(float value)
+    {
+        playerHealth += value;
+
+        if (health)
+        {
+            health.SetHealth(playerHealth);
+        }
+    }
+
+    public void IncreaseWingValue(float value)
+    {
+        wingValue += value;
+
+        if (wings)
+        {
+            wings.SetWingValue(wingValue);
+        }
+    }
+
+
+    public float GetWingValue()
+    {
+        return wingValue;
     }
 }

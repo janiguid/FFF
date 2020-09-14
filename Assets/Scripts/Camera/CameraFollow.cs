@@ -31,6 +31,7 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (Player == null) this.enabled = false;
         Delta = Vector3.zero;
 
         diff = Player.transform.position.x - transform.position.x;
