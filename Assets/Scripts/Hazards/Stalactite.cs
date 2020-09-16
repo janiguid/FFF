@@ -8,6 +8,8 @@ public class Stalactite : Hazard
     [SerializeField] float yForceMultiplier;
     [SerializeField] Rigidbody2D spike;
     private Transform firena;
+    [SerializeField] float range;
+
 
     private void Start()
     {
@@ -20,7 +22,7 @@ public class Stalactite : Hazard
     private void Update()
     {
         float dist = GetDistance(spike.position, firena.position);
-        if(dist < 8)
+        if(dist < range)
         {
             spike.bodyType = RigidbodyType2D.Dynamic;
         }

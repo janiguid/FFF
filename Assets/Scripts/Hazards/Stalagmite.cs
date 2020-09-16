@@ -6,6 +6,7 @@ public class Stalagmite : Hazard
 {
     [SerializeField] float xForceMultiplier;
     [SerializeField] float yForceMultiplier;
+    [SerializeField] bool bubble;
 
     private void Start()
     {
@@ -45,6 +46,11 @@ public class Stalagmite : Hazard
                 print("Missing forceAble");
             }
 
+        }
+        
+        if (bubble)
+        {
+            gameObject.SetActive(false);
         }
     }
 }
