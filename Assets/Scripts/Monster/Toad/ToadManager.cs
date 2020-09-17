@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
+[RequireComponent(typeof(DamageDetector))]
+public class ToadManager : MonoBehaviour
 {
     [SerializeField] private string targetTag;
+    [SerializeField] private DamageDetector damageDetector;
 
     private float health;
     private Animator anim;
     private PlayerManager player;
+
 
 
     // Start is called before the first frame update
@@ -18,6 +20,8 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
         player = FindObjectOfType<PlayerManager>();
         anim = GetComponent<Animator>();
         if (targetTag == "") targetTag = "Player";
+
+        damageDetector.detectorDelegate += ApplyDamage;
     }
 
     public bool HasPlayer()
@@ -32,7 +36,10 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
         return player.transform.position;
     }
 
-
+    private void OnDisable()
+    {
+        damageDetector.detectorDelegate -= ApplyDamage;
+    }
     public void ApplyDamage(float dam)
     {
         health -= (dam);
@@ -41,11 +48,5 @@ public class ToadManager : MonoBehaviour, IDamageable, IFreezeable, IPushable
         anim.SetBool("ReceivedDamage", true);
     }
 
-    public void Freeze(float freezeDuration)
-    {
-    }
 
-    public void ApplyForce(float horizontalForce, float verticalForce)
-    {
-    }
 }

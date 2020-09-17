@@ -38,7 +38,7 @@ public class FlightController : MonoBehaviour
     {
         inputValue = Inputs.FlightMovement.Flight.ReadValue<Vector2>();
 
-        if (inputValue.x != 0)
+        if (inputValue.x > 0.2f || inputValue.x < -0.2f)
         {
             transform.SetXScale((int)Mathf.Sign(inputValue.x));
         }

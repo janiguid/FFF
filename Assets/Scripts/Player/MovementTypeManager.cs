@@ -61,6 +61,7 @@ public class MovementTypeManager : MonoBehaviour
                 }
             }
             anim.Play("Transform");
+            anim.SetBool("IsFlying", true);
             particles.Play();
 
             comboManager.enabled = false;

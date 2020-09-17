@@ -30,7 +30,7 @@ public class ComboManager : MonoBehaviour
     void Start()
     {
         Inputs.LandMovement.West.performed += _ => Punch();
-        Inputs.LandMovement.North.performed += _ => UpperCut();
+        Inputs.LandMovement.North.performed += _ => Kick();
 
         ComboMethods combos = gameObject.GetComponent<ComboMethods>();
         combos.InitializeDict();
@@ -65,18 +65,18 @@ public class ComboManager : MonoBehaviour
         //add first combo root
         //-----------------------------------
         //light punch
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.FirstPunch");
         parent.AddChild(childToBeAdded);
 
         //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.SecondPunch");
         parent.AddChild(childToBeAdded);
 
 
         //push light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 15, true, regPunchPreTime, finalPunchPostTime, "Base Layer.Punch");
+        childToBeAdded = new ComboNode(1, 15, true, regPunchPreTime, finalPunchPostTime, "Base Layer.ThirdPunch");
         parent.AddChild(childToBeAdded);
 
         //make triangle possible after second square
@@ -141,7 +141,7 @@ public class ComboManager : MonoBehaviour
         
     }
 
-    void UpperCut()
+    void Kick()
     {
         if (comboTimer < recoveryTime) return;
         CheckInput(2);
@@ -159,9 +159,9 @@ public class ComboManager : MonoBehaviour
                 attackType += 10;
             }
 
-            CommenceAttack(attackType);
+            //CommenceAttack(attackType);
             animator.Play(CurrentNode.GetAnimation());
-
+            //StartCoroutine(FreezeTime());
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
 
@@ -172,6 +172,18 @@ public class ComboManager : MonoBehaviour
         print("invalid node");
     }
 
+    IEnumerator FreezeTime()
+    {
+        animator.Play(CurrentNode.GetAnimation());
+        yield return new WaitForSeconds(0.8f);
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 1;
+
+        print("Shouldve exited");
+
+        yield break;
+    }
 
     void CommenceAttack(int i)
     {

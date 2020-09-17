@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Monster, IDamageable, ITargetable
+public class Leech : Monster, ITargetable
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -15,35 +15,19 @@ public class Leech : Monster, IDamageable, ITargetable
     [Header("Timers")]
     [SerializeField] private float recoveryTimer;
     [SerializeField] private float timeBeforeRecovery;
+    [SerializeField] private float shootTimer;
+
 
     [Header("Visual Effects")]
     [SerializeField] private ParticleSystem deathCloud;
 
+
+    private DamageDetector damDetector;
     private bool isTargetable;
     private Transform target;
-    [SerializeField]private float shootTimer;
 
-    public override void ApplyDamage(float dam)
-    {
-        if (health <= 0) return;
-        recoveryTimer = timeBeforeRecovery;
-        health -= dam;
-        if (health <= 0)
-        {
-            isTargetable = false;
-            StartCoroutine(PlayDeathAnimAndDie());
-        }
-        
-    }
 
-    IEnumerator PlayDeathAnimAndDie()
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        
-        deathCloud.Play();
-        yield return new WaitForSeconds(deathCloud.main.duration);
-        Destroy(gameObject);
-    }
+
 
     private void Start()
     {
@@ -55,8 +39,19 @@ public class Leech : Monster, IDamageable, ITargetable
         if (InitialHealth == 0) InitialHealth = 50f;
         health = InitialHealth;
         shootTimer = 2;
-        
+
+        if (damDetector)
+        {
+            damDetector.detectorDelegate += ApplyDamage;
+        }
+        else
+        {
+            damDetector = GetComponent<DamageDetector>();
+            damDetector.detectorDelegate += ApplyDamage;
+        }
     }
+
+
 
     private void Update()
     {
@@ -91,6 +86,29 @@ public class Leech : Monster, IDamageable, ITargetable
 
         CheckForPlayer();
 
+    }
+
+    public override void ApplyDamage(float dam)
+    {
+        print("called func");
+        if (health <= 0) return;
+        recoveryTimer = timeBeforeRecovery;
+        health -= dam;
+        if (health <= 0)
+        {
+            isTargetable = false;
+            StartCoroutine(PlayDeathAnimAndDie());
+        }
+
+    }
+
+    IEnumerator PlayDeathAnimAndDie()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        deathCloud.Play();
+        yield return new WaitForSeconds(deathCloud.main.duration);
+        Destroy(gameObject);
     }
 
     void BeginShoot()

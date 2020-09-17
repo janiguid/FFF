@@ -6,14 +6,19 @@ using UnityEngine;
 public class CursorManager : MonoBehaviour
 {
     [SerializeField] private float cursorSpeed;
-    [SerializeField] private Vector2 movement;
+    [SerializeField] private Vector3 movement;
     [SerializeField] private GameObject fireBall;
     [SerializeField] private float radius;
 
 
-    private Transform playerTransform;
-    InputActions Inputs;
 
+
+    private Transform playerTransform;
+    private InputActions Inputs;
+
+    public Vector3 centerPosition;
+    private Vector2 lastKnownLoc;
+    public Vector3 distanceFromCenter;
     private void Awake()
     {
         Inputs = new InputActions();
@@ -21,6 +26,7 @@ public class CursorManager : MonoBehaviour
 
     private void Start()
     {
+        centerPosition = transform.localPosition;
         playerTransform = FindObjectOfType<PlayerController>().transform;
         Inputs.FlightMovement.Fireball.started += _ => FireProjectile();
     }
@@ -51,17 +57,7 @@ public class CursorManager : MonoBehaviour
         }
         
 
-        //movement = Inputs.FlightMovement.Cursor.ReadValue<Vector2>() * cursorSpeed;
-
-        //Vector2 lastKnownLoc = movement;
-
-        //if (playerTransform.localScale.x < 0)
-        //{
-        //    movement.x *= -1;
-        //}
-
-
-        Vector2 lastKnownLoc = movement;
+         lastKnownLoc = movement;
 
         if (movement.x == 0)
         {
@@ -73,8 +69,20 @@ public class CursorManager : MonoBehaviour
             movement.y = lastKnownLoc.y;
         }
 
-        movement.x = Mathf.Clamp(movement.x, -radius, radius);
-        movement.y = Mathf.Clamp(movement.y, -radius, radius);
+        float dist = Vector2.Distance(movement, centerPosition);
+
+        if (dist > radius)
+        {
+            //movement.x = Mathf.Clamp(movement.x, -radius, radius);
+            //movement.y = Mathf.Clamp(movement.y, -radius, radius);
+            //movement.z = -1;
+            distanceFromCenter = movement - centerPosition;
+            //distanceFromCenter.Normalize();
+            distanceFromCenter *= radius / dist;
+
+            movement = centerPosition+distanceFromCenter;
+        }
+
         transform.localPosition = movement;
     }
 
