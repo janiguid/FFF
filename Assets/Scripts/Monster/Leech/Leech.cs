@@ -21,6 +21,12 @@ public class Leech : Monster, ITargetable
     [Header("Visual Effects")]
     [SerializeField] private ParticleSystem deathCloud;
 
+    [Header("Bounds")]
+    [SerializeField] private Transform leftBound;
+    [SerializeField] private Transform rightBound;
+    public  float leftMax;
+    public float rightMax;
+
 
     private DamageDetector damDetector;
     private bool isTargetable;
@@ -48,6 +54,26 @@ public class Leech : Monster, ITargetable
         {
             damDetector = GetComponent<DamageDetector>();
             damDetector.detectorDelegate += ApplyDamage;
+        }
+
+        if(leftBound && rightBound)
+        {
+            leftMax = leftBound.position.x;
+            rightMax = rightBound.position.x;
+
+            if(leftMax > rightMax)
+            {
+                print("Error, you have your bounds mixed up!");
+                float temp = leftMax;
+                leftMax = rightMax;
+                rightMax = temp;
+            }
+        }
+        else
+        {
+            print("ERROR: Missing Left and Right Bound references");
+            leftMax = transform.localPosition.x - 2;
+            rightMax = transform.localPosition.x + 2;
         }
     }
 
@@ -127,16 +153,22 @@ public class Leech : Monster, ITargetable
 
     void LookForPlayer()
     {
-        timeForTravelling -= Time.deltaTime;
+        //timeForTravelling -= Time.deltaTime;
 
-        if(timeForTravelling <= 0)
-        {
-            timeForTravelling = 5;
-            TurnAround(1);
-        }
+        //if(timeForTravelling <= 0)
+        //{
+        //    timeForTravelling = 5;
+        //    TurnAround(1);
+        //}
 
         transform.Translate( transform.right * Time.deltaTime, Space.World);
-
+        if(transform.localPosition.x > rightMax)
+        {
+            TurnAround(1);
+        }else if(transform.localPosition.x < leftMax)
+        {
+            TurnAround(1);
+        }
 
     }
 
@@ -159,15 +191,10 @@ public class Leech : Monster, ITargetable
 
     void TurnAround(int dir)
     {
-        Vector3 rot = new Vector3(0,180,0) * dir;
+        Vector3 rot = new Vector3(0, 180, 0) * dir;
         transform.Rotate(0, 180, 0);
     }
 
-
-    public override void ApplyForce(float horizontalForce, float verticalForce)
-    {
-
-    }
 
 
     public bool IsTargetable()
