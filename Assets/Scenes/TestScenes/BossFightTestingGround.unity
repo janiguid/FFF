@@ -657,6 +657,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 760c48a6cee3f3646841e303d3f97ae0, type: 3}
+--- !u!50 &1626795496 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3456264468487865747, guid: c1716e65616faf24abeeb8eda8cebd68,
+    type: 3}
+  m_PrefabInstance: {fileID: 3456264467776669878}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1731146773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -950,6 +956,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3456264468487865746, guid: c1716e65616faf24abeeb8eda8cebd68,
+        type: 3}
+      propertyPath: spike
+      value: 
+      objectReference: {fileID: 1626795496}
     - target: {fileID: 3456264468487865749, guid: c1716e65616faf24abeeb8eda8cebd68,
         type: 3}
       propertyPath: m_LocalPosition.x
