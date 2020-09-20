@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     [Header("Timers")]
     [SerializeField] private float timeBeforeRecovery;
     [SerializeField] private float recoveryTimer;
+    [SerializeField] private float attackPauseTimer;
 
 
     [SerializeField] private Animator animator;
@@ -104,8 +105,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        recoveryTimer -= Time.deltaTime;
-        if (recoveryTimer >= 0) return;
+        if (recoveryTimer >= 0)
+        {
+            recoveryTimer -= Time.deltaTime;
+            return;
+        }
 
 
 
@@ -139,9 +143,9 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if ((isFacingRight && horizontalMovement < 0) || (!isFacingRight && horizontalMovement > 0))
+        if (horizontalMovement != 0)
         {
-            Flip();
+            transform.SetXScale((int)Mathf.Sign(horizontalMovement));
         }
 
     }
@@ -149,7 +153,6 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
 
-        recoveryTimer -= Time.deltaTime;
         if (recoveryTimer >= 0) return;
         RB_2D.velocity = movement;
 
@@ -161,13 +164,7 @@ public class PlayerController : MonoBehaviour
         return jumpsLeft;
     }
 
-    void Flip()
-    {
-        Vector2 turner = Vector2.left;
-        turner.y += 1;
-        transform.localScale *= turner;
-        isFacingRight = !isFacingRight;
-    }
+
 
     void Jump()
     {
@@ -232,6 +229,7 @@ public class PlayerController : MonoBehaviour
     {
         movement = Vector2.zero;
         movement = Vector2.down;
-        recoveryTimer = timeBeforeRecovery;
+        RB_2D.velocity = movement;
+        recoveryTimer = attackPauseTimer;
     }
 }

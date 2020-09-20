@@ -29,7 +29,7 @@ public class ToadSearch : StateMachineBehaviour
         {
             currDistance = Vector2.Distance(animator.transform.position, toad.GetPlayerPosition());
 
-            Debug.Log("Current Distance: " + currDistance);
+            //Debug.Log("Current Distance: " + currDistance);
             if (currDistance > minDistance && animator.GetFloat("ToungeLashCD") <= 0.5)
             {
                 rb.MovePosition(Vector2.MoveTowards(transform.position, toad.GetPlayerPosition(), Time.deltaTime * speed));

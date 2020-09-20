@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Monster, IDamageable, ITargetable
+public class Leech : Monster, ITargetable
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -15,35 +15,25 @@ public class Leech : Monster, IDamageable, ITargetable
     [Header("Timers")]
     [SerializeField] private float recoveryTimer;
     [SerializeField] private float timeBeforeRecovery;
+    [SerializeField] private float shootTimer;
+
 
     [Header("Visual Effects")]
     [SerializeField] private ParticleSystem deathCloud;
 
+    [Header("Bounds")]
+    [SerializeField] private Transform leftBound;
+    [SerializeField] private Transform rightBound;
+    public  float leftMax;
+    public float rightMax;
+
+
+    private DamageDetector damDetector;
     private bool isTargetable;
     private Transform target;
-    [SerializeField]private float shootTimer;
 
-    public override void ApplyDamage(float dam)
-    {
-        if (health <= 0) return;
-        recoveryTimer = timeBeforeRecovery;
-        health -= dam;
-        if (health <= 0)
-        {
-            isTargetable = false;
-            StartCoroutine(PlayDeathAnimAndDie());
-        }
-        
-    }
 
-    IEnumerator PlayDeathAnimAndDie()
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-        
-        deathCloud.Play();
-        yield return new WaitForSeconds(deathCloud.main.duration);
-        Destroy(gameObject);
-    }
+
 
     private void Start()
     {
@@ -55,8 +45,39 @@ public class Leech : Monster, IDamageable, ITargetable
         if (InitialHealth == 0) InitialHealth = 50f;
         health = InitialHealth;
         shootTimer = 2;
-        
+
+        if (damDetector)
+        {
+            damDetector.detectorDelegate += ApplyDamage;
+        }
+        else
+        {
+            damDetector = GetComponent<DamageDetector>();
+            damDetector.detectorDelegate += ApplyDamage;
+        }
+
+        if(leftBound && rightBound)
+        {
+            leftMax = leftBound.position.x;
+            rightMax = rightBound.position.x;
+
+            if(leftMax > rightMax)
+            {
+                print("Error, you have your bounds mixed up!");
+                float temp = leftMax;
+                leftMax = rightMax;
+                rightMax = temp;
+            }
+        }
+        else
+        {
+            print("ERROR: Missing Left and Right Bound references");
+            leftMax = transform.localPosition.x - 2;
+            rightMax = transform.localPosition.x + 2;
+        }
     }
+
+
 
     private void Update()
     {
@@ -93,6 +114,29 @@ public class Leech : Monster, IDamageable, ITargetable
 
     }
 
+    public override void ApplyDamage(float dam)
+    {
+        print("called func");
+        if (health <= 0) return;
+        recoveryTimer = timeBeforeRecovery;
+        health -= dam;
+        if (health <= 0)
+        {
+            isTargetable = false;
+            StartCoroutine(PlayDeathAnimAndDie());
+        }
+
+    }
+
+    IEnumerator PlayDeathAnimAndDie()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        deathCloud.Play();
+        yield return new WaitForSeconds(deathCloud.main.duration);
+        Destroy(gameObject);
+    }
+
     void BeginShoot()
     {
         var GameObject = Instantiate(projectilePrefab, transform, false);
@@ -109,16 +153,22 @@ public class Leech : Monster, IDamageable, ITargetable
 
     void LookForPlayer()
     {
-        timeForTravelling -= Time.deltaTime;
+        //timeForTravelling -= Time.deltaTime;
 
-        if(timeForTravelling <= 0)
-        {
-            timeForTravelling = 5;
-            TurnAround(1);
-        }
+        //if(timeForTravelling <= 0)
+        //{
+        //    timeForTravelling = 5;
+        //    TurnAround(1);
+        //}
 
         transform.Translate( transform.right * Time.deltaTime, Space.World);
-
+        if(transform.localPosition.x > rightMax)
+        {
+            TurnAround(1);
+        }else if(transform.localPosition.x < leftMax)
+        {
+            TurnAround(1);
+        }
 
     }
 
@@ -141,15 +191,10 @@ public class Leech : Monster, IDamageable, ITargetable
 
     void TurnAround(int dir)
     {
-        Vector3 rot = new Vector3(0,180,0) * dir;
+        Vector3 rot = new Vector3(0, 180, 0) * dir;
         transform.Rotate(0, 180, 0);
     }
 
-
-    public override void ApplyForce(float horizontalForce, float verticalForce)
-    {
-
-    }
 
 
     public bool IsTargetable()
