@@ -60,19 +60,22 @@ public class MovementTypeManager : MonoBehaviour
                     return;
                 }
             }
-            anim.Play("Transform");
-            anim.SetBool("IsFlying", true);
-            particles.Play();
+
 
             comboManager.enabled = false;
             flightController.enabled = true;
             playerController.enabled = false;
+
+            anim.Play("Transform");
+            anim.SetBool("IsFlying", true);
+            particles.Play();
         }
         else
         {
             anim.Play("Idle");
-            playerController.enabled = true;
             flightController.enabled = false;
+            playerController.enabled = true;
+            
             comboManager.enabled = true;
         }
     }

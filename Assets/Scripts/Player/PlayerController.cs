@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int jumpsLeft;
     [SerializeField] private bool isFacingRight;
     [SerializeField] private bool isAttacking;
+    [SerializeField] private bool isJumping;
 
     [Header("Timers")]
     [SerializeField] private float timeBeforeRecovery;
@@ -85,7 +86,7 @@ public class PlayerController : MonoBehaviour
         if (RB_2D)
         {
             RB_2D.gravityScale = gravityScale;
-            RB_2D.velocity = movement = Vector2.zero;
+            RB_2D.velocity = movement = Vector2.down * maxYVelocity * 0.5f;
         }
         RefreshJump();
     }
@@ -173,12 +174,14 @@ public class PlayerController : MonoBehaviour
         movement.y = Vector2.up.y * jumpVelocity;
         isGrounded = false;
 
-        if (animator)
+        if (hasAnim)
         {
-            if (animator.GetBool("IsJumping") == false)
-            {
-                animator.SetBool("IsJumping", true);
-            }
+            //if (animator.GetBool("IsJumping") == false)
+            //{
+            //    animator.SetBool("IsJumping", true);
+            //}
+            isJumping = true;
+            animator.Play("Jump");
         }
 
         jumpsLeft -= 1;
@@ -191,6 +194,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (this.enabled == false) return;
         if (collision.tag == "Ground")
         {
             isGrounded = true;
@@ -198,22 +202,26 @@ public class PlayerController : MonoBehaviour
             RefreshJump();
             print("Refreshed");
 
-            if (animator)
+            if (hasAnim)
             {
                 if (animator.GetBool("IsJumping") == true)
                 {
                     animator.SetBool("IsJumping", false);
                 }
+
+                isJumping = false;
+                animator.Play("Land");
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (this.enabled == false) return;
         if (collision.tag == "Ground")
         {
             isGrounded = false;
-
+            if (!isJumping && hasAnim) animator.Play("Drop");
 
         }
     }
