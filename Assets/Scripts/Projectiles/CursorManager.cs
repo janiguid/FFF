@@ -83,6 +83,7 @@ public class CursorManager : MonoBehaviour
             movement = centerPosition+distanceFromCenter;
         }
 
+        movement.z = -1;
         transform.localPosition = movement;
     }
 

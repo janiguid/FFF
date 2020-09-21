@@ -20,7 +20,10 @@ public class Leech : Monster, ITargetable
 
     [Header("Visual Effects")]
     [SerializeField] private ParticleSystem deathCloud;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform spitSource;
 
+<<<<<<< HEAD
     [Header("Bounds")]
     [SerializeField] private Transform leftBound;
     [SerializeField] private Transform rightBound;
@@ -28,6 +31,9 @@ public class Leech : Monster, ITargetable
     public float rightMax;
 
 
+=======
+    
+>>>>>>> FlightLimiter
     private DamageDetector damDetector;
     private bool isTargetable;
     private Transform target;
@@ -56,6 +62,7 @@ public class Leech : Monster, ITargetable
             damDetector.detectorDelegate += ApplyDamage;
         }
 
+<<<<<<< HEAD
         if(leftBound && rightBound)
         {
             leftMax = leftBound.position.x;
@@ -74,6 +81,11 @@ public class Leech : Monster, ITargetable
             print("ERROR: Missing Left and Right Bound references");
             leftMax = transform.localPosition.x - 2;
             rightMax = transform.localPosition.x + 2;
+=======
+        if(anim == null)
+        {
+            anim = GetComponent<Animator>();
+>>>>>>> FlightLimiter
         }
     }
 
@@ -139,7 +151,10 @@ public class Leech : Monster, ITargetable
 
     void BeginShoot()
     {
+        anim.Play("Spit");
         var GameObject = Instantiate(projectilePrefab, transform, false);
+        GameObject.transform.position = spitSource.position;
+
         GameObject.GetComponent<Projectile>().SetTargetTag(targetTag);
     }
 
