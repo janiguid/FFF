@@ -23,7 +23,12 @@ public class Leech : Monster, ITargetable
     [SerializeField] private Animator anim;
     [SerializeField] private Transform spitSource;
 
-    
+    [Header("Bounds")]
+    [SerializeField] private Transform LeftBound;
+    [SerializeField] private Transform RightBound;
+    private float leftMax;
+    private float rightMax;
+
     private DamageDetector damDetector;
     private bool isTargetable;
     private Transform target;
@@ -55,6 +60,17 @@ public class Leech : Monster, ITargetable
         if(anim == null)
         {
             anim = GetComponent<Animator>();
+        }
+
+        if(LeftBound && RightBound)
+        {
+            leftMax = LeftBound.position.x;
+            rightMax = RightBound.position.x;
+        }
+        else
+        {
+            leftMax = -3;
+            rightMax = 3;
         }
     }
 
@@ -139,9 +155,10 @@ public class Leech : Monster, ITargetable
     {
         timeForTravelling -= Time.deltaTime;
 
-        if(timeForTravelling <= 0)
+        //if timeForTravelling is 0 turn
+
+        if(transform.localPosition.x > rightMax || transform.localPosition.x < leftMax)
         {
-            timeForTravelling = 5;
             TurnAround(1);
         }
 
