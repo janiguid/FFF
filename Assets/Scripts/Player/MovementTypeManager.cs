@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class MovementTypeManager : MonoBehaviour
 {
+    [Header ("References")]
     [SerializeField] private PlayerController playerController;
     [SerializeField] private FlightController flightController;
     [SerializeField] private ComboManager comboManager;
     [SerializeField] private ParticleSystem particles;
 
+    [SerializeField] private float flightTimer;
+
+    private float wingValueDecrementor;
+    private WaitForSeconds waitTime;
     private PlayerManager pMan;
     private Animator anim;
 
@@ -31,10 +36,15 @@ public class MovementTypeManager : MonoBehaviour
         {
             pMan = GetComponent<PlayerManager>();
         }
+
         anim = GetComponent<Animator>();
-        playerController = GetComponent<PlayerController>();
-        flightController = GetComponent<FlightController>();
-        comboManager = GetComponent<ComboManager>();
+
+        if(playerController == null) playerController = GetComponent<PlayerController>();
+        if(flightController == null) flightController = GetComponent<FlightController>();
+        if(comboManager == null) comboManager = GetComponent<ComboManager>();
+
+
+        
     }
 
     private void OnEnable()
@@ -59,6 +69,8 @@ public class MovementTypeManager : MonoBehaviour
                 {
                     return;
                 }
+
+
             }
 
 
@@ -66,17 +78,44 @@ public class MovementTypeManager : MonoBehaviour
             flightController.enabled = true;
             playerController.enabled = false;
 
+            wingValueDecrementor = pMan.GetWingValue() / flightTimer;
+            waitTime = new WaitForSeconds(1);
+            StartCoroutine(FlightTimer());
             anim.Play("Transform");
             anim.SetBool("IsFlying", true);
             particles.Play();
         }
         else
         {
-            anim.Play("Idle");
-            flightController.enabled = false;
-            playerController.enabled = true;
-            
-            comboManager.enabled = true;
+            EndFlight();
         }
+    }
+
+    void EndFlight()
+    {
+        particles.Play();
+        anim.Play("Transform");
+        anim.Play("Idle");
+        flightController.enabled = false;
+        playerController.enabled = true;
+        StopCoroutine(FlightTimer());
+        comboManager.enabled = true;
+    }
+
+    IEnumerator FlightTimer()
+    {
+        if (!pMan) yield break;
+        
+
+
+        while(pMan.GetWingValue() > 0)
+        {
+            pMan.IncreaseWingValue(-wingValueDecrementor);
+            yield return waitTime;
+        }
+
+        EndFlight();
+
+        yield break;
     }
 }

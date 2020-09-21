@@ -20,8 +20,10 @@ public class Leech : Monster, ITargetable
 
     [Header("Visual Effects")]
     [SerializeField] private ParticleSystem deathCloud;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform spitSource;
 
-
+    
     private DamageDetector damDetector;
     private bool isTargetable;
     private Transform target;
@@ -48,6 +50,11 @@ public class Leech : Monster, ITargetable
         {
             damDetector = GetComponent<DamageDetector>();
             damDetector.detectorDelegate += ApplyDamage;
+        }
+
+        if(anim == null)
+        {
+            anim = GetComponent<Animator>();
         }
     }
 
@@ -113,7 +120,10 @@ public class Leech : Monster, ITargetable
 
     void BeginShoot()
     {
+        anim.Play("Spit");
         var GameObject = Instantiate(projectilePrefab, transform, false);
+        GameObject.transform.position = spitSource.position;
+
         GameObject.GetComponent<Projectile>().SetTargetTag(targetTag);
     }
 
