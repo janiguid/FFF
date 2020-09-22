@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private DamageDetector damageDetector;
     private HealthBar health;
     private WingBar wings;
+    private GameObject player;
 
 
 
@@ -61,12 +63,20 @@ public class PlayerManager : MonoBehaviour
     {
         playerHealth -= dam;
 
+        if (playerHealth <= 0)
+        {
+            playerHealth = 0;
+            player = GameObject.FindWithTag("Player");
+            player.transform.position = new Vector2(-53, 24);
+            RegainHealth(initialPlayerHealth);
+            print(playerHealth);
+            SceneManager.LoadScene(1);
+        }
+        
         if (health)
         {
             health.SetHealth(playerHealth);
         }
-
-        if (playerHealth <= 0) Destroy(gameObject);
 
         print("Player manager received delegate call");
     }

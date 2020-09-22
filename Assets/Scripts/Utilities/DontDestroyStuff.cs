@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DontDestroyFirena : MonoBehaviour
+public class DontDestroyStuff : MonoBehaviour
 {
+    [SerializeField] string objTag;
     void Awake()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] objs = GameObject.FindGameObjectsWithTag(objTag);
 
         if (objs.Length > 1)
         {

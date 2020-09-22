@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goTo: 1
   x: -53
-  y: 38
+  y: 24
 --- !u!1 &297791536
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,7 +4546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goTo: 1
   x: -53
-  y: 38
+  y: 24
 --- !u!61 &643793803
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Ground
   - PunchPosition
+  - InGameUI
+  - EventSystem
   layers:
   - Default
   - TransparentFX
