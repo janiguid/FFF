@@ -70,6 +70,7 @@ public class PlayerManager : MonoBehaviour
             player.transform.position = new Vector2(-53, 24);
             RegainHealth(initialPlayerHealth);
             print(playerHealth);
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             SceneManager.LoadScene(1);
         }
         
