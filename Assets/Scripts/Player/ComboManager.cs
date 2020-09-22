@@ -165,11 +165,11 @@ public class ComboManager : MonoBehaviour
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
 
-            print("valid node: " + CurrentNode.attackType);
+            //print("valid node: " + CurrentNode.attackType);
             return;
         }
 
-        print("invalid node");
+        //print("invalid node");
     }
 
     IEnumerator FreezeTime()

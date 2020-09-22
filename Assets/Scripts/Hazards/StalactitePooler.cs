@@ -31,7 +31,6 @@ public class StalactitePooler : MonoBehaviour
         while (true)
         {
             yield return wait;
-            print("activate one");
             ActivateFromPool();
         }
     }

@@ -16,7 +16,7 @@ public class MovementTypeManager : MonoBehaviour
     private WaitForSeconds waitTime;
     private PlayerManager pMan;
     private Animator anim;
-
+    private Coroutine wingValueChecker;
     InputActions Inputs;
 
     private void Awake()
@@ -43,7 +43,7 @@ public class MovementTypeManager : MonoBehaviour
         if(flightController == null) flightController = GetComponent<FlightController>();
         if(comboManager == null) comboManager = GetComponent<ComboManager>();
 
-
+        wingValueChecker = null;
         
     }
 
@@ -80,7 +80,7 @@ public class MovementTypeManager : MonoBehaviour
 
             wingValueDecrementor = pMan.GetWingValue() / flightTimer;
             waitTime = new WaitForSeconds(1);
-            StartCoroutine(FlightTimer());
+            wingValueChecker = StartCoroutine(FlightTimer());
             anim.Play("Transform");
             anim.SetBool("IsFlying", true);
             particles.Play();
@@ -96,9 +96,10 @@ public class MovementTypeManager : MonoBehaviour
         particles.Play();
         anim.Play("Transform");
         anim.Play("Idle");
+        anim.SetBool("IsFlying", false);
         flightController.enabled = false;
         playerController.enabled = true;
-        StopCoroutine(FlightTimer());
+        StopCoroutine(wingValueChecker);
         comboManager.enabled = true;
     }
 
@@ -111,6 +112,7 @@ public class MovementTypeManager : MonoBehaviour
         while(pMan.GetWingValue() > 0)
         {
             pMan.IncreaseWingValue(-wingValueDecrementor);
+            print("Still decreasing");
             yield return waitTime;
         }
 

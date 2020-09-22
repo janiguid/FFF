@@ -99,7 +99,7 @@ public class CursorManager : MonoBehaviour
         correctTarget.x *= Mathf.Sign(transform.parent.localScale.x);
 
         print(correctTarget);
-        temp.GetComponent<Projectile>().SetTarget(correctTarget);
+        temp.GetComponent<Projectile>().SetTarget(correctTarget, transform.position);
         temp.SetActive(true);
     }
 }
