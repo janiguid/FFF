@@ -80,7 +80,7 @@ public class ComboManager : MonoBehaviour
         parent.AddChild(childToBeAdded);
 
         //make triangle possible after second square
-        parent.AddChild(new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime, "Base Layer.RegularKick"));
+        parent.AddChild(new ComboNode(2, 20, true, regPunchPreTime, finalPunchPostTime, "Base Layer.FirstKick"));
         //-----------------------------------
 
 
@@ -88,24 +88,24 @@ public class ComboManager : MonoBehaviour
         //-----------------------------------
         //light punch
         parent = RootNode;
-        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime, "Base Layer.RegularKick");
+        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime, "Base Layer.FirstKick");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime, "Base Layer.RegularKick");
+        childToBeAdded = new ComboNode(2, 15, false, regPunchPreTime, regPunchPostTime, "Base Layer.SecondKick");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, regPunchPostTime, "Base Layer.HighKick");
+        childToBeAdded = new ComboNode(2, 20, true, regPunchPreTime, regPunchPostTime, "Base Layer.FinalKick");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.FirstPunch");
         parent.AddChild(childToBeAdded);
 
         //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, true, regPunchPreTime, regPunchPostTime, "Base Layer.Punch");
+        childToBeAdded = new ComboNode(1, 10, true, regPunchPreTime, regPunchPostTime, "Base Layer.SecondPunch");
         parent.AddChild(childToBeAdded);
 
 

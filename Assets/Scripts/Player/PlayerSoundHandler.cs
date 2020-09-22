@@ -13,8 +13,8 @@ public class PlayerSoundHandler : MonoBehaviour
 
     private PlayerController playerController;
     private InputActions inputActions;
-    private bool inFlight;
-    private bool inAir;
+    [SerializeField] private bool inFlight;
+    [SerializeField] private bool inAir;
 
 
     private Dictionary<PlayerSoundType, AudioSource> AudioDictionary;
@@ -129,7 +129,11 @@ public class PlayerSoundHandler : MonoBehaviour
 
     void BeginWalkSounds()
     {
-        if (inFlight ||inAir ) return;
+        if (inFlight || inAir)
+        {
+            StopWalkSounds();
+            return;
+        }
         PlayContinuously(PlayerSoundType.footsteps);
     }
 
@@ -144,6 +148,20 @@ public class PlayerSoundHandler : MonoBehaviour
         {
             PlayPlayerSound(PlayerSoundType.landingSound);
             inAir = false;
+
+            if(inputActions.LandMovement.Move.ReadValue<float>() != 0)
+            {
+                PlayPlayerSound(PlayerSoundType.footsteps);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Ground" && inFlight == false)
+        {
+            StopWalkSounds();
+            inAir = true;
         }
     }
 }

@@ -200,6 +200,17 @@
                     "action": "ToggleFlight",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "57bb8f26-f5e3-4e1a-a707-9b350abdde2b",
+                    "path": "<Keyboard>/m",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleFlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

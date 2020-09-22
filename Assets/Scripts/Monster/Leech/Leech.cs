@@ -20,13 +20,14 @@ public class Leech : Monster, ITargetable
 
     [Header("Visual Effects")]
     [SerializeField] private ParticleSystem deathCloud;
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform spitSource;
 
     [Header("Bounds")]
-    [SerializeField] private Transform leftBound;
-    [SerializeField] private Transform rightBound;
-    public  float leftMax;
-    public float rightMax;
-
+    [SerializeField] private Transform LeftBound;
+    [SerializeField] private Transform RightBound;
+    private float leftMax;
+    private float rightMax;
 
     private DamageDetector damDetector;
     private bool isTargetable;
@@ -56,24 +57,20 @@ public class Leech : Monster, ITargetable
             damDetector.detectorDelegate += ApplyDamage;
         }
 
-        if(leftBound && rightBound)
+        if(anim == null)
         {
-            leftMax = leftBound.position.x;
-            rightMax = rightBound.position.x;
+            anim = GetComponent<Animator>();
+        }
 
-            if(leftMax > rightMax)
-            {
-                print("Error, you have your bounds mixed up!");
-                float temp = leftMax;
-                leftMax = rightMax;
-                rightMax = temp;
-            }
+        if(LeftBound && RightBound)
+        {
+            leftMax = LeftBound.position.x;
+            rightMax = RightBound.position.x;
         }
         else
         {
-            print("ERROR: Missing Left and Right Bound references");
-            leftMax = transform.localPosition.x - 2;
-            rightMax = transform.localPosition.x + 2;
+            leftMax = -3;
+            rightMax = 3;
         }
     }
 
@@ -139,7 +136,10 @@ public class Leech : Monster, ITargetable
 
     void BeginShoot()
     {
+        anim.Play("Spit");
         var GameObject = Instantiate(projectilePrefab, transform, false);
+        GameObject.transform.position = spitSource.position;
+
         GameObject.GetComponent<Projectile>().SetTargetTag(targetTag);
     }
 
@@ -153,22 +153,17 @@ public class Leech : Monster, ITargetable
 
     void LookForPlayer()
     {
-        //timeForTravelling -= Time.deltaTime;
+        timeForTravelling -= Time.deltaTime;
 
-        //if(timeForTravelling <= 0)
-        //{
-        //    timeForTravelling = 5;
-        //    TurnAround(1);
-        //}
+        //if timeForTravelling is 0 turn
 
-        transform.Translate( transform.right * Time.deltaTime, Space.World);
-        if(transform.localPosition.x > rightMax)
-        {
-            TurnAround(1);
-        }else if(transform.localPosition.x < leftMax)
+        if(transform.localPosition.x > rightMax || transform.localPosition.x < leftMax)
         {
             TurnAround(1);
         }
+
+        transform.Translate( transform.right * Time.deltaTime, Space.World);
+
 
     }
 
@@ -191,10 +186,15 @@ public class Leech : Monster, ITargetable
 
     void TurnAround(int dir)
     {
-        Vector3 rot = new Vector3(0, 180, 0) * dir;
+        Vector3 rot = new Vector3(0,180,0) * dir;
         transform.Rotate(0, 180, 0);
     }
 
+
+    public override void ApplyForce(float horizontalForce, float verticalForce)
+    {
+
+    }
 
 
     public bool IsTargetable()
