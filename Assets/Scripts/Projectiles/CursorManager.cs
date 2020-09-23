@@ -9,8 +9,8 @@ public class CursorManager : MonoBehaviour
     [SerializeField] private Vector3 movement;
     [SerializeField] private GameObject fireBall;
     [SerializeField] private float radius;
-
-
+    [SerializeField] private Animator anim;
+    [SerializeField] private Transform fireballStartPoint;
 
 
     private Transform playerTransform;
@@ -90,9 +90,8 @@ public class CursorManager : MonoBehaviour
     void FireProjectile()
     {
         var temp = Instantiate(fireBall);
-        print(transform.parent.position);
+        if (anim) anim.Play("Base Layer.FlyAttack");
         temp.transform.position = transform.parent.position;
-        
         temp.SetActive(false);
 
         Vector2 correctTarget = transform.localPosition;
