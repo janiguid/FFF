@@ -24,10 +24,14 @@ public class Leech : Monster, ITargetable
     [SerializeField] private Transform spitSource;
 
     [Header("Bounds")]
-    [SerializeField] private Transform LeftBound;
-    [SerializeField] private Transform RightBound;
+    [SerializeField] private Transform leftBound;
+    [SerializeField] private Transform rightBound;
+    [SerializeField] private Vector2 initialLeftBound;
+    [SerializeField] private Vector2 initialRightBound;
     private float leftMax;
     private float rightMax;
+    private Vector3 rot;
+
 
     private DamageDetector damDetector;
     private bool isTargetable;
@@ -62,10 +66,14 @@ public class Leech : Monster, ITargetable
             anim = GetComponent<Animator>();
         }
 
-        if(LeftBound && RightBound)
+        if(leftBound && rightBound)
         {
-            leftMax = LeftBound.position.x;
-            rightMax = RightBound.position.x;
+            leftMax = leftBound.position.x;
+            rightMax = rightBound.position.x;
+            initialLeftBound = leftBound.position;
+            initialRightBound = rightBound.position;
+            positionToGoTo = initialRightBound;
+            dir = 1;
         }
         else
         {
@@ -79,8 +87,13 @@ public class Leech : Monster, ITargetable
     private void Update()
     {
         if (health <= 0) return;
-        recoveryTimer -= Time.deltaTime;
-        if (recoveryTimer >= 0) return;
+        
+        if (recoveryTimer >= 0)
+        {
+
+            recoveryTimer -= Time.deltaTime;
+            return;
+        }
 
         float dist = 0;
         if (target == null)
@@ -140,10 +153,13 @@ public class Leech : Monster, ITargetable
     void BeginShoot()
     {
         anim.Play("Spit");
-        var GameObject = Instantiate(projectilePrefab, transform, false);
-        GameObject.transform.position = spitSource.position;
-
-        GameObject.GetComponent<Projectile>().SetTargetTag(targetTag);
+        var proj = Instantiate(projectilePrefab, transform, false);
+        proj.transform.position = spitSource.position;
+        Projectile projInstance = proj.GetComponent<Projectile>();
+        Vector2 tgt = target.transform.localPosition - transform.localPosition;
+        projInstance.SetTarget(tgt.normalized, transform.localPosition);
+        //projInstance.SetDir(dir);
+        projInstance.GetComponent<Projectile>().SetTargetTag(targetTag);
     }
 
     float GetDistance(Vector2 origin, Vector2 target)
@@ -154,37 +170,47 @@ public class Leech : Monster, ITargetable
         return Mathf.Sqrt(xDist + yDist);
     }
 
+    public Vector2 positionToGoTo;
+    public int dir;
     void LookForPlayer()
     {
-        timeForTravelling -= Time.deltaTime;
 
-        //if timeForTravelling is 0 turn
+        if (transform.localPosition.x >= rightMax) {
+            if(positionToGoTo != initialLeftBound)
+            {
+                positionToGoTo = initialLeftBound;
+                transform.SetXScale(-1);
+                dir = -1;
+            }   
+        }
+        else if(transform.localPosition.x <= leftMax)
+        {
+            if(positionToGoTo != initialRightBound)
+            {
+                positionToGoTo = initialRightBound;
+                transform.SetXScale(1);
+                dir = 1;
+            }
+            
+        }
 
-        if(transform.localPosition.x > rightMax || transform.localPosition.x < leftMax)
-        {
-            TurnAround(1);
-        }
+        //if(positionToGoTo == initialRightBound && rot.y == -1)
+        //{
+        //    TurnAround(1);
+        //}else if(positionToGoTo == initialLeftBound && rot.y == 1)
+        //{
+        //    TurnAround(0);
+        //}
 
-        if (transform.localPosition.x > rightMax) {
-            transform.Translate(transform.right * Time.deltaTime, Space.World);
-        }
-        else if(transform.localPosition.y < leftMax)
-        {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, LeftBound.position, Time.deltaTime);
-        }
-        else
-        {
-            transform.Translate(transform.right * Time.deltaTime, Space.World);
-        }
-        
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, positionToGoTo, Time.deltaTime);
 
 
     }
 
     bool CheckForPlayer()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, eyesightLength, layerMask);
-        Debug.DrawRay(transform.position, transform.right * eyesightLength);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right * dir, eyesightLength, layerMask);
+        Debug.DrawRay(transform.position, transform.right * eyesightLength * dir);
         if (hit.collider == null && target != null)
         {
             target = null;
@@ -200,8 +226,8 @@ public class Leech : Monster, ITargetable
 
     void TurnAround(int dir)
     {
-        Vector3 rot = new Vector3(0,180,0) * dir;
-        transform.Rotate(0, 180, 0);
+        rot = new Vector3(0,180,0) * dir;
+        transform.Rotate(rot);
     }
 
 

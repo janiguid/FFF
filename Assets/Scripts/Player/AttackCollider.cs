@@ -11,6 +11,9 @@ public class AttackCollider : MonoBehaviour
     [SerializeField] bool canJuggle;
     [SerializeField] bool canPush;
 
+
+    [SerializeField] float yForce;
+    [SerializeField] float xForce;
     //can Push is regulated by animations
     private WaitForSecondsRealtime waitPeriod;
 
@@ -30,8 +33,8 @@ public class AttackCollider : MonoBehaviour
             {
                 if (player.GetIsInAir())
                 {
-                    player.gameObject.GetComponent<IFreezeable>().Freeze(1f);
-                    collision.GetComponent<IPushable>().ApplyForce(0, 50);
+                    player.gameObject.GetComponent<IFreezeable>().Freeze(5f);
+                    //collision.GetComponent<IPushable>().ApplyForce(0, 50);
                     collision.GetComponent<IFreezeable>().Freeze(1f);
                     
                 }
@@ -40,14 +43,15 @@ public class AttackCollider : MonoBehaviour
             Vector2 forwardVector = Vector2.right * Mathf.Sign(transform.parent.parent.localScale.x);
             if (canJuggle)
             {
-                
-                collision.GetComponent<IPushable>().ApplyForce(0, 400);
+                //0, 400
+                collision.GetComponent<IPushable>().ApplyForce(xForce, yForce);
                 print("Should be juggling");
             }
 
             if (canPush)
             {
-                collision.GetComponent<IPushable>().ApplyForce(200 * forwardVector.x, 0);
+                //200, 0
+                collision.GetComponent<IPushable>().ApplyForce(xForce * forwardVector.x, 0);
             }
             StartCoroutine(HitStop());
         }
@@ -56,7 +60,7 @@ public class AttackCollider : MonoBehaviour
 
     IEnumerator HitStop()
     {
-        //if (Time.timeScale == 0) yield break;
+        waitPeriod.waitTime = waitTime;
         Time.timeScale = 0;
         yield return waitPeriod;
         Time.timeScale = 1;

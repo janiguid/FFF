@@ -53,6 +53,14 @@ public class CameraShakeTest : MonoBehaviour
             if(mainCam.orthographicSize > targetSize)
             mainCam.orthographicSize = Mathf.SmoothDamp(mainCam.orthographicSize, targetSize, ref throwaway, zoomSpeed * Time.deltaTime);
             combatModeTimer -= Time.deltaTime;
+
+            if (beginCameraShakeTime)
+            {
+                cameraShakeTime -= Time.deltaTime;
+
+                if (cameraShakeTime <= 0) beginCameraShakeTime = false;
+                ShakeCamera();
+            }
             return;
 
         }else if(combatModeTimer <= 0 && combatMode == true)

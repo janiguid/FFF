@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &146506482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146506483}
+  - component: {fileID: 146506484}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &146506483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146506482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8999874314141535370}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &146506484
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146506482}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: e22bf392ddd593c44933ff56a1fd8a46, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.7499464, y: 0.9801258}
+  m_Size: {x: 2.138345, y: 3.4606242}
+  m_Direction: 0
 --- !u!1 &759433154
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8999874314141535370
 Transform:
   m_ObjectHideFlags: 0
@@ -128,6 +175,7 @@ Transform:
   - {fileID: 1579763920}
   - {fileID: 977770491}
   - {fileID: 759433155}
+  - {fileID: 146506483}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -336,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360c4cc0618508e4882e6d98d900d6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialHealth: 50
+  InitialHealth: 100
   health: 0
   shootCooldown: 1.5
   timeForTravelling: 5
@@ -349,13 +397,17 @@ MonoBehaviour:
     type: 3}
   eyesightLength: 10
   recoveryTimer: 0
-  timeBeforeRecovery: 0
+  timeBeforeRecovery: 0.5
   shootTimer: 0
   deathCloud: {fileID: 8999874313171851295}
   anim: {fileID: 0}
   spitSource: {fileID: 1579763920}
-  LeftBound: {fileID: 977770491}
-  RightBound: {fileID: 759433155}
+  leftBound: {fileID: 977770491}
+  rightBound: {fileID: 759433155}
+  initialLeftBound: {x: 0, y: 0}
+  initialRightBound: {x: 0, y: 0}
+  positionToGoTo: {x: 0, y: 0}
+  dir: 0
 --- !u!114 &308940390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,14 +424,13 @@ MonoBehaviour:
   jumpHeight: 0
   jumpTime: 0
   jumpVelocity: 0
-  MyAudio: {fileID: 0}
-  MyData: {fileID: 0}
+  MyAudio: {fileID: 8999874314141535375}
   MyRB2D: {fileID: 0}
   camShake: {fileID: 0}
   staggerTime: 0
   isFrozen: 0
   savedVelocity: {x: 0, y: 0}
-  freezeTime: 0.3
+  freezeTime: 0.5
   fallingVelocity: 0
   initialImmunityTime: 0
   immunityTimer: 0

@@ -13,12 +13,12 @@ public class ComboManager : MonoBehaviour
     [SerializeField] private float regPunchPostTime;
     [SerializeField] private float finalPunchPostTime;
     [SerializeField] private Animator animator;
-
+    [SerializeField] private PlayerController player;
 
     private InputActions Inputs;
     private ComboNode RootNode;
     private ComboNode CurrentNode;
-
+    private bool isJumping;
     private Dictionary<int, Func<bool>> MethodDict = new Dictionary<int, Func<bool>>();
 
     private void Awake()
@@ -65,7 +65,7 @@ public class ComboManager : MonoBehaviour
         //add first combo root
         //-----------------------------------
         //light punch
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.FirstPunch");
+        childToBeAdded = new ComboNode(1, 10, false, .35f, regPunchPostTime, "Base Layer.FirstPunch");
         parent.AddChild(childToBeAdded);
 
         //light punch
@@ -100,17 +100,22 @@ public class ComboManager : MonoBehaviour
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, 0, regPunchPostTime, "Base Layer.FirstPunch");
+        childToBeAdded = new ComboNode(3, 10, false, regPunchPreTime, 2, "Base Layer.Swipe");
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, true, 0, regPunchPostTime, "Base Layer.SecondPunch");
+        childToBeAdded = new ComboNode(4, 10, true, 0, regPunchPostTime, "Base Layer.FlyingKick");
+        parent.AddChild(childToBeAdded);
+
+        childToBeAdded = new ComboNode(3, 10, true, 0, regPunchPostTime, "Base Layer.Swipe");
         parent.AddChild(childToBeAdded);
 
 
         //-----------------------------------
 
-
+        parent = RootNode;
+        childToBeAdded = new ComboNode(3, 10, false, 0, regPunchPostTime, "Base Layer.Swipe");
+        parent.AddChild(childToBeAdded);
 
 
         CurrentNode = RootNode;
@@ -136,15 +141,33 @@ public class ComboManager : MonoBehaviour
     void Punch()
     {
         if (comboTimer < recoveryTime) return;
-        CheckInput(1);
+
+        if (player.GetIsInAir())
+        {
+            CheckInput(3);
+        }
+        else
+        {
+            CheckInput(1);
+        }
+        
         
     }
 
     void Kick()
     {
         if (comboTimer < recoveryTime) return;
-        CheckInput(2);
+        if (player.GetIsInAir())
+        {
+            CheckInput(4);
+        }
+        else
+        {
+            CheckInput(2);
+        }
+        
     }
+
 
     void CheckInput(int attackType)
     {
@@ -167,7 +190,7 @@ public class ComboManager : MonoBehaviour
             return;
         }
 
-        //print("invalid node");
+        print("invalid node");
     }
 
 
@@ -202,6 +225,7 @@ public class ComboManager : MonoBehaviour
 
     private void ResetCombo()
     {
+        print("Restarted Combo");
         CurrentNode = RootNode;
     }
 }
