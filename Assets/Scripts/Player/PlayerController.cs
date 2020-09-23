@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private int maxJumps;
     [SerializeField] private int jumpsLeft;
-    [SerializeField] private bool isFacingRight;
-    [SerializeField] private bool isAttacking;
     [SerializeField] private bool isJumping;
 
     [Header("Timers")]
@@ -235,9 +233,14 @@ public class PlayerController : MonoBehaviour
 
     private void ShortFreeze()
     {
-        movement = Vector2.zero;
-        movement = Vector2.down;
+        //movement = Vector2.zero;
+        //movement = Vector2.down;
         RB_2D.velocity = movement;
         recoveryTimer = attackPauseTimer;
+    }
+
+    public bool GetIsInAir()
+    {
+        return isJumping;
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float direction;
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private float speed;
     [SerializeField] private int damage;
@@ -57,7 +56,7 @@ public class Projectile : MonoBehaviour
         else
         {
             //transform.position = Vector2.MoveTowards(transform.position, target, .5f);
-            myRigidBody.velocity = target * speed;
+            myRigidBody.velocity = target * speed ;
         }
         
     }
@@ -90,6 +89,7 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
