@@ -111,9 +111,10 @@ public class Leech : Monster, ITargetable
 
     }
 
-    public override void ApplyDamage(float dam)
+    public void ApplyDamage(float dam)
     {
         print("called func");
+        anim.Play("Base Layer.Hit");
         if (health <= 0) return;
         recoveryTimer = timeBeforeRecovery;
         health -= dam;
@@ -122,6 +123,8 @@ public class Leech : Monster, ITargetable
             isTargetable = false;
             StartCoroutine(PlayDeathAnimAndDie());
         }
+
+
 
     }
 

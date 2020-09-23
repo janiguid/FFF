@@ -5,6 +5,7 @@ using UnityEngine;
 public class AttackCollider : MonoBehaviour
 {
     [SerializeField] PlayerController player;
+    [SerializeField] ParticleSystem pSystem;
     [SerializeField] float damage;
     [SerializeField] float waitTime;
     [SerializeField] bool canJuggle;
@@ -21,7 +22,7 @@ public class AttackCollider : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
-            print("hit");
+            if (pSystem) pSystem.Play();
             collision.GetComponent<IDamageable>().ApplyDamage(damage);
             collision.GetComponent<IFreezeable>().Freeze(0.3f);
 

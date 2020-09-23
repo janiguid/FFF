@@ -10,7 +10,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     [SerializeField] private float jumpTime;
     [SerializeField] private float jumpVelocity;
 
-
+    [Header("Components")]
     [SerializeField] private AudioSource MyAudio;
     [SerializeField] private Rigidbody2D MyRB2D;
     [SerializeField] private CameraShakeTest camShake;
