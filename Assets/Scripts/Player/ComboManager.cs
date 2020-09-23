@@ -100,12 +100,11 @@ public class ComboManager : MonoBehaviour
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.FirstPunch");
+        childToBeAdded = new ComboNode(1, 10, false, 0, regPunchPostTime, "Base Layer.FirstPunch");
         parent.AddChild(childToBeAdded);
 
-        //light punch
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(1, 10, true, regPunchPreTime, regPunchPostTime, "Base Layer.SecondPunch");
+        childToBeAdded = new ComboNode(1, 10, true, 0, regPunchPostTime, "Base Layer.SecondPunch");
         parent.AddChild(childToBeAdded);
 
 
@@ -161,7 +160,6 @@ public class ComboManager : MonoBehaviour
 
             //CommenceAttack(attackType);
             animator.Play(CurrentNode.GetAnimation());
-            //StartCoroutine(FreezeTime());
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
 
@@ -172,18 +170,7 @@ public class ComboManager : MonoBehaviour
         //print("invalid node");
     }
 
-    IEnumerator FreezeTime()
-    {
-        animator.Play(CurrentNode.GetAnimation());
-        yield return new WaitForSeconds(0.8f);
-        Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(0.5f);
-        Time.timeScale = 1;
 
-        print("Shouldve exited");
-
-        yield break;
-    }
 
     void CommenceAttack(int i)
     {

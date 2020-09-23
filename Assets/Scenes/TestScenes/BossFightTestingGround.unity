@@ -4875,6 +4875,53 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &146506482
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 146506483}
+  - component: {fileID: 146506484}
+  m_Layer: 0
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &146506483
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146506482}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 659017655}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &146506484
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146506482}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: e22bf392ddd593c44933ff56a1fd8a46, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.7499464, y: 0.9801258}
+  m_Size: {x: 2.138345, y: 3.4606242}
+  m_Direction: 0
 --- !u!1 &175996076
 GameObject:
   m_ObjectHideFlags: 0
@@ -5267,6 +5314,30 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &659017651 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8999874314141535375, guid: 3b8b54dac03228648b6f969de67346fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1762633620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &659017655 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8999874314141535370, guid: 3b8b54dac03228648b6f969de67346fc,
+    type: 3}
+  m_PrefabInstance: {fileID: 1762633620}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &659770814 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3557629774062640075, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1731146773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55a8a0059258ef4ca1d2334abc7203f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1141067416
 GameObject:
   m_ObjectHideFlags: 0
@@ -5421,6 +5492,14 @@ PrefabInstance:
       propertyPath: canJuggle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1269029257, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
+      propertyPath: waitTime
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1269029257, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 659770814}
     - target: {fileID: 1391403794, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
       propertyPath: m_Layer
       value: 15
@@ -5469,6 +5548,16 @@ PrefabInstance:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 3.52
       objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640074, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: regPunchPreTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640075, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: attackPauseTimer
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3557629774062640079, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_Sprite
@@ -5484,6 +5573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: flightTimer
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640119, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
@@ -5633,6 +5727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02954ace940fa143aab8f14b5cd5da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 659770814}
   damage: 5
   waitTime: 0.1
   canJuggle: 0
@@ -5649,6 +5744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e02954ace940fa143aab8f14b5cd5da5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 659770814}
   damage: 5
   waitTime: 0.1
   canJuggle: 0
@@ -5660,6 +5756,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 308940390, guid: 3b8b54dac03228648b6f969de67346fc, type: 3}
+      propertyPath: freezeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 308940390, guid: 3b8b54dac03228648b6f969de67346fc, type: 3}
+      propertyPath: MyAudio
+      value: 
+      objectReference: {fileID: 659017651}
     - target: {fileID: 1351164430038710159, guid: 3b8b54dac03228648b6f969de67346fc,
         type: 3}
       propertyPath: m_Enabled

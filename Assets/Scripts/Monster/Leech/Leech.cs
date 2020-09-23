@@ -162,7 +162,18 @@ public class Leech : Monster, ITargetable
             TurnAround(1);
         }
 
-        transform.Translate( transform.right * Time.deltaTime, Space.World);
+        if (transform.localPosition.x > rightMax) {
+            transform.Translate(transform.right * Time.deltaTime, Space.World);
+        }
+        else if(transform.localPosition.y < leftMax)
+        {
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, LeftBound.position, Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(transform.right * Time.deltaTime, Space.World);
+        }
+        
 
 
     }

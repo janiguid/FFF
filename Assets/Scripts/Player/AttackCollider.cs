@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AttackCollider : MonoBehaviour
 {
+    [SerializeField] PlayerController player;
     [SerializeField] float damage;
     [SerializeField] float waitTime;
     [SerializeField] bool canJuggle;
@@ -24,11 +25,22 @@ public class AttackCollider : MonoBehaviour
             collision.GetComponent<IDamageable>().ApplyDamage(damage);
             collision.GetComponent<IFreezeable>().Freeze(0.3f);
 
+            if (player)
+            {
+                if (player.GetIsInAir())
+                {
+                    player.gameObject.GetComponent<IFreezeable>().Freeze(1f);
+                    collision.GetComponent<IPushable>().ApplyForce(0, 50);
+                    collision.GetComponent<IFreezeable>().Freeze(1f);
+                    
+                }
+            }
+
             Vector2 forwardVector = Vector2.right * Mathf.Sign(transform.parent.parent.localScale.x);
             if (canJuggle)
             {
                 
-                collision.GetComponent<IPushable>().ApplyForce(50 * forwardVector.x, 380);
+                collision.GetComponent<IPushable>().ApplyForce(0, 400);
                 print("Should be juggling");
             }
 
