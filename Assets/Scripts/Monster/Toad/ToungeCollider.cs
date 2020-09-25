@@ -6,7 +6,7 @@ public class ToungeCollider : MonoBehaviour
 {
     [SerializeField] private float tongueDamage;
     [SerializeField] private string targetTag;
-
+    [SerializeField] AudioSource audio;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,6 +32,8 @@ public class ToungeCollider : MonoBehaviour
                 float xVel = 50 * Mathf.Sign(transform.parent.localScale.x);
                 print(xVel);
                 push.ApplyForce(xVel, 20);
+
+                if (audio.isPlaying == false) audio.Play();
             }
         }
     }
