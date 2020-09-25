@@ -4888,6 +4888,8 @@ MonoBehaviour:
   fireBall: {fileID: 1719812379910414485, guid: c794ea8bdce36824cb58a41f98c89aba,
     type: 3}
   radius: 4
+  anim: {fileID: 0}
+  fireballStartPoint: {fileID: 0}
   centerPosition: {x: 0, y: 0, z: 0}
   distanceFromCenter: {x: 0, y: 0, z: 0}
 --- !u!114 &385084840
@@ -4957,7 +4959,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1269029254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.5, y: 0.69, z: 0}
+  m_LocalPosition: {x: 1.68, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247079854}
@@ -4981,6 +4983,8 @@ MonoBehaviour:
   waitTime: 0.05
   canJuggle: 0
   canPush: 0
+  yForce: 0
+  xForce: 0
 --- !u!61 &1269029256
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5080,9 +5084,11 @@ MonoBehaviour:
   player: {fileID: 3557629774062640075}
   pSystem: {fileID: 8620972246940841056}
   damage: 5
-  waitTime: 0.1
+  waitTime: 0.15
   canJuggle: 0
   canPush: 0
+  yForce: 0
+  xForce: 0
 --- !u!1 &1434427971
 GameObject:
   m_ObjectHideFlags: 0
@@ -5186,9 +5192,11 @@ MonoBehaviour:
   player: {fileID: 3557629774062640075}
   pSystem: {fileID: 0}
   damage: 5
-  waitTime: 0.1
+  waitTime: 0.15
   canJuggle: 0
   canPush: 0
+  yForce: 0
+  xForce: 0
 --- !u!1 &1716559042
 GameObject:
   m_ObjectHideFlags: 0
@@ -10064,6 +10072,53 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1 &2074170499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2074170500}
+  - component: {fileID: 2074170501}
+  m_Layer: 17
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2074170500
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074170499}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3557629774323087425}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &2074170501
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074170499}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: e22bf392ddd593c44933ff56a1fd8a46, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -1.3722785}
+  serializedVersion: 2
+  m_Radius: 0.8357074
 --- !u!1 &1773044849989123755
 GameObject:
   m_ObjectHideFlags: 0
@@ -19395,6 +19450,7 @@ Transform:
   - {fileID: 385084839}
   - {fileID: 6242250416217739684}
   - {fileID: 247079854}
+  - {fileID: 2074170500}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19483,7 +19539,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.00033020973, y: -0.16743016}
+  m_Offset: {x: 0.00033020973, y: -0.113262}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19494,7 +19550,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3124909, y: 3.1644888}
+  m_Size: {x: 1.3124909, y: 3.0561523}
   m_EdgeRadius: 0
 --- !u!61 &3557629774062640072
 BoxCollider2D:
@@ -19509,7 +19565,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008489609, y: -1.7060955}
+  m_Offset: {x: -0.008489609, y: -1.668855}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -19520,7 +19576,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.18857, y: 0.27223969}
+  m_Size: {x: 1.18857, y: 0.19775856}
   m_EdgeRadius: 0
 --- !u!114 &3557629774062640075
 MonoBehaviour:
@@ -19545,7 +19601,7 @@ MonoBehaviour:
   minYVelocity: -30
   maxYVelocity: 50
   isGrounded: 0
-  maxJumps: 2
+  maxJumps: 1
   jumpsLeft: 0
   isJumping: 0
   timeBeforeRecovery: 0.3
@@ -19571,7 +19627,8 @@ MonoBehaviour:
   regPunchPreTime: 0.3
   regPunchPostTime: 0.5
   finalPunchPostTime: 0.8
-  animator: {fileID: 0}
+  animator: {fileID: 2074526256}
+  player: {fileID: 3557629774062640075}
 --- !u!114 &3557629774062640117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19586,8 +19643,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPlayerHealth: 50
   playerHealth: 0
-  initialWingValue: 50
+  initialWingValue: 0
   wingValue: 0
+  L2: {fileID: 0}
   damageDetector: {fileID: 1895837080}
 --- !u!114 &3557629774062640116
 MonoBehaviour:
@@ -19694,7 +19752,7 @@ MonoBehaviour:
   jumpHeight: 5
   jumpTime: 0.4
   jumpVelocity: 0
-  MyAudio: {fileID: 0}
+  MyAudio: {fileID: 303989941}
   MyRB2D: {fileID: 3557629774062640078}
   camShake: {fileID: 0}
   staggerTime: 0
@@ -19702,7 +19760,7 @@ MonoBehaviour:
   savedVelocity: {x: 0, y: 0}
   freezeTime: 5
   fallingVelocity: 0
-  initialImmunityTime: 0.3
+  initialImmunityTime: 0.1
   immunityTimer: 0.5
   canBeTargeted: 0
 --- !u!95 &2074526256
