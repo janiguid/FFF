@@ -108,7 +108,6 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
     //Applies force to this character
     public void ApplyForce(float HorizontalForce, float VerticalForce)
     {
-        print("force applied");
         isFrozen = false;
         MyRB2D.velocity = Vector2.zero;
         MyRB2D.AddForce(new Vector2(HorizontalForce, VerticalForce), ForceMode2D.Impulse);

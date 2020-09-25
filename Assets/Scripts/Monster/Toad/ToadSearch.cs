@@ -39,7 +39,6 @@ public class ToadSearch : StateMachineBehaviour
             {
                 //animator.SetBool("PlayerWithinRange", true);
                 float chance = Random.Range(0, 100);
-                Debug.Log(chance);
                 if(chance < 50)
                 {
                     animator.Play("Base Layer.TongueLash");

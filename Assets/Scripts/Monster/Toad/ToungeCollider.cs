@@ -14,7 +14,6 @@ public class ToungeCollider : MonoBehaviour
         {
             if (collision.GetComponent<ITargetable>().IsTargetable())
             {
-                print(transform.localScale);
                 IDamageable[] dam = collision.GetComponents<IDamageable>();
                 IFreezeable[] freezeables = collision.GetComponents<IFreezeable>();
                 IPushable push = collision.GetComponent<IPushable>();
@@ -30,9 +29,9 @@ public class ToungeCollider : MonoBehaviour
 
 
                 float xVel = 50 * Mathf.Sign(transform.parent.localScale.x);
-                print(xVel);
                 push.ApplyForce(xVel, 20);
 
+                print("I HIT: " + collision.tag);
                 if (audio.isPlaying == false) audio.Play();
             }
         }

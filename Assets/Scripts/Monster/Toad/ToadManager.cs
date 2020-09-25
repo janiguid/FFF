@@ -50,14 +50,14 @@ public class ToadManager : MonoBehaviour
         anim.SetBool("ReceivedDamage", true);
     }
 
-    public float s;
-    private void OnMouseDown()
-    {
-        print("wth");
-        float playerLoc = FindObjectOfType<PlayerManager>().transform.position.x;
-        s = playerLoc - transform.position.x;
-        s *= (1 / 3) + (1 % 3);
-        GetComponent<Rigidbody2D>().velocity = new Vector2(s, 31.6f);
-    }
+    //public float s;
+    //private void OnMouseDown()
+    //{
+    //    print("wth");
+    //    float playerLoc = FindObjectOfType<PlayerManager>().transform.position.x;
+    //    s = playerLoc - transform.position.x;
+    //    s *= (1 / 3) + (1 % 3);
+    //    GetComponent<Rigidbody2D>().velocity = new Vector2(s, 31.6f);
+    //}
 
 }

@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private float initialPlayerHealth;
     [SerializeField] private float playerHealth;
     [SerializeField] private float initialWingValue;
     [SerializeField] private float wingValue;
-
+    [SerializeField] private GameObject L2;
     [SerializeField] private DamageDetector damageDetector;
     private HealthBar health;
     private WingBar wings;
@@ -88,6 +88,15 @@ public class PlayerManager : MonoBehaviour
         if (wings)
         {
             wings.SetWingValue(wingValue);
+        }
+
+        if(wingValue == 50)
+        {
+            if (L2) L2.SetActive(true);
+        }
+        else
+        {
+            if (L2) L2.SetActive(false);
         }
     }
 

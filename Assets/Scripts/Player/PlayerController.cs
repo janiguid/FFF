@@ -167,7 +167,6 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        print("jump func called");
         if (jumpsLeft == 0) return;
         movement.y = Vector2.up.y * jumpVelocity;
         isGrounded = false;
@@ -242,5 +241,11 @@ public class PlayerController : MonoBehaviour
     public bool GetIsInAir()
     {
         return isJumping;
+    }
+
+    public void EnhanceJumpAbility()
+    {
+        maxJumps += 1;
+        RefreshJump();
     }
 }
