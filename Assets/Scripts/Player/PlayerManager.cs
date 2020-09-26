@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class PlayerManager : MonoBehaviour
+
+[RequireComponent(typeof(DamageDetector))]
+public class PlayerManager : Managers
 {
-    [SerializeField] private float initialPlayerHealth;
-    [SerializeField] private float playerHealth;
     [SerializeField] private float initialWingValue;
     [SerializeField] private float wingValue;
     [SerializeField] private GameObject L2;
     [SerializeField] private DamageDetector damageDetector;
-    private HealthBar health;
+    private HealthBar healthBar;
     private WingBar wings;
 
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +29,9 @@ public class PlayerManager : MonoBehaviour
             print("couldn't find dma dec");
         }
 
-        if (health == null)
+        if (healthBar == null)
         {
-            health = FindObjectOfType<HealthBar>();
+            healthBar = FindObjectOfType<HealthBar>();
         }
 
         if(wings == null)
@@ -40,11 +40,11 @@ public class PlayerManager : MonoBehaviour
         }
 
         wingValue = initialWingValue;
-        playerHealth = initialPlayerHealth;
+        health = initialHealth;
 
-        if (health)
+        if (healthBar)
         {
-            health.SetMaxHealth(initialPlayerHealth);
+            healthBar.SetMaxHealth(initialHealth);
         }
 
         if (wings)
@@ -59,25 +59,25 @@ public class PlayerManager : MonoBehaviour
 
     public void ApplyDamage(float dam)
     {
-        playerHealth -= dam;
+        health -= dam;
 
-        if (health)
+        if (healthBar)
         {
-            health.SetHealth(playerHealth);
+            healthBar.SetHealth(health);
         }
 
-        if (playerHealth <= 0) Destroy(gameObject);
+        if (health <= 0) Destroy(gameObject);
 
         print("Player manager received delegate call");
     }
 
     public void RegainHealth(float value)
     {
-        playerHealth += value;
+        health += value;
 
-        if (health)
+        if (healthBar)
         {
-            health.SetHealth(playerHealth);
+            healthBar.SetHealth(health);
         }
     }
 

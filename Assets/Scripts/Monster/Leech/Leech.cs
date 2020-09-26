@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Monster, ITargetable
+public class Leech : Managers
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -47,8 +47,8 @@ public class Leech : Monster, ITargetable
         if (distBeforeBreaking == 0) distBeforeBreaking = 2;
         if (layerMask != LayerMask.GetMask("Player")) layerMask = LayerMask.GetMask("Player");
 
-        if (InitialHealth == 0) InitialHealth = 50f;
-        health = InitialHealth;
+        if (initialHealth == 0) initialHealth = 50f;
+        health = initialHealth;
         shootTimer = 2;
 
         if (damDetector)
@@ -115,10 +115,7 @@ public class Leech : Monster, ITargetable
         }
 
         
-        if(dist > 5 + distBeforeBreaking)
-        {
-            target = null;
-        }
+
 
         CheckForPlayer();
 
@@ -147,7 +144,6 @@ public class Leech : Monster, ITargetable
 
         deathCloud.Play();
         yield return new WaitForSeconds(deathCloud.main.duration);
-        Destroy(gameObject);
     }
 
     void BeginShoot()
@@ -175,32 +171,27 @@ public class Leech : Monster, ITargetable
     void LookForPlayer()
     {
 
-        if (transform.localPosition.x >= rightMax) {
+        if (Mathf.Abs(transform.localPosition.x - initialRightBound.x) < 0.1) {
             if(positionToGoTo != initialLeftBound)
             {
                 positionToGoTo = initialLeftBound;
+                positionToGoTo.x -= 1;
                 transform.SetXScale(-1);
                 dir = -1;
             }   
         }
-        else if(transform.localPosition.x <= leftMax)
+        else if(Mathf.Abs(transform.localPosition.x - initialLeftBound.x) < 0.1)
         {
             if(positionToGoTo != initialRightBound)
             {
                 positionToGoTo = initialRightBound;
+                positionToGoTo.x += 1;
                 transform.SetXScale(1);
                 dir = 1;
             }
             
         }
 
-        //if(positionToGoTo == initialRightBound && rot.y == -1)
-        //{
-        //    TurnAround(1);
-        //}else if(positionToGoTo == initialLeftBound && rot.y == 1)
-        //{
-        //    TurnAround(0);
-        //}
 
         transform.localPosition = Vector2.MoveTowards(transform.localPosition, positionToGoTo, Time.deltaTime);
 
@@ -224,21 +215,4 @@ public class Leech : Monster, ITargetable
     }
 
 
-    void TurnAround(int dir)
-    {
-        rot = new Vector3(0,180,0) * dir;
-        transform.Rotate(rot);
-    }
-
-
-    public override void ApplyForce(float horizontalForce, float verticalForce)
-    {
-
-    }
-
-
-    public bool IsTargetable()
-    {
-        return isTargetable;
-    }
 }

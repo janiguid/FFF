@@ -63,7 +63,8 @@ public class Projectile : MonoBehaviour
 
     public void SetTarget(Vector2 tgt, Vector2 originalPos)
     {
-        target = tgt;
+        //target = tgt;
+        target = tgt.normalized;
         Vector2 transformPos = new Vector2(transform.position.x, transform.position.y);
         var dir = originalPos - transformPos;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;

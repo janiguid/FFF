@@ -143,7 +143,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &175996077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +334,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WingContainer (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176102730487078783, guid: 9ec7a60a442665f438858363937f4d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ec7a60a442665f438858363937f4d44, type: 3}
@@ -717,6 +722,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WingContainer (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3176102730487078783, guid: 9ec7a60a442665f438858363937f4d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ec7a60a442665f438858363937f4d44, type: 3}
 --- !u!1 &1141067416
@@ -735,7 +745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1141067417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -915,6 +925,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WingContainer (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3176102730487078783, guid: 9ec7a60a442665f438858363937f4d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ec7a60a442665f438858363937f4d44, type: 3}
 --- !u!1001 &1672748977
@@ -984,6 +999,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WingContainer (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3176102730487078783, guid: 9ec7a60a442665f438858363937f4d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ec7a60a442665f438858363937f4d44, type: 3}
 --- !u!1001 &1731146773
@@ -993,16 +1013,75 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 385084837, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 2005502709}
+    - target: {fileID: 3557629774062640072, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640072, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 3.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640073, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640073, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 3.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640079, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640079, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.52
+      objectReference: {fileID: 0}
     - target: {fileID: 3557629774062640112, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_Name
       value: Firena
       objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640116, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: MyRB2D
+      value: 
+      objectReference: {fileID: 2005502721}
+    - target: {fileID: 3557629774062640116, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: damDec
+      value: 
+      objectReference: {fileID: 2005502711}
+    - target: {fileID: 3557629774062640116, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 2005502709}
     - target: {fileID: 3557629774062640117, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: L2
       value: 
       objectReference: {fileID: 494347196}
+    - target: {fileID: 3557629774062640117, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: initialHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3557629774062640117, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: initialWingValue
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1058,6 +1137,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3557629774409448337, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+        type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec7dff9ddf0c6104d94d837eb419fa26, type: 3}
 --- !u!1001 &1762633620
@@ -1071,6 +1155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Leech
+      objectReference: {fileID: 0}
+    - target: {fileID: 8999874314141535364, guid: 3b8b54dac03228648b6f969de67346fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8999874314141535370, guid: 3b8b54dac03228648b6f969de67346fc,
         type: 3}
@@ -1196,8 +1285,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoubleJumper (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7466405456866352269, guid: 85ace7882ecf7034ead7de61d10422a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85ace7882ecf7034ead7de61d10422a8, type: 3}
+--- !u!95 &2005502709 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2074526256, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1731146773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2005502711 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1895837080, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1731146773}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959572a8bd8fb6443a9e1cbea38e3c77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &2005502721 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 3557629774062640078, guid: ec7dff9ddf0c6104d94d837eb419fa26,
+    type: 3}
+  m_PrefabInstance: {fileID: 1731146773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2078586729 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3557629774323087425, guid: ec7dff9ddf0c6104d94d837eb419fa26,
@@ -1270,6 +1388,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WingContainer (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176102730487078783, guid: 9ec7a60a442665f438858363937f4d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ec7a60a442665f438858363937f4d44, type: 3}
@@ -1414,6 +1537,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stalagmite
       objectReference: {fileID: 0}
+    - target: {fileID: 2989313001141197305, guid: 8de4ae84af5ce864fb4ff552e0d96f03,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8de4ae84af5ce864fb4ff552e0d96f03, type: 3}
 --- !u!1001 &3096819051769496536
@@ -1483,6 +1611,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoubleJumper
       objectReference: {fileID: 0}
+    - target: {fileID: 7466405456866352269, guid: 85ace7882ecf7034ead7de61d10422a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85ace7882ecf7034ead7de61d10422a8, type: 3}
 --- !u!1001 &3456264467776669878
@@ -1551,6 +1684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Stalactite
+      objectReference: {fileID: 0}
+    - target: {fileID: 3456264468487865750, guid: c1716e65616faf24abeeb8eda8cebd68,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1716e65616faf24abeeb8eda8cebd68, type: 3}

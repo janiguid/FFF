@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(DamageDetector))]
-public class ToadManager : MonoBehaviour
+public class ToadManager : Managers
 {
     [SerializeField] private string targetTag;
     [SerializeField] private DamageDetector damageDetector;
-    [SerializeField] private float initialHealth;
 
-
-    private float health;
     private Animator anim;
     private PlayerManager player;
 
@@ -45,19 +42,10 @@ public class ToadManager : MonoBehaviour
     public void ApplyDamage(float dam)
     {
         health -= (dam);
-        if (health <= 0) Destroy(gameObject);
 
         anim.SetBool("ReceivedDamage", true);
     }
 
-    //public float s;
-    //private void OnMouseDown()
-    //{
-    //    print("wth");
-    //    float playerLoc = FindObjectOfType<PlayerManager>().transform.position.x;
-    //    s = playerLoc - transform.position.x;
-    //    s *= (1 / 3) + (1 % 3);
-    //    GetComponent<Rigidbody2D>().velocity = new Vector2(s, 31.6f);
-    //}
+
 
 }

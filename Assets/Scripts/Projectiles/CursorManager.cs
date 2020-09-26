@@ -90,7 +90,7 @@ public class CursorManager : MonoBehaviour
     void FireProjectile()
     {
         var temp = Instantiate(fireBall);
-        if (anim) anim.Play("Base Layer.FlyAttack");
+        if (anim) anim.Play("Base Layer.FireballAttack");
         temp.transform.position = transform.parent.position;
         temp.SetActive(false);
 

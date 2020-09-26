@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 8999874314141535375}
   - component: {fileID: 1351164430038710159}
   - component: {fileID: 308940390}
+  - component: {fileID: 5892560292397457889}
   - component: {fileID: 1927642584}
   m_Layer: 13
   m_Name: Leech
@@ -384,7 +385,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360c4cc0618508e4882e6d98d900d6cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialHealth: 100
+  initialHealth: 50
+  isInAir: 0
   health: 0
   shootCooldown: 1.5
   timeForTravelling: 5
@@ -435,6 +437,22 @@ MonoBehaviour:
   initialImmunityTime: 0
   immunityTimer: 0
   canBeTargeted: 0
+--- !u!114 &5892560292397457889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8999874314141535364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b47cfffde40ac80408bc4593e6d8ac7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damDec: {fileID: 308940390}
+  manager: {fileID: 1351164430038710159}
+  itemToDrop:
+  - {fileID: 1057693208103844046, guid: 7d0caf7675653ae44a5b1de66898756d, type: 3}
 --- !u!95 &1927642584
 Animator:
   serializedVersion: 3

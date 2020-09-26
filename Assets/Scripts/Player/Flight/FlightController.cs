@@ -7,10 +7,12 @@ public class FlightController : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private bool isFacingRight;
     [SerializeField] private GameObject cursor;
+    [SerializeField] private Rigidbody2D MyRB2D;
+    [SerializeField] private DamageDetector damDec;
+    [SerializeField] private Animator anim;
 
     private Vector2 inputValue;
     private VFXHandler MyVFX;
-    private Rigidbody2D MyRB2D;
 
     InputActions Inputs;
 
@@ -27,6 +29,7 @@ public class FlightController : MonoBehaviour
             MyRB2D = GetComponent<Rigidbody2D>();
         }
     }
+
 
     public void InitializeFlight()
     {
@@ -51,6 +54,12 @@ public class FlightController : MonoBehaviour
         InitializeFlight();
         Inputs.Enable();
         cursor.SetActive(true);
+        if (damDec) damDec.detectorDelegate += PlayHitAnim;
+    }
+
+    void PlayHitAnim(float a)
+    {
+        anim.Play("Base Layer.FlyDamaged");
     }
 
     private void OnDisable()
@@ -58,6 +67,8 @@ public class FlightController : MonoBehaviour
         MyVFX.StopAura();
         Inputs.Disable();
         cursor.SetActive(false);
+
+        if (damDec) damDec.detectorDelegate -= PlayHitAnim;
     }
 
 

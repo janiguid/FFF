@@ -49,9 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80daca3ac2afdb24ca7f2a9dfe9b0d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: 1
   myRigidBody: {fileID: 0}
-  speed: 6
+  speed: 20
   damage: 0
   lifetime: 0
   particleSys: {fileID: 0}
