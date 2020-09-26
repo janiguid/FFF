@@ -86,10 +86,16 @@ public class PlayerManager : MonoBehaviour
     {
         playerHealth += value;
 
+        if (playerHealth > initialPlayerHealth)
+        {
+            playerHealth = initialPlayerHealth;
+        }
+
         if (health)
         {
             health.SetHealth(playerHealth);
         }
+
     }
 
     public void IncreaseWingValue(float value)
