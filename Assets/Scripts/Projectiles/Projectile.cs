@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float direction;
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private float speed;
     [SerializeField] private int damage;
@@ -57,14 +56,20 @@ public class Projectile : MonoBehaviour
         else
         {
             //transform.position = Vector2.MoveTowards(transform.position, target, .5f);
-            myRigidBody.velocity = target * speed;
+            myRigidBody.velocity = target * speed ;
         }
         
     }
 
-    public void SetTarget(Vector2 tgt)
+    public void SetTarget(Vector2 tgt, Vector2 originalPos)
     {
-        target = tgt;
+        //target = tgt;
+        target = tgt.normalized;
+        Vector2 transformPos = new Vector2(transform.position.x, transform.position.y);
+        var dir = originalPos - transformPos;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        angle += 90;
+        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     public void SetTargetTag(targetTag tag)
@@ -85,6 +90,7 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

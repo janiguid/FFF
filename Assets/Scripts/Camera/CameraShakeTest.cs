@@ -38,7 +38,7 @@ public class CameraShakeTest : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (targetSize == 0) targetSize = 4;
+        if (targetSize == 0) targetSize = 6;
         if (zoomSpeed == 0) zoomSpeed = 10;
         if (playerTransform == null) FindObjectOfType<PlayerController>();
         if (mainCam) initialSize = mainCam.orthographicSize;
@@ -50,9 +50,18 @@ public class CameraShakeTest : MonoBehaviour
         if (playerTransform == null) this.enabled = false;
         if(combatModeTimer > 0)
         {
-            if(mainCam.orthographicSize >= targetSize)
+            if(mainCam.orthographicSize > targetSize)
             mainCam.orthographicSize = Mathf.SmoothDamp(mainCam.orthographicSize, targetSize, ref throwaway, zoomSpeed * Time.deltaTime);
             combatModeTimer -= Time.deltaTime;
+
+            if (beginCameraShakeTime)
+            {
+                cameraShakeTime -= Time.deltaTime;
+
+                if (cameraShakeTime <= 0) beginCameraShakeTime = false;
+                ShakeCamera();
+            }
+            return;
 
         }else if(combatModeTimer <= 0 && combatMode == true)
         {

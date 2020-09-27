@@ -35,9 +35,19 @@ public class ToadSearch : StateMachineBehaviour
                 rb.MovePosition(Vector2.MoveTowards(transform.position, toad.GetPlayerPosition(), Time.deltaTime * speed));
                 animator.SetBool("PlayerWithinRange", false);
             }
-            else if(currDistance <= minDistance)
+            else if(currDistance <= minDistance && animator.GetFloat("ToungeLashCD") <= 0.1)
             {
-                animator.SetBool("PlayerWithinRange", true);
+                //animator.SetBool("PlayerWithinRange", true);
+                float chance = Random.Range(0, 100);
+                if(chance < 50)
+                {
+                    animator.Play("Base Layer.TongueLash");
+                }
+                else
+                {
+                    animator.Play("Base Layer.JumpAttack");
+                }
+                
             }
 
             if (animator.GetFloat("ToungeLashCD") > 0.1)

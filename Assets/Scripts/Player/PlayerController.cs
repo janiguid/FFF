@@ -26,8 +26,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private int maxJumps;
     [SerializeField] private int jumpsLeft;
-    [SerializeField] private bool isFacingRight;
-    [SerializeField] private bool isAttacking;
     [SerializeField] private bool isJumping;
 
     [Header("Timers")]
@@ -42,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private InputActions Inputs;
     private Rigidbody2D RB_2D;
     private SpriteRenderer SRenderer;
-    private DamageDetector damageDetector;
+    [SerializeField] private DamageDetector damageDetector;
 
     private void Awake()
     {
@@ -50,6 +48,8 @@ public class PlayerController : MonoBehaviour
         Inputs.LandMovement.Jump.performed += _ => Jump();
         Inputs.LandMovement.North.performed += _ => ShortFreeze();
         Inputs.LandMovement.West.performed += _ => ShortFreeze();
+
+        if (damageDetector == null) damageDetector = GetComponent<DamageDetector>();
     }
 
     // Start is called before the first frame update
@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
     {
         if(RB_2D == null) RB_2D = GetComponent<Rigidbody2D>();
 
-        if(damageDetector == null) damageDetector = GetComponent<DamageDetector>();
+        
 
-        if (damageDetector) damageDetector.detectorDelegate += ApplyDamage;
+        //if (damageDetector) damageDetector.detectorDelegate += ApplyDamage;
 
         InitializePhys();
         RefreshJump();
@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (damageDetector) damageDetector.detectorDelegate += ApplyDamage;
         Inputs.Enable();
 
         if (RB_2D)
@@ -93,7 +94,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        if (damageDetector) damageDetector.detectorDelegate -= ApplyDamage;
         Inputs.Disable();
     }
 
@@ -169,7 +170,6 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        print("jump func called");
         if (jumpsLeft == 0) return;
         movement.y = Vector2.up.y * jumpVelocity;
         isGrounded = false;
@@ -230,14 +230,26 @@ public class PlayerController : MonoBehaviour
     {
         print("Player controller received delegate call");
         ShortFreeze();
+
         animator.Play("Damaged");
     }
 
     private void ShortFreeze()
     {
-        movement = Vector2.zero;
-        movement = Vector2.down;
+        //movement = Vector2.zero;
+        //movement = Vector2.down;
         RB_2D.velocity = movement;
         recoveryTimer = attackPauseTimer;
+    }
+
+    public bool GetIsInAir()
+    {
+        return isJumping;
+    }
+
+    public void EnhanceJumpAbility()
+    {
+        maxJumps += 1;
+        RefreshJump();
     }
 }

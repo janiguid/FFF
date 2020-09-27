@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Monster, ITargetable
+public class Leech : Managers
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -24,10 +24,14 @@ public class Leech : Monster, ITargetable
     [SerializeField] private Transform spitSource;
 
     [Header("Bounds")]
-    [SerializeField] private Transform LeftBound;
-    [SerializeField] private Transform RightBound;
+    [SerializeField] private Transform leftBound;
+    [SerializeField] private Transform rightBound;
+    [SerializeField] private Vector2 initialLeftBound;
+    [SerializeField] private Vector2 initialRightBound;
     private float leftMax;
     private float rightMax;
+    private Vector3 rot;
+
 
     private DamageDetector damDetector;
     private bool isTargetable;
@@ -43,8 +47,8 @@ public class Leech : Monster, ITargetable
         if (distBeforeBreaking == 0) distBeforeBreaking = 2;
         if (layerMask != LayerMask.GetMask("Player")) layerMask = LayerMask.GetMask("Player");
 
-        if (InitialHealth == 0) InitialHealth = 50f;
-        health = InitialHealth;
+        if (initialHealth == 0) initialHealth = 50f;
+        health = initialHealth;
         shootTimer = 2;
 
         if (damDetector)
@@ -62,10 +66,14 @@ public class Leech : Monster, ITargetable
             anim = GetComponent<Animator>();
         }
 
-        if(LeftBound && RightBound)
+        if(leftBound && rightBound)
         {
-            leftMax = LeftBound.position.x;
-            rightMax = RightBound.position.x;
+            leftMax = leftBound.position.x;
+            rightMax = rightBound.position.x;
+            initialLeftBound = leftBound.position;
+            initialRightBound = rightBound.position;
+            positionToGoTo = initialRightBound;
+            dir = 1;
         }
         else
         {
@@ -79,8 +87,13 @@ public class Leech : Monster, ITargetable
     private void Update()
     {
         if (health <= 0) return;
-        recoveryTimer -= Time.deltaTime;
-        if (recoveryTimer >= 0) return;
+        
+        if (recoveryTimer >= 0)
+        {
+
+            recoveryTimer -= Time.deltaTime;
+            return;
+        }
 
         float dist = 0;
         if (target == null)
@@ -102,18 +115,16 @@ public class Leech : Monster, ITargetable
         }
 
         
-        if(dist > 5 + distBeforeBreaking)
-        {
-            target = null;
-        }
+
 
         CheckForPlayer();
 
     }
 
-    public override void ApplyDamage(float dam)
+    public void ApplyDamage(float dam)
     {
         print("called func");
+        anim.Play("Base Layer.Hit");
         if (health <= 0) return;
         recoveryTimer = timeBeforeRecovery;
         health -= dam;
@@ -123,6 +134,8 @@ public class Leech : Monster, ITargetable
             StartCoroutine(PlayDeathAnimAndDie());
         }
 
+
+
     }
 
     IEnumerator PlayDeathAnimAndDie()
@@ -131,16 +144,18 @@ public class Leech : Monster, ITargetable
 
         deathCloud.Play();
         yield return new WaitForSeconds(deathCloud.main.duration);
-        Destroy(gameObject);
     }
 
     void BeginShoot()
     {
         anim.Play("Spit");
-        var GameObject = Instantiate(projectilePrefab, transform, false);
-        GameObject.transform.position = spitSource.position;
-
-        GameObject.GetComponent<Projectile>().SetTargetTag(targetTag);
+        var proj = Instantiate(projectilePrefab, transform, false);
+        proj.transform.position = spitSource.position;
+        Projectile projInstance = proj.GetComponent<Projectile>();
+        Vector2 tgt = target.transform.localPosition - transform.localPosition;
+        projInstance.SetTarget(tgt.normalized, transform.localPosition);
+        //projInstance.SetDir(dir);
+        projInstance.GetComponent<Projectile>().SetTargetTag(targetTag);
     }
 
     float GetDistance(Vector2 origin, Vector2 target)
@@ -151,26 +166,42 @@ public class Leech : Monster, ITargetable
         return Mathf.Sqrt(xDist + yDist);
     }
 
+    public Vector2 positionToGoTo;
+    public int dir;
     void LookForPlayer()
     {
-        timeForTravelling -= Time.deltaTime;
 
-        //if timeForTravelling is 0 turn
-
-        if(transform.localPosition.x > rightMax || transform.localPosition.x < leftMax)
+        if (Mathf.Abs(transform.localPosition.x - initialRightBound.x) < 0.1) {
+            if(positionToGoTo != initialLeftBound)
+            {
+                positionToGoTo = initialLeftBound;
+                positionToGoTo.x -= 1;
+                transform.SetXScale(-1);
+                dir = -1;
+            }   
+        }
+        else if(Mathf.Abs(transform.localPosition.x - initialLeftBound.x) < 0.1)
         {
-            TurnAround(1);
+            if(positionToGoTo != initialRightBound)
+            {
+                positionToGoTo = initialRightBound;
+                positionToGoTo.x += 1;
+                transform.SetXScale(1);
+                dir = 1;
+            }
+            
         }
 
-        transform.Translate( transform.right * Time.deltaTime, Space.World);
+
+        transform.localPosition = Vector2.MoveTowards(transform.localPosition, positionToGoTo, Time.deltaTime);
 
 
     }
 
     bool CheckForPlayer()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, eyesightLength, layerMask);
-        Debug.DrawRay(transform.position, transform.right * eyesightLength);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right * dir, eyesightLength, layerMask);
+        Debug.DrawRay(transform.position, transform.right * eyesightLength * dir);
         if (hit.collider == null && target != null)
         {
             target = null;
@@ -184,21 +215,4 @@ public class Leech : Monster, ITargetable
     }
 
 
-    void TurnAround(int dir)
-    {
-        Vector3 rot = new Vector3(0,180,0) * dir;
-        transform.Rotate(0, 180, 0);
-    }
-
-
-    public override void ApplyForce(float horizontalForce, float verticalForce)
-    {
-
-    }
-
-
-    public bool IsTargetable()
-    {
-        return isTargetable;
-    }
 }
