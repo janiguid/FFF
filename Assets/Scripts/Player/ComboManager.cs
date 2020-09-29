@@ -65,7 +65,7 @@ public class ComboManager : MonoBehaviour
         //add first combo root
         //-----------------------------------
         //light punch
-        childToBeAdded = new ComboNode(1, 10, false, .35f, regPunchPostTime, "Base Layer.FirstPunch");
+        childToBeAdded = new ComboNode(1, 10, false, regPunchPreTime, regPunchPostTime, "Base Layer.FirstPunch");
         parent.AddChild(childToBeAdded);
 
         //light punch
@@ -104,10 +104,10 @@ public class ComboManager : MonoBehaviour
         parent.AddChild(childToBeAdded);
 
         parent = childToBeAdded;
-        childToBeAdded = new ComboNode(4, 10, true, 0, regPunchPostTime, "Base Layer.FlyingKick");
+        childToBeAdded = new ComboNode(4, 10, true, regPunchPreTime, regPunchPostTime, "Base Layer.FlyingKick");
         parent.AddChild(childToBeAdded);
 
-        childToBeAdded = new ComboNode(3, 10, true, 0, regPunchPostTime, "Base Layer.Swipe");
+        childToBeAdded = new ComboNode(3, 10, true, regPunchPreTime, regPunchPostTime, "Base Layer.Swipe");
         parent.AddChild(childToBeAdded);
 
 

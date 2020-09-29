@@ -84,6 +84,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnLevelWasLoaded(int level)
     {
+        AudioManager.Instance.StopAudio();
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 

@@ -143,6 +143,7 @@ public class Leech : Managers
 
         deathCloud.Play();
         yield return new WaitForSeconds(deathCloud.main.duration);
+
     }
 
     void BeginShoot()
@@ -184,46 +185,22 @@ public class Leech : Managers
                 GoRight();
             }
 
+        }else if(transform.localPosition.x < initialLeftBound.x && dir == -1)
+        {
+            GoRight();
+        }else if(transform.localPosition.x > initialRightBound.x && dir == 1)
+        {
+            GoLeft();
         }
 
-        //if (transform.localPosition.x < initialLeftBound.x)
-        //{
-        //    if (positionToGoTo.x == initialLeftBound.x)
-        //    {
-        //        GoRight();
-        //    }
-        //}else if(transform.localPosition.x > initialRightBound.x)
-        //{
-        //    if(positionToGoTo.x == initialRightBound.x)
-        //    {
-        //        GoLeft();
-        //    }
-        //}
 
-        //timeForTravelling -= Time.deltaTime;
-
-        //if (timeForTravelling <= 0)
-        //{
-        //    timeForTravelling = 10;
-
-        //    if (positionToGoTo == initialRightBound)
-        //    {
-        //        GoLeft();
-        //    }
-        //    else if (positionToGoTo == initialLeftBound) 
-        //    {
-        //        GoRight();
-        //    }
-        //}
         positionToGoTo.y = transform.localPosition.y;
         transform.localPosition = Vector2.MoveTowards(transform.localPosition, positionToGoTo, Time.deltaTime);
-        //transform.Translate(transform.right * dir * Time.deltaTime);
     }
 
     void GoLeft()
     {
         positionToGoTo = initialLeftBound;
-        //positionToGoTo.x -= .5f;
         transform.SetXScale(-1);
         dir = -1;
         timeForTravelling = 10;
@@ -232,7 +209,6 @@ public class Leech : Managers
     void GoRight()
     {
         positionToGoTo = initialRightBound;
-        //positionToGoTo.x += .5f;
         transform.SetXScale(1);
         dir = 1;
         timeForTravelling = 10;

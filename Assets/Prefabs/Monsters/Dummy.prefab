@@ -92,7 +92,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1828256045}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.63, y: 1.131, z: -0.31}
+  m_LocalPosition: {x: 7.69, y: 1.131, z: -0.31}
   m_LocalScale: {x: 3.4284847, y: 1.069605, z: 1}
   m_Children: []
   m_Father: {fileID: 8285724313990949562}
@@ -137,12 +137,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 157e6e68d6df9f8488d4c80ab30622f6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7613fa555394059468a5057d0e857f2b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.268, y: 0.584}
+  m_Size: {x: 16.34, y: 2.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -652,9 +652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fd7389ff0b3bf2458f1f38c523d44ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialHealth: 60
+  isInAir: 0
+  health: 0
   targetTag: Player
   damageDetector: {fileID: 2856846099746999552}
-  initialHealth: 100
 --- !u!82 &439068206
 AudioSource:
   m_ObjectHideFlags: 0
