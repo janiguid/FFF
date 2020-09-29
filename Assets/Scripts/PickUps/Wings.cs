@@ -21,7 +21,18 @@ public class Wings : PickUp
                 pMan.IncreaseWingValue(wingValue);
             }
 
-            Destroy(gameObject);
+            StartCoroutine(Deactivate());
         }
+    }
+
+
+    IEnumerator Deactivate()
+    {
+        gameObject.GetComponent<Collider2D>().enabled = false;
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        yield return new WaitForSeconds(4);
+        gameObject.GetComponent<Collider2D>().enabled = true;
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        gameObject.SetActive(true);
     }
 }

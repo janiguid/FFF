@@ -43,7 +43,7 @@ public class Leech : Managers
     private void Start()
     {
         isTargetable = true;
-        if (timeForTravelling == 0) timeForTravelling = 5;
+        if (timeForTravelling == 0) timeForTravelling = 10;
         if (distBeforeBreaking == 0) distBeforeBreaking = 2;
         if (layerMask != LayerMask.GetMask("Player")) layerMask = LayerMask.GetMask("Player");
 
@@ -68,18 +68,17 @@ public class Leech : Managers
 
         if(leftBound && rightBound)
         {
-            leftMax = leftBound.position.x;
-            rightMax = rightBound.position.x;
-            initialLeftBound = leftBound.position;
-            initialRightBound = rightBound.position;
+
+
+            initialLeftBound = transform.localPosition + leftBound.localPosition;
+            initialRightBound = transform.localPosition + rightBound.localPosition;
+
+            initialLeftBound.y = transform.localPosition.y;
+            initialRightBound.y = transform.localPosition.y;
             positionToGoTo = initialRightBound;
             dir = 1;
         }
-        else
-        {
-            leftMax = -3;
-            rightMax = 3;
-        }
+
     }
 
 
@@ -171,31 +170,72 @@ public class Leech : Managers
     void LookForPlayer()
     {
 
-        if (Mathf.Abs(transform.localPosition.x - initialRightBound.x) < 0.1) {
-            if(positionToGoTo != initialLeftBound)
-            {
-                positionToGoTo = initialLeftBound;
-                positionToGoTo.x -= 1;
-                transform.SetXScale(-1);
-                dir = -1;
-            }   
-        }
-        else if(Mathf.Abs(transform.localPosition.x - initialLeftBound.x) < 0.1)
+        if (Mathf.Abs(transform.localPosition.x - initialRightBound.x) <= 0.01)
         {
-            if(positionToGoTo != initialRightBound)
+            if (positionToGoTo.x != initialLeftBound.x)
             {
-                positionToGoTo = initialRightBound;
-                positionToGoTo.x += 1;
-                transform.SetXScale(1);
-                dir = 1;
+                GoLeft();
             }
-            
+        }
+        else if (Mathf.Abs(transform.localPosition.x - initialLeftBound.x) <= 0.01)
+        {
+            if (positionToGoTo.x != initialRightBound.x)
+            {
+                GoRight();
+            }
+
         }
 
+        //if (transform.localPosition.x < initialLeftBound.x)
+        //{
+        //    if (positionToGoTo.x == initialLeftBound.x)
+        //    {
+        //        GoRight();
+        //    }
+        //}else if(transform.localPosition.x > initialRightBound.x)
+        //{
+        //    if(positionToGoTo.x == initialRightBound.x)
+        //    {
+        //        GoLeft();
+        //    }
+        //}
 
+        //timeForTravelling -= Time.deltaTime;
+
+        //if (timeForTravelling <= 0)
+        //{
+        //    timeForTravelling = 10;
+
+        //    if (positionToGoTo == initialRightBound)
+        //    {
+        //        GoLeft();
+        //    }
+        //    else if (positionToGoTo == initialLeftBound) 
+        //    {
+        //        GoRight();
+        //    }
+        //}
+        positionToGoTo.y = transform.localPosition.y;
         transform.localPosition = Vector2.MoveTowards(transform.localPosition, positionToGoTo, Time.deltaTime);
+        //transform.Translate(transform.right * dir * Time.deltaTime);
+    }
 
+    void GoLeft()
+    {
+        positionToGoTo = initialLeftBound;
+        //positionToGoTo.x -= .5f;
+        transform.SetXScale(-1);
+        dir = -1;
+        timeForTravelling = 10;
+    }
 
+    void GoRight()
+    {
+        positionToGoTo = initialRightBound;
+        //positionToGoTo.x += .5f;
+        transform.SetXScale(1);
+        dir = 1;
+        timeForTravelling = 10;
     }
 
     bool CheckForPlayer()

@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float playerHealth;
     [SerializeField] private float initialWingValue;
     [SerializeField] private float wingValue;
-
+    [SerializeField] private GameObject L2;
     [SerializeField] private DamageDetector damageDetector;
     private HealthBar health;
     private WingBar wings;
@@ -69,7 +69,7 @@ public class PlayerManager : MonoBehaviour
             player = GameObject.FindWithTag("Player");
             player.transform.position = new Vector2(-53, 24);
             RegainHealth(initialPlayerHealth);
-            print(playerHealth);
+            
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             SceneManager.LoadScene(1);
         }
@@ -80,6 +80,11 @@ public class PlayerManager : MonoBehaviour
         }
 
         print("Player manager received delegate call");
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
     public void RegainHealth(float value)
@@ -105,6 +110,15 @@ public class PlayerManager : MonoBehaviour
         if (wings)
         {
             wings.SetWingValue(wingValue);
+        }
+
+        if(wings && wingValue >= 50 && L2 && L2.activeSelf == false)
+        {
+            L2.SetActive(true);
+        }
+        else if(L2.activeSelf == true && L2 && wingValue < 50)
+        {
+            L2.SetActive(false);
         }
     }
 

@@ -20,7 +20,12 @@ public class ToadManager : Managers
         anim = GetComponent<Animator>();
         if (targetTag == "") targetTag = "Player";
 
-        damageDetector.detectorDelegate += ApplyDamage;
+        if(damageDetector == null)
+        {
+            damageDetector = GetComponent<DamageDetector>();
+            damageDetector.detectorDelegate += ApplyDamage;
+        }
+        
     }
 
     public bool HasPlayer()
@@ -37,7 +42,10 @@ public class ToadManager : Managers
 
     private void OnDisable()
     {
-        damageDetector.detectorDelegate -= ApplyDamage;
+        if (damageDetector)
+        {
+            damageDetector.detectorDelegate -= ApplyDamage;
+        }
     }
     public void ApplyDamage(float dam)
     {

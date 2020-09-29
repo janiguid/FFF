@@ -49,7 +49,11 @@ public class Stalactite : Hazard
 
         }
 
-        gameObject.SetActive(false);
+        if(collision.tag == "Ground")
+        {
+            gameObject.SetActive(false);
+        }
+        
     }
 
 }
