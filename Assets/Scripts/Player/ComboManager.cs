@@ -181,12 +181,9 @@ public class ComboManager : MonoBehaviour
                 attackType += 10;
             }
 
-            //CommenceAttack(attackType);
             animator.Play(CurrentNode.GetAnimation());
             BeginTimer(CurrentNode.GetPreRecTime(), CurrentNode.GetPostRecTime());
 
-
-            //print("valid node: " + CurrentNode.attackType);
             return;
         }
 

@@ -11,7 +11,7 @@ public class CursorManager : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private Animator anim;
     [SerializeField] private Transform fireballStartPoint;
-
+    [SerializeField] private AudioSource audioSrc;
 
     private Transform playerTransform;
     private InputActions Inputs;
@@ -32,6 +32,8 @@ public class CursorManager : MonoBehaviour
         centerPosition = transform.localPosition;
         playerTransform = FindObjectOfType<PlayerController>().transform;
         Inputs.FlightMovement.Fireball.started += _ => FireProjectile();
+
+        if (audioSrc == null) TryGetComponent<AudioSource>(out audioSrc);
 
         mainCam = Camera.main;
     }
@@ -97,6 +99,7 @@ public class CursorManager : MonoBehaviour
 
     void FireProjectile()
     {
+        if (audioSrc) audioSrc.Play();
         var temp = Instantiate(fireBall);
         if (anim) anim.Play("Base Layer.FireballAttack");
         temp.transform.position = transform.parent.position;

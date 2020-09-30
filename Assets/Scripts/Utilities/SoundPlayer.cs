@@ -30,6 +30,7 @@ public class SoundPlayer : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            if (AudioManager.Instance == null) return;
             if (AudioManager.Instance.IsPlaying() == false)
             {
                 AudioManager.Instance.PlayAudio(soundToPlay.ToString());

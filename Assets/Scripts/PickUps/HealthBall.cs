@@ -21,7 +21,31 @@ public class HealthBall : PickUp
                 pMan.RegainHealth(healthValue);
             }
 
-            Destroy(gameObject);
+            StartCoroutine(BeginDeath());
         }
+    }
+
+
+    public override IEnumerator BeginDeath()
+    {
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        AudioSource audio;
+        
+        if(TryGetComponent<AudioSource>(out audio))
+        {
+            audio.Play();
+        }
+        else
+        {
+            yield return null;
+        }
+
+        while (audio.isPlaying)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
+        yield return null;
     }
 }

@@ -67,6 +67,7 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator EndSound()
     {
+        if (source == null) yield return null;
         while(source.volume != 0)
         {
             source.volume -= 0.05f;

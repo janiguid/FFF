@@ -233,8 +233,7 @@ public class PlayerController : MonoBehaviour
 
     private void ShortFreeze()
     {
-        //movement = Vector2.zero;
-        //movement = Vector2.down;
+
         RB_2D.velocity = movement;
         recoveryTimer = attackPauseTimer;
     }
@@ -246,7 +245,7 @@ public class PlayerController : MonoBehaviour
 
     public void AlterJumpAbility(int i)
     {
-        maxJumps += i;
+        maxJumps = i;
         RefreshJump();
     }
 }

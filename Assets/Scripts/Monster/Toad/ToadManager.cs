@@ -40,6 +40,14 @@ public class ToadManager : Managers
         return player.transform.position;
     }
 
+    private void OnEnable()
+    {
+        if (damageDetector)
+        {
+            damageDetector.detectorDelegate += ApplyDamage;
+        }    
+    }
+
     private void OnDisable()
     {
         if (damageDetector)
@@ -49,9 +57,14 @@ public class ToadManager : Managers
     }
     public void ApplyDamage(float dam)
     {
-        health -= (dam);
+        print("WTFF");
+        health -= dam;
 
         anim.SetBool("ReceivedDamage", true);
+
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
     }
 
 

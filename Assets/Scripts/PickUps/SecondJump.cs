@@ -17,10 +17,33 @@ public class SecondJump : PickUp
             PlayerController pCon;
             if (collision.TryGetComponent<PlayerController>(out pCon))
             {
-                pCon.AlterJumpAbility(1);
+                pCon.AlterJumpAbility(2);
             }
 
-            Destroy(gameObject);
+            StartCoroutine(BeginDeath());
         }
+    }
+
+
+    public override IEnumerator BeginDeath()
+    {
+        GetComponent<Collider2D>().enabled = false;
+        AudioSource audio;
+
+        if (TryGetComponent<AudioSource>(out audio))
+        {
+            audio.Play();
+        }
+        else
+        {
+            yield return null;
+        }
+
+        while (audio.isPlaying)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+        Destroy(gameObject);
+        yield return null;
     }
 }

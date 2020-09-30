@@ -11,6 +11,7 @@ public class PlayerSoundHandler : MonoBehaviour
     [SerializeField] private AudioSource footstepsSound;
     [SerializeField] private AudioSource landingSound;
     [SerializeField] private AudioSource deathSound;
+    [SerializeField] private AudioSource flightSound;
 
     private PlayerController playerController;
     private InputActions inputActions;
@@ -27,7 +28,8 @@ public class PlayerSoundHandler : MonoBehaviour
         flightDescent, 
         footsteps,
         landingSound,
-        deathSound
+        deathSound,
+        flightSound
     }
 
     private void Awake()
@@ -69,6 +71,7 @@ public class PlayerSoundHandler : MonoBehaviour
         AudioDictionary.Add(PlayerSoundType.footsteps, footstepsSound);
         AudioDictionary.Add(PlayerSoundType.landingSound, landingSound);
         AudioDictionary.Add(PlayerSoundType.deathSound, deathSound);
+        AudioDictionary.Add(PlayerSoundType.flightSound, flightSound);
 
         playerController = FindObjectOfType<PlayerController>();
     }
@@ -120,7 +123,8 @@ public class PlayerSoundHandler : MonoBehaviour
         {
             print("ERROR: Nothing in audio dictionary");
         }
-        AudioDictionary[soundType].Play();
+        if (AudioDictionary.ContainsKey(soundType))
+            AudioDictionary[soundType].Play();
     }
 
     public void PlayContinuously(PlayerSoundType soundType)
@@ -129,6 +133,20 @@ public class PlayerSoundHandler : MonoBehaviour
 
         if (inFlight) return;
         AudioDictionary[soundType].Play();
+    }
+
+    public void StopSound(PlayerSoundType soundType)
+    {
+        if (AudioDictionary.Count == 0)
+        {
+            print("ERROR: Nothing in audio dictionary");
+        }
+
+        if (AudioDictionary.ContainsKey(soundType))
+        {
+            AudioDictionary[soundType].Stop();
+        }
+        
     }
 
     void BeginWalkSounds()

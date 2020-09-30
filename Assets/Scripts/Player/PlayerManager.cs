@@ -68,10 +68,16 @@ public class PlayerManager : MonoBehaviour
         {
             playerHealth = 0;
             
-            RegainHealth(initialPlayerHealth);
-            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            soundHandler.PlayPlayerSound(PlayerSoundHandler.PlayerSoundType.deathSound);
+            
+            if (soundHandler)
+            {
+                AudioManager.Instance.StopAudio();
+                soundHandler.PlayPlayerSound(PlayerSoundHandler.PlayerSoundType.deathSound);
+
+            }
             SceneManager.LoadScene(1);
+            ResetCharacter();
+            gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             transform.position = new Vector2(-53, 24);
         }
         
@@ -86,6 +92,7 @@ public class PlayerManager : MonoBehaviour
     private void OnLevelWasLoaded(int level)
     {
         AudioManager.Instance.StopAudio();
+        if(level == 1) transform.position = new Vector2(-53, 24);
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 
@@ -119,14 +126,18 @@ public class PlayerManager : MonoBehaviour
             wingValue = 50;
         }
 
-        if(wings && wingValue >= 50 && L2 && L2.activeSelf == false)
+        if(L2 != null)
         {
-            L2.SetActive(true);
+            if (wings && wingValue >= 50 && L2 && L2.activeSelf == false)
+            {
+                L2.SetActive(true);
+            }
+            else if (L2.activeSelf == true && L2 && wingValue < 50)
+            {
+                L2.SetActive(false);
+            }
         }
-        else if(L2.activeSelf == true && L2 && wingValue < 50)
-        {
-            L2.SetActive(false);
-        }
+
     }
 
 
@@ -139,6 +150,6 @@ public class PlayerManager : MonoBehaviour
     {
         wingValue = initialWingValue;
         playerHealth = initialPlayerHealth;
-        GetComponent<PlayerController>().AlterJumpAbility(-1);
+        GetComponent<PlayerController>().AlterJumpAbility(1);
     }
 }

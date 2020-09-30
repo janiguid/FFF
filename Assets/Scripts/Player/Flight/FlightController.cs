@@ -10,6 +10,7 @@ public class FlightController : MonoBehaviour
     [SerializeField] private Rigidbody2D MyRB2D;
     [SerializeField] private DamageDetector damDec;
     [SerializeField] private Animator anim;
+    [SerializeField] private PlayerSoundHandler audioSrc;
 
     private Vector2 inputValue;
     private VFXHandler MyVFX;
@@ -64,6 +65,7 @@ public class FlightController : MonoBehaviour
 
     private void OnDisable()
     {
+        audioSrc.StopSound(PlayerSoundHandler.PlayerSoundType.flightAscent);
         MyVFX.StopAura();
         Inputs.Disable();
         cursor.SetActive(false);

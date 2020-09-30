@@ -1120,6 +1120,7 @@ GameObject:
   - component: {fileID: 278671838}
   - component: {fileID: 278671840}
   - component: {fileID: 278671841}
+  - component: {fileID: 278671842}
   m_Layer: 0
   m_Name: Swamp Water 1
   m_TagString: Untagged
@@ -1230,7 +1231,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 278671837}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df63f1e74e89e964b982053a6efd2ad0, type: 3}
   m_Name: 
@@ -1238,6 +1239,19 @@ MonoBehaviour:
   damage: 50
   xForceMultiplier: 0
   yForceMultiplier: 0
+--- !u!114 &278671842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278671837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27796d133d8b474b85743d95e5f2ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1 &297791536
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,6 +4912,7 @@ GameObject:
   - component: {fileID: 643793804}
   - component: {fileID: 643793803}
   - component: {fileID: 643793802}
+  - component: {fileID: 643793806}
   m_Layer: 0
   m_Name: Swamp Water 2
   m_TagString: Untagged
@@ -4912,7 +4927,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643793801}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df63f1e74e89e964b982053a6efd2ad0, type: 3}
   m_Name: 
@@ -5013,6 +5028,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &643793806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 643793801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e27796d133d8b474b85743d95e5f2ad4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!1001 &647027980
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -136,18 +136,11 @@ public class Leech : Managers, ITargetable
         if (health <= 0)
         {
             isTargetable = false;
+
             Instantiate(poofCloud, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         }
     }
 
-    IEnumerator PlayDeathAnimAndDie()
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
-
-        deathCloud.Play();
-        yield return new WaitForSeconds(deathCloud.main.duration);
-        Destroy(gameObject);
-    }
 
     void BeginShoot()
     {

@@ -26,8 +26,21 @@ public class Wings : PickUp
     }
 
 
-    IEnumerator Deactivate()
+
+IEnumerator Deactivate()
     {
+        AudioSource audio;
+
+        if (TryGetComponent<AudioSource>(out audio))
+        {
+            audio.Play();
+        }
+        else
+        {
+            yield return null;
+        }
+
+
         gameObject.GetComponent<Collider2D>().enabled = false;
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         yield return new WaitForSeconds(4);
