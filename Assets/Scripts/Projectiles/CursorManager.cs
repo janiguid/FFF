@@ -19,6 +19,9 @@ public class CursorManager : MonoBehaviour
     public Vector3 centerPosition;
     private Vector2 lastKnownLoc;
     public Vector3 distanceFromCenter;
+
+
+    private Camera mainCam;
     private void Awake()
     {
         Inputs = new InputActions();
@@ -29,6 +32,8 @@ public class CursorManager : MonoBehaviour
         centerPosition = transform.localPosition;
         playerTransform = FindObjectOfType<PlayerController>().transform;
         Inputs.FlightMovement.Fireball.started += _ => FireProjectile();
+
+        mainCam = Camera.main;
     }
 
     private void OnEnable()
@@ -45,46 +50,49 @@ public class CursorManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement.y += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().y * Time.deltaTime * cursorSpeed;
+        //movement.y = Camera.main.ScreenToWorldPoint(Inputs.FlightMovement.Cursor.ReadValue<Vector2>()).y * Time.deltaTime * cursorSpeed;
 
-        if(playerTransform.localScale.x > 0)
-        {
-            movement.x += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
-        }
-        else
-        {
-            movement.x -= Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
-        }
-        
+        //if(playerTransform.localScale.x > 0)
+        //{
+        //    //movement.x += Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+        //    movement.x = Camera.main.ScreenToWorldPoint(Inputs.FlightMovement.Cursor.ReadValue<Vector2>()).x * Time.deltaTime * cursorSpeed;
+        //}
+        //else
+        //{
+        //    //movement.x -= Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+        //    movement.x -= Inputs.FlightMovement.Cursor.ReadValue<Vector2>().x * Time.deltaTime * cursorSpeed;
+        //}
 
-         lastKnownLoc = movement;
+        movement = mainCam.ScreenToWorldPoint(Inputs.FlightMovement.Cursor.ReadValue<Vector2>());
 
-        if (movement.x == 0)
-        {
-            movement.x = lastKnownLoc.x;
-        }
+        // lastKnownLoc = movement;
 
-        if(movement.y == 0)
-        {
-            movement.y = lastKnownLoc.y;
-        }
+        //if (movement.x == 0)
+        //{
+        //    movement.x = lastKnownLoc.x;
+        //}
 
-        float dist = Vector2.Distance(movement, centerPosition);
+        //if(movement.y == 0)
+        //{
+        //    movement.y = lastKnownLoc.y;
+        //}
 
-        if (dist > radius)
-        {
-            //movement.x = Mathf.Clamp(movement.x, -radius, radius);
-            //movement.y = Mathf.Clamp(movement.y, -radius, radius);
-            //movement.z = -1;
-            distanceFromCenter = movement - centerPosition;
-            //distanceFromCenter.Normalize();
-            distanceFromCenter *= radius / dist;
+        //float dist = Vector2.Distance(movement, centerPosition);
 
-            movement = centerPosition+distanceFromCenter;
-        }
+        //if (dist > radius)
+        //{
+        //    //movement.x = Mathf.Clamp(movement.x, -radius, radius);
+        //    //movement.y = Mathf.Clamp(movement.y, -radius, radius);
+        //    //movement.z = -1;
+        //    distanceFromCenter = movement - centerPosition;
+        //    //distanceFromCenter.Normalize();
+        //    distanceFromCenter *= radius / dist;
+
+        //    movement = centerPosition + distanceFromCenter;
+        //}
 
         movement.z = -1;
-        transform.localPosition = movement;
+        transform.position = movement;
     }
 
     void FireProjectile()

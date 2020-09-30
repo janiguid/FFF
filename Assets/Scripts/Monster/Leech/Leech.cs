@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Leech : Managers
+public class Leech : Managers, ITargetable
 {
     [SerializeField] private float shootCooldown;
     [SerializeField] private float timeForTravelling;
@@ -22,6 +22,7 @@ public class Leech : Managers
     [SerializeField] private ParticleSystem deathCloud;
     [SerializeField] private Animator anim;
     [SerializeField] private Transform spitSource;
+    [SerializeField] private GameObject poofCloud;
 
     [Header("Bounds")]
     [SerializeField] private Transform leftBound;
@@ -32,13 +33,26 @@ public class Leech : Managers
     private float rightMax;
     private Vector3 rot;
 
+    [Header("Colliders")]
+    [SerializeField] private Collider[] colliders;
 
     private DamageDetector damDetector;
-    private bool isTargetable;
     private Transform target;
+    private bool isTargetable;
 
 
-
+    private void Awake()
+    {
+        if (damDetector)
+        {
+            damDetector.detectorDelegate += ApplyDamage;
+        }
+        else
+        {
+            damDetector = GetComponent<DamageDetector>();
+            damDetector.detectorDelegate += ApplyDamage;
+        }
+    }
 
     private void Start()
     {
@@ -51,15 +65,7 @@ public class Leech : Managers
         health = initialHealth;
         shootTimer = 2;
 
-        if (damDetector)
-        {
-            damDetector.detectorDelegate += ApplyDamage;
-        }
-        else
-        {
-            damDetector = GetComponent<DamageDetector>();
-            damDetector.detectorDelegate += ApplyDamage;
-        }
+
 
         if(anim == null)
         {
@@ -130,11 +136,8 @@ public class Leech : Managers
         if (health <= 0)
         {
             isTargetable = false;
-            StartCoroutine(PlayDeathAnimAndDie());
+            Instantiate(poofCloud, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         }
-
-
-
     }
 
     IEnumerator PlayDeathAnimAndDie()
@@ -143,7 +146,7 @@ public class Leech : Managers
 
         deathCloud.Play();
         yield return new WaitForSeconds(deathCloud.main.duration);
-
+        Destroy(gameObject);
     }
 
     void BeginShoot()
@@ -230,5 +233,8 @@ public class Leech : Managers
         }
     }
 
-
+    public bool IsTargetable()
+    {
+        return isTargetable;
+    }
 }

@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private float wingValue;
     [SerializeField] private GameObject L2;
     [SerializeField] private DamageDetector damageDetector;
+    [SerializeField] private PlayerSoundHandler soundHandler;
     private HealthBar health;
     private WingBar wings;
     private GameObject player;
@@ -66,12 +67,12 @@ public class PlayerManager : MonoBehaviour
         if (playerHealth <= 0)
         {
             playerHealth = 0;
-            player = GameObject.FindWithTag("Player");
-            player.transform.position = new Vector2(-53, 24);
-            RegainHealth(initialPlayerHealth);
             
+            RegainHealth(initialPlayerHealth);
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            soundHandler.PlayPlayerSound(PlayerSoundHandler.PlayerSoundType.deathSound);
             SceneManager.LoadScene(1);
+            transform.position = new Vector2(-53, 24);
         }
         
         if (health)
@@ -113,6 +114,11 @@ public class PlayerManager : MonoBehaviour
             wings.SetWingValue(wingValue);
         }
 
+        if(wingValue >= 50)
+        {
+            wingValue = 50;
+        }
+
         if(wings && wingValue >= 50 && L2 && L2.activeSelf == false)
         {
             L2.SetActive(true);
@@ -127,5 +133,12 @@ public class PlayerManager : MonoBehaviour
     public float GetWingValue()
     {
         return wingValue;
+    }
+
+    private void ResetCharacter()
+    {
+        wingValue = initialWingValue;
+        playerHealth = initialPlayerHealth;
+        GetComponent<PlayerController>().AlterJumpAbility(-1);
     }
 }

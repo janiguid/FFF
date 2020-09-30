@@ -17,6 +17,7 @@ MonoBehaviour:
   - Mouse
   - Joystick
   - Gamepad
+  - DualShock4GampadiOS
   m_UpdateMode: 1
   m_CompensateForScreenOrientation: 1
   m_FilterNoiseOnCurrent: 0

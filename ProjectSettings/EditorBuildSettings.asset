@@ -5,33 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/RealmOne/MainMenu.unity
     guid: 9299b396a47e5cd468577293cdeb2fd6
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/First Chamber.unity
-    guid: f254093f955705d49b7b7f6b5e284279
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/Left Miniboss.unity
-    guid: 07909fe4545fa6948ad0d0254e949a67
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/Right Miniboss.unity
-    guid: 510c5c60a67d42842b284e1499ea3a0c
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/Double Jump Chamber.unity
-    guid: 7a7043ac720288b48be3f816c68c6a73
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/Flight Chamber.unity
-    guid: 010d8ebc452908f4aa2ddde9a9a7ab08
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/Realm Boss.unity
-    guid: eec57e91ea007e946a112c9fe3c28b96
-  - enabled: 0
-    path: Assets/Scenes/RealmOne/OG Build/Realm Exit.unity
-    guid: 12c0f68d150999a47be219669f307ad0
   - enabled: 1
     path: Assets/Scenes/RealmOne/RealmOneTest.unity
     guid: d9d5dc472e1fae94683c3a7e6f7512b2

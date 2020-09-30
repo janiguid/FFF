@@ -25,6 +25,9 @@ public class AttackCollider : MonoBehaviour
     {
         if (collision.tag == "Enemy")
         {
+            if (collision.gameObject == null) return;
+            if (collision.GetComponent<ITargetable>().IsTargetable() == false) return;
+
             if (pSystem) pSystem.Play();
             collision.GetComponent<IDamageable>().ApplyDamage(damage);
             collision.GetComponent<IFreezeable>().Freeze(0.3f);

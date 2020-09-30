@@ -17,7 +17,7 @@ public class SecondJump : PickUp
             PlayerController pCon;
             if (collision.TryGetComponent<PlayerController>(out pCon))
             {
-                pCon.EnhanceJumpAbility();
+                pCon.AlterJumpAbility(1);
             }
 
             Destroy(gameObject);

@@ -244,9 +244,9 @@ public class PlayerController : MonoBehaviour
         return isJumping;
     }
 
-    public void EnhanceJumpAbility()
+    public void AlterJumpAbility(int i)
     {
-        maxJumps += 1;
+        maxJumps += i;
         RefreshJump();
     }
 }

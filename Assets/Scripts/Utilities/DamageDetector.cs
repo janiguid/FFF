@@ -114,6 +114,7 @@ public class DamageDetector : MonoBehaviour, IDamageable, IPushable, IFreezeable
         ShakeCam();
         if (MyAudio)
         {
+            if (MyAudio.isActiveAndEnabled == false) return;
             MyAudio.Play();
         }
     }

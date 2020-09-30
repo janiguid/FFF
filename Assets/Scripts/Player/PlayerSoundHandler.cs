@@ -10,6 +10,7 @@ public class PlayerSoundHandler : MonoBehaviour
     [SerializeField] private AudioSource flightDescentSound;
     [SerializeField] private AudioSource footstepsSound;
     [SerializeField] private AudioSource landingSound;
+    [SerializeField] private AudioSource deathSound;
 
     private PlayerController playerController;
     private InputActions inputActions;
@@ -25,7 +26,8 @@ public class PlayerSoundHandler : MonoBehaviour
         flightAscent,
         flightDescent, 
         footsteps,
-        landingSound
+        landingSound,
+        deathSound
     }
 
     private void Awake()
@@ -35,6 +37,7 @@ public class PlayerSoundHandler : MonoBehaviour
         inputActions.LandMovement.ToggleFlight.started += _ => PlayFlightSound();
         inputActions.LandMovement.Move.started += _ => BeginWalkSounds();
         inputActions.LandMovement.Move.canceled += _ => StopWalkSounds();
+        
         inFlight = false;
     }
 
@@ -65,6 +68,7 @@ public class PlayerSoundHandler : MonoBehaviour
         AudioDictionary.Add(PlayerSoundType.flightDescent, flightDescentSound);
         AudioDictionary.Add(PlayerSoundType.footsteps, footstepsSound);
         AudioDictionary.Add(PlayerSoundType.landingSound, landingSound);
+        AudioDictionary.Add(PlayerSoundType.deathSound, deathSound);
 
         playerController = FindObjectOfType<PlayerController>();
     }

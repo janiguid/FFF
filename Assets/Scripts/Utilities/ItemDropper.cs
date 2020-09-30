@@ -32,10 +32,11 @@ public class ItemDropper : MonoBehaviour
             for(int i = 0; i < itemToDrop.Length; ++i)
             {
                 Instantiate(itemToDrop[i], transform.position, Quaternion.identity);
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
 
+        
         
     }
 }

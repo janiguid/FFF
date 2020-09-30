@@ -181,8 +181,30 @@
                 },
                 {
                     "name": "",
+                    "id": "a2651c72-2b2a-4e47-ac35-6dd417cb83ec",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "West",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4c6e46f6-24e3-4ede-b170-30b10f8eb44b",
                     "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "North",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e9308401-4ac0-4835-a81b-7245b18d6f5f",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -204,7 +226,7 @@
                 {
                     "name": "",
                     "id": "57bb8f26-f5e3-4e1a-a707-9b350abdde2b",
-                    "path": "<Keyboard>/m",
+                    "path": "<Keyboard>/shift",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -256,6 +278,61 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "WASD",
+                    "id": "5d2dff92-8a17-41eb-b2f9-8d29c4b08647",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "dd399ef5-14b8-4ecd-a096-0a9f0def176f",
+                    "path": "<keyboard>/W",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "122e8694-4d68-4e45-a465-b022602f0c3f",
+                    "path": "<keyboard>/S",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "81ef596d-7221-4b5d-a818-5952dd99e529",
+                    "path": "<keyboard>/A",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "e43af979-d392-4ff4-8925-719fcb581141",
+                    "path": "<keyboard>/D",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flight",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "b1230ead-4079-45cc-a420-34e78044dc69",
                     "path": "<Gamepad>/rightStick",
@@ -279,8 +356,30 @@
                 },
                 {
                     "name": "",
+                    "id": "9ca01c1f-9a39-4da8-bc6f-4a85cf76e4d6",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "5ecc9941-1549-494d-b477-139244ce0121",
                     "path": "<DualShockGamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fireball",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9d9c9a86-634f-4ec4-ab2c-d199108ac5a4",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
