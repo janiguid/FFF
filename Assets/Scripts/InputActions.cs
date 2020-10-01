@@ -73,8 +73,19 @@ public class @InputActions : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""90b604fd-e563-4e15-8f15-55b6b9edd945"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""id"": ""bea1c02f-2e77-4e64-b8fe-bab841c0ee50"",
+                    ""path"": ""<keyboard>/Space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""89946bb4-45db-4679-bc35-7589ceb4dd17"",
+                    ""path"": ""<keyboard>/W"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

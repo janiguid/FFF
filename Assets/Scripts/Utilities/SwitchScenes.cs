@@ -14,8 +14,9 @@ public class SwitchScenes : MonoBehaviour
         {
             player = GameObject.FindWithTag("Player");
             player.transform.position = new Vector2(x, y);
+
             SceneManager.LoadScene(goTo);
-            Debug.Log("Player: " + player.transform.position + " Scene: " + goTo);
+
         }
     }
 

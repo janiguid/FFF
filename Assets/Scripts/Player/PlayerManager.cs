@@ -75,10 +75,12 @@ public class PlayerManager : MonoBehaviour
                 soundHandler.PlayPlayerSound(PlayerSoundHandler.PlayerSoundType.deathSound);
 
             }
+
+
             SceneManager.LoadScene(1);
             ResetCharacter();
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.position = new Vector2(-53, 24);
+            transform.position = new Vector2(-53, 26);
         }
         
         if (health)

@@ -46,7 +46,12 @@ public class FlightController : MonoBehaviour
         {
             transform.SetXScale((int)Mathf.Sign(inputValue.x));
         }
+    }
+
+    private void FixedUpdate()
+    {
         MyRB2D.AddForce(inputValue * speed);
+
     }
 
     private void OnEnable()

@@ -46,8 +46,8 @@ public class PlayerController : MonoBehaviour
     {
         Inputs = new InputActions();
         Inputs.LandMovement.Jump.performed += _ => Jump();
-        Inputs.LandMovement.North.performed += _ => ShortFreeze();
-        Inputs.LandMovement.West.performed += _ => ShortFreeze();
+        //Inputs.LandMovement.North.performed += _ => ShortFreeze();
+        //Inputs.LandMovement.West.performed += _ => ShortFreeze();
 
         if (damageDetector == null) damageDetector = GetComponent<DamageDetector>();
     }
@@ -87,7 +87,8 @@ public class PlayerController : MonoBehaviour
         if (RB_2D)
         {
             RB_2D.gravityScale = gravityScale;
-            RB_2D.velocity = movement = Vector2.down * maxYVelocity * 0.5f;
+            movement.y = Vector2.down.y;
+            isGrounded = false;
         }
         RefreshJump();
     }
@@ -234,7 +235,7 @@ public class PlayerController : MonoBehaviour
     private void ShortFreeze()
     {
 
-        RB_2D.velocity = movement;
+        //RB_2D.velocity = movement;
         recoveryTimer = attackPauseTimer;
     }
 
